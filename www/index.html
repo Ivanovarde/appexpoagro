@@ -1,0 +1,238 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="no-js gt-ie9" itemscope itemtype="http://schema.org/">
+
+<head>
+	<meta charset="utf-8">
+	<title>Expoagro</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="apple-touch-icon" sizes="57x57" href="assets/favicons/apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="assets/favicons/apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="assets/favicons/apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="assets/favicons/apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="assets/favicons/apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="assets/favicons/apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="assets/favicons/apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="assets/favicons/apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="192x192" href="assets/favicons/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="assets/favicons/favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/favicon-16x16.png">
+	<link rel="manifest" href="assets/favicons/manifest.json">
+	<link rel="stylesheet" href="assets/stylesheets/library/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/stylesheets/library/font-awesome.min.css">
+	<link rel="stylesheet" href="assets/stylesheets/library/bootstrap-select.min.css">
+	<link rel="stylesheet" href="assets/stylesheets/styles.css">
+</head>
+
+<body class="home">
+
+	<div id="preloader"></div>
+
+	<div id="wrapper">
+
+		<header>
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="logo-holder"><a href="index.html"><img src="assets/images/logo-mercedes-benz.svg"></a></div>
+						<div>Mercedes-Benz</div>
+					</div>
+					<div class="col-sm-6"><button class="btn btn-black">Mercedes-Benz Plan de Ahorro</button></div>
+				</div>
+			</div>
+		</header>
+
+		<section class="hero">
+			<div class="container-fluid ">
+				<div class="row">
+					<div class="col-md-12 scale-img image-container"><img src="images/header-image.jpg">
+						<div class="hero-info">
+							<!--
+							<h1>Expoagro</h1>
+							<h2>del 13 al 16 de marzo.</h2>
+							-->
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="copy shadow">
+			<div class="container ">
+				<div class="row">
+					<div class="col-md-12 lead"><span></span>
+						<h1>Armá tu plan a medida.</h1>
+						<p>Configurá el plan de acuerdo a tus necesidades en 2 simples pasos: elegí tu modelo y alguno de nuestros planes.</p>
+					</div>
+				</div>
+			</div>
+			<hr class="sep sep-invisible">
+		</section>
+
+		<section class="thumbs">
+			<div class="container ">
+				<div class="row">
+
+					<div class="col-sm-6">
+						<div class="thumbnail">
+							<h3>VANS</h3>
+							<figure>
+								<img src="images/vans.jpg" >
+							</figure>
+							<div class="caption">
+								<div class="line">
+									<select id="vans_linea" class="selectpicker">
+										<option value="">Línea</option>
+										<option value="1">Chasis Cabina</option>
+										<option value="2">Combi</option>
+										<option value="3">Furgón</option>
+										<option value="4">Pasajeros</option>
+									</select>
+								</div>
+								<div class="model">
+									<select id="vans_modelos" class="selectpicker">
+										<option value="">Modelo</option>
+									</select>
+								</div>
+								<div class="plan">
+									<select id="vans_plan" class="selectpicker">
+										<option value="">Plan</option>
+									</select>
+								</div>
+								<div class="payment">
+									<select id="vans_cuotas" class="selectpicker">
+										<option value="">Cuotas</option>
+									</select>
+								</div>
+								<div class="budget">
+									<a href="javascript:void(0)" onclick="cotizar('vans');" class="btn btn-primary" role="button">Cotizar</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="thumbnail">
+							<h3>CAMIONES</h3>
+							<figure>
+								<img src="images/trucks.jpg" >
+							</figure>
+							<div class="caption">
+								<div class="line">
+									<select id="camiones_linea" class="selectpicker">
+										<option value="">Línea</option>
+										<option value="1">Livianos</option>
+										<option value="2">Medianos</option>
+										<option value="3">Pesados Off Road</option>
+										<option value="4">Pesados On Road</option>
+										<option value="5">Semipesados</option>
+									</select>
+								</div>
+								<div class="model">
+									<select id="camiones_modelos" class="selectpicker">
+										<option value="">Modelo</option>
+									</select>
+								</div>
+								<div class="plan">
+									<select id="camiones_plan" class="selectpicker">
+										<option value="">Plan</option>
+									</select>
+								</div>
+								<div class="payment">
+									<select id="camiones_cuotas" class="selectpicker">
+										<option value="">Cuotas</option>
+									</select>
+								</div>
+								<div class="budget">
+									<a href="javascript:void(0)" onclick="cotizar('camiones');" class="btn btn-primary" role="button">Cotizar</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="thumbnail">
+							<h3>BUS</h3>
+							<figure>
+								<img src="images/buses.jpg" >
+							</figure>
+							<div class="caption">
+								<div class="line">
+									<select id="bus_linea" class="selectpicker">
+										<option value="">Línea</option>
+										<option value="1">Interurbanos</option>
+										<option value="2">Midibus</option>
+										<option value="3">Plataforma con motor eléctrico</option>
+										<option value="4">Urbanos</option>
+									</select>
+								</div>
+								<div class="model">
+									<select id="bus_modelos" class="selectpicker">
+										<option value="">Modelo</option>
+									</select>
+								</div>
+								<div class="plan">
+									<select id="bus_plan" class="selectpicker">
+										<option value="">Plan</option>
+									</select>
+								</div>
+								<div class="payment">
+									<select id="bus_cuotas" class="selectpicker">
+										<option value="">Cuotas</option>
+									</select>
+								</div>
+								<div class="budget">
+									<a href="javascript:void(0)" onclick="cotizar('bus');" class="btn btn-primary" role="button">Cotizar</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="thumbnail black">
+							<h3>Plan <span>84</span><br>meses.</h3>
+							<div class="caption">
+								<div class="budget">
+									<a href="formulario.html?obj=pickup&linea=1&modelo=Plan&plan=84%20meses&cuotas=84" class="btn btn-primary" role="button">Conocé más</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</section>
+
+	</div>
+
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<button type="button" id="btn_contactos_pendientes" class="btn btn-primary">
+					Contactos Guardados <span class="badge badge-light" id="total_contactos_pendientes">0</span>
+					<span class="sr-only">contactos guardados</span>
+					</button>
+					<button type="button" id="btn_backoffice" class="btn btn-primary">BackOffice</button>
+
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	 <script type="text/javascript" src="cordova.js"></script>
+	 <script type="text/javascript" src="js/index.js"></script>
+
+	<script src="assets/scripts/library/jquery-3.2.1.min.js"></script>
+	<script src="assets/scripts/library/tether.min.js"></script>
+	<script src="assets/scripts/library/bootstrap.min.js"></script>
+	<script src="assets/scripts/library/bootstrap-select.min.js"></script>
+	<script src="assets/scripts/library/iv-validator.3.2.js"></script>
+	<script src="assets/scripts/library/iv-validator-regional-es.js"></script>
+	<script src="assets/scripts/library/jquery.form.js"></script>
+	<script src="assets/scripts/ivano.js"></script>
+
+</body>
+
+</html>

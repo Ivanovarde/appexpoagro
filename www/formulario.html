@@ -1,0 +1,208 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="no-js gt-ie9" itemscope itemtype="http://schema.org/">
+
+<head>
+	<meta charset="utf-8">
+	<title>Formulario - Expoagro</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="apple-touch-icon" sizes="57x57" href="assets/favicons/apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="assets/favicons/apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="assets/favicons/apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="assets/favicons/apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="assets/favicons/apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="assets/favicons/apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="assets/favicons/apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="assets/favicons/apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="192x192" href="assets/favicons/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="assets/favicons/favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/favicon-16x16.png">
+	<link rel="manifest" href="assets/favicons/manifest.json">
+	<link rel="stylesheet" href="assets/stylesheets/library/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/stylesheets/library/font-awesome.min.css">
+	<link rel="stylesheet" href="assets/stylesheets/library/bootstrap-select.min.css">
+	<link rel="stylesheet" href="assets/stylesheets/styles.css">
+</head>
+
+<body class="formulario">
+
+	<div id="preloader"></div>
+
+	<div id="wrapper">
+
+		<header>
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="logo-holder"><a href="index.html"><img src="assets/images/logo-mercedes-benz.svg"></a></div>
+						<div>Mercedes-Benz</div>
+					</div>
+					<div class="col-sm-6">
+						<button class="btn btn-black">Mercedes-Benz Plan de Ahorro</button>
+					</div>
+				</div>
+			</div>
+		</header>
+
+
+		<section id="encabezado_formulario" class="copy">
+			<div class="container ">
+				<div class="row">
+
+					<div class="col-sm-5 lead max">
+						<span></span>
+						<h1 class="line-name" id="form_modelo_cotizador"></h1>
+						<h1 class="plan-name" id="form_nombre_plan_cotizador"></h1>						
+					</div>
+
+					<div class="col-sm-7">
+						<div>
+							<div class="vehicle-image-container scale-img">
+								<figure>
+									<img id="form_img_ppal" src="images/vehicles/loading.gif">
+								</figure>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</section>
+
+		<section>
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-12">
+						<hr class="sep">
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="plan-data shadow">
+			<div class="container ">
+				<div class="row">
+					<div class="month-detail-min col-sm-5">
+						<span>Cantidad de Cuotas</span>
+						<strong><li id="form_cant_cuotas">-</li></strong>
+						<span>Total cuota mensual</span>
+						<strong><li id="form_total_cuota_mensual">$ -</li></strong>
+					</div>
+					<div class="plan-detail col-sm-7">
+						<p>
+							Precio vehículo con IVA : $ <span id="form_precio_vehiculo_iva">-</span><br>
+							Tipo de plan : <span id="form_tipo_plan">-</span><br>
+							Cuota Pura: $ <span id="form_cuota_pura">-</span><br>
+							Carga administrativa + derecho de suscrip. : $ <span id="form_gastos_adm_suscrip">-</span><br>
+							IVA (Carga administrativa + derecho de suscrip.) : $ <span id="form_gastos_adm_suscrip_iva">-</span><br>
+							Alícuota extraordinaria (30%) : $ <span id="form_alicuota">-</span>							
+						</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12">
+						<div id="legals" >
+							NOTA: Los valores aquí expresados son solamente de referencia y se calculan en base a la lista de precios vigente al 28/02/2018. Las cuotas se ajusta según el valor móvil del vehículo suscripto. Precios válidos para personas residentes en la República Argentina excepto Tierra del Fuego que tiene un tratamiento impositivo distinto. Para mayor asesoramiento comuníquese al 0800-888-2262 o a <a href="mailto:plandeahorro@mercedes-benz.com.ar" target="_blank">plandeahorro@mercedes-benz.com.ar</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="form">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-12">
+						<form id="form1">
+							<div class="form-group">
+								<input type="text" class="form-control" placeholder="Nombre" id="nombre" name="nombre">
+							</div>
+							<div class="form-group">
+								<input type="text" class="form-control" placeholder="Apellido" id="apellido" name="apellido">
+							</div>
+							<div class="form-group">
+								<input type="text" class="form-control" placeholder="Mail" id="email" name="email">
+							</div>
+							<div class="form-group">
+								<input type="text" class="form-control" placeholder="Teléfono" id="telefono" name="telefono">
+							</div>
+							<div class="form-group">
+								<select class="selectpicker form-control" id="provincia" name="provincia" data-size="8">
+									<option value="">Provincia</option>
+									<option value="Buenos Aires">Buenos Aires</option>
+									<option value="CABA">Capital Federal</option>
+									<option value="Catamarca">Catamarca</option>
+									<option value="Chaco">Chaco</option>
+									<option value="Chubut">Chubut</option>
+									<option value="Córdoba">Córdoba</option>
+									<option value="Corrientes">Corrientes</option>
+									<option value="Entre Ríos">Entre Ríos</option>
+									<option value="Formosa">Formosa</option>
+									<option value="Jujuy">Jujuy</option>
+									<option value="La Pampa">La Pampa</option>
+									<option value="La Rioja">La Rioja</option>
+									<option value="Mendoza">Mendoza</option>
+									<option value="Misione">Misiones</option>
+									<option value="Neuquén">Neuquén</option>
+									<option value="Rio Negro">Rio Negro</option>
+									<option value="Salta">Salta</option>
+									<option value="San Juan">San Juan</option>
+									<option value="San Luis">San Luis</option>
+									<option value="Santa Cruz">Santa Cruz</option>
+									<option value="Santa Fe">Santa Fe</option>
+									<option value="Santiago del Estero">Santiago del Estero</option>
+									<option value="Tierra del Fuego">Tierra del Fuego</option>
+									<option value="Tucumán">Tucumán</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<input type="text" class="form-control" placeholder="Ciudad" id="ciudad" name="ciudad">
+							</div>
+							<div class="form-group">
+								<button type="submit" class="btn btn-primary" id="btn_enviar_cotizacion_final" name="submit">Enviar cotización</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+
+	</div>
+
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<button type="button" id="btn_contactos_pendientes" class="btn btn-primary">
+					Contactos Guardados <span class="badge badge-light" id="total_contactos_pendientes">0</span>
+					<span class="sr-only">contactos guardados</span>
+					</button>
+					<button type="button" id="btn_backoffice" class="btn btn-primary">BackOffice</button>
+
+				</div>
+			</div>
+		</div>
+	</footer>
+	
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/json2.js"></script>
+    
+	<script src="assets/scripts/library/jquery-3.2.1.min.js"></script>
+	<script src="assets/scripts/library/tether.min.js"></script>
+	<script src="assets/scripts/library/bootstrap.min.js"></script>
+	<script src="assets/scripts/library/bootstrap-select.min.js"></script>
+	<script src="assets/scripts/library/iv-validator.3.2.js"></script>
+	<script src="assets/scripts/library/iv-validator-regional-es.js"></script>
+	<script src="assets/scripts/library/jquery.form.js"></script>
+	<script src="assets/scripts/ivano.js"></script>
+
+	
+
+</body>
+
+</html>

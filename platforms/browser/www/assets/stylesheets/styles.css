@@ -1,0 +1,799 @@
+@font-face {
+	font-family: 'corporate-s';
+	src: url('assets/fonts/corporate/corporates-light-webfont.eot');
+	src: url('assets/fonts/corporate/corporates-light-webfont.eot?#iefix') format('embedded-opentype'),
+		 url('assets/fonts/corporate/corporates-light-webfont.woff') format('woff'),
+		 url('assets/fonts/corporate/corporates-light-webfont.ttf') format('truetype'),
+		 url('assets/fonts/corporate/corporates-light-webfont.svg#corporateslight') format('svg');
+	font-weight: 200;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'corporate-s';
+	src: url('assets/fonts/corporate/corporates-demi-webfont.eot');
+	src: url('assets/fonts/corporate/corporates-demi-webfont.eot?#iefix') format('embedded-opentype'),
+		 url('assets/fonts/corporate/corporates-demi-webfont.woff') format('woff'),
+		 url('assets/fonts/corporate/corporates-demi-webfont.ttf') format('truetype'),
+		 url('assets/fonts/corporate/corporates-demi-webfont.svg#corporatesdemi') format('svg');
+	font-weight: 300;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'corporate-s';
+	src: url('assets/fonts/corporate/corporates-regular-webfont.eot');
+	src: url('assets/fonts/corporate/corporates-regular-webfont.eot?#iefix') format('embedded-opentype'),
+		 url('assets/fonts/corporate/corporates-regular-webfont.woff') format('woff'),
+		 url('assets/fonts/corporate/corporates-regular-webfont.ttf') format('truetype'),
+		 url('assets/fonts/corporate/corporates-regular-webfont.svg#corporatesregular') format('svg');
+	font-weight: 400;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'corporate-s';
+	src: url('assets/fonts/corporate/corporates-regularitalic-webfont.eot');
+	src: url('assets/fonts/corporate/corporates-regularitalic-webfont.eot?#iefix') format('embedded-opentype'),
+		 url('assets/fonts/corporate/corporates-regularitalic-webfont.woff') format('woff'),
+		 url('assets/fonts/corporate/corporates-regularitalic-webfont.ttf') format('truetype'),
+		 url('assets/fonts/corporate/corporates-regularitalic-webfont.svg#corporatesregularitalic') format('svg');
+	font-weight: 400;
+	font-style: italic;
+}
+@font-face {
+	font-family: 'corporate-a';
+	src: url('assets/fonts/corporate/corporatea-regular-webfont.eot');
+	src: url('assets/fonts/corporate/corporatea-regular-webfont.eot?#iefix') format('embedded-opentype'),
+		 url('assets/fonts/corporate/corporatea-regular-webfont.woff') format('woff'),
+		 url('assets/fonts/corporate/corporatea-regular-webfont.ttf') format('truetype'),
+		 url('assets/fonts/corporate/corporatea-regular-webfont.svg#corporate_aregular') format('svg');
+	font-weight: 400;
+	font-style: normal;
+}
+
+html {
+	font-size: 62.5%;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+body {
+	background: #fff;
+	/*background: #777;*/
+	overflow-x: hidden;
+	-ms-overflow-style: scrollbar;
+	color: #5d5b59;
+	font-family: "corporate-a", sans-serif;
+	font-size: 16px;
+	font-size: 1.6rem;
+	font-weight: 300;
+	line-height: 1.5;
+}
+
+
+
+input::-moz-focus-inner {
+	border: 0;
+}
+:focus {
+  outline: none !important;
+}
+
+::-moz-focus-inner {
+  border: 0 !important;
+}
+a, a:active, a:focus,
+button, button:focus, button:active,
+object, embed,
+.btn, .btn:focus, .btn:active:focus, .btn.active:focus, .btn.focus, .btn.focus:active, .btn.active.focus {
+	outline: none;
+	outline: 0;
+	-moz-outline-style: none;
+}
+.bootstrap-select .dropdown-toggle:focus {
+	outline: none;
+	outline: 0;
+	outline-offset: 0px;
+}
+input::-moz-focus-inner {
+	border: 0;
+}
+
+
+h1{
+	font-size: 3.6rem;
+	font-size: 36px;
+}
+
+p:last-child, .p:last-child{
+	margin-bottom: 0;
+}
+figure{
+	margin: 0;
+}
+
+#wrapper {
+	background: #fff;
+}
+#wrapper, .container, container-fluid {
+	/*max-width: 768px;*/
+	max-width: 1024px;
+	position: relative;
+	margin: 0 auto;
+	width: auto;
+}
+header {
+	font-size: 18px;
+	font-size: 1.8rem;
+	color: rgb(255, 255, 255);
+	letter-spacing: 0.02em;
+	background: rgb(0, 0, 0);
+	height: 120px;
+	line-height: 120px;
+	z-index: 2;
+	position: relative;
+	padding: 0 35px;
+}
+.home header{
+	/*background: rgba(0, 0, 0,.5);*/
+}
+
+header .row > div > div {
+	display: inline-block;
+	line-height: 120px;
+}
+header .row > div:last-child{
+	text-align: right;
+}
+.logo-holder {
+	/* max-width: 60px; */
+	height: 100%;
+	width: 60px;
+	margin-right: 50px;
+}
+header button.btn {
+	position: relative;
+	cursor: default;
+	/*
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+	top: 50%;
+	*/
+	font-size: 15px;
+	font-family: 'corporate-a', sans-serif;
+	font-weight: bold;
+	letter-spacing: normal;
+}
+
+section.copy .container, section.plan-data .container{
+	padding: 0 50px;
+}
+section.shortcuts, section.form {
+	padding-bottom: 50px;
+}
+section.thumbs{
+	padding-bottom: 30px;
+}
+
+.hero{
+
+}
+.hero .image-container{
+	padding: 0;
+	color: #fff;
+}
+.hero .image-container, .hero img {
+	/*margin-top: -120px;*/
+}
+.hero-info {
+	position: absolute;
+	/*top: calc(50% - 10px);*/
+	top: 120px;
+	left: 50px;
+	-webkit-transform: translateY(-50%);
+			transform: translateY(-50%);
+	/* z-index: 20; */
+}
+.hero-info h1 {
+	margin: 0;
+	font-size: 58px;
+	font-size: 5.8rem;
+	line-height: 1;
+	/* text-transform: lowercase; */
+	letter-spacing: -.03em;
+}
+.hero-info h2 {
+	margin: 0;
+	font-size: 35px;
+	font-size: 3.5rem;
+	line-height: 1;
+	letter-spacing: -.06em;
+}
+
+section.copy {
+	font-family: 'corporate-s';
+	font-weight: 400;
+	font-style: normal;
+	font-size: 17px;
+	font-size: 1.7rem;
+}
+section.copy .lead {
+	font-size: 1.7rem;
+	font-size: 17px;
+	padding-top: 50px;
+	/*padding-bottom: 50px;*/
+}
+section.copy .lead > span{
+	border-bottom: 3px solid #040600;
+	width: 80px;
+	display: inline-block;
+	margin-bottom: 15px;
+}
+section.copy .max h1{
+	font-family: 'corporate-a';
+	font-size: 57px;
+	font-size: 5.7rem;
+	margin-bottom: 0;
+}
+section.copy h1 {
+	font-family: 'corporate-a';
+	font-size: 46px;
+	font-size: 4.6rem;
+	margin-bottom: 0;
+	color: #040600;
+	margin: 0;
+}
+section.copy .vehicle-image-container {
+	text-align: center;
+}
+
+section.thumbs {
+	text-align: center;
+}
+.thumbs .row > div {
+	display: inline-block;
+	float: none;
+	margin-left: -4px;
+}
+.thumbnail {
+	padding: 20px 0 0;
+	-webkit-box-shadow: 0px 0px 6px 3px rgba(166, 163, 166,.3);
+	box-shadow: 0px 0px 6px 3px rgba(166, 163, 166,.3);
+}
+.thumbnail h3 {
+	font-size: 23px;
+	font-size: 2.3rem;
+	margin: 0;
+}
+.thumbnail figure{
+	text-align: center;
+	/*min-height: 170px;*/
+	margin: 0;
+}
+.thumbnail figure img {
+	max-width: 190px;
+	width: auto;
+	height: auto;
+}
+.thumbnail .caption {
+	padding: 9px 0 0;
+	color: #040600;
+}
+.thumbnail .caption > div:not(:last-child) {
+	border-top: 1px solid #a6a3a6;
+}
+.thumbnail .budget a {
+	width: 100%;
+	font-size: 18px;
+	font-size: 1.8rem;
+	opacity: 1;
+	line-height: 38px;
+}
+.thumbnail .line, .thumbnail .plan{
+	/*line-height: 40px;*/
+}
+.thumbnail h3,
+.thumbnail .line,
+.thumbnail .model,
+.thumbnail .payment,
+.thumbnail .plan{
+	padding: 0 20px;
+}
+.thumbnail.black {
+	background: #363536;
+	color: #fff;
+}
+.thumbnail.black h3 {
+	margin: 10px 0 240px;
+	padding: 0 30px;
+	font-size: 36px;
+	font-size: 3.6rem;
+	line-height: 23px;
+	text-align: left;
+}
+.thumbnail.black h3 span {
+	display: inline-block;
+	border-radius: 50%;
+	border: 1px solid #fff;
+	padding: 14px 8px;
+}
+
+section.no-info {
+	-webkit-box-shadow: 0px 5px 12px -7px rgba(0,0,0,.3);
+	box-shadow: 0px 5px 8px 0px rgba(0,0,0,.3);
+
+	background: url(/images/header-image.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center top;
+	padding: 50px 0 0;
+	position: relative;
+}
+section.no-info::after {
+	content: ' ';
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,.4);
+}
+section.no-info + section, section.no-info + section + section{
+	display: none
+}
+section.no-info .vehicle-image-container {
+	display: none;
+}
+section.no-info .container {
+	z-index: 1;
+}
+section.no-info .max > span {
+	border-color: transparent;
+}
+section.no-info h1 {
+	color: #fff;
+}
+
+section.shadow {
+	-webkit-box-shadow: 0px 5px 12px -7px rgba(0,0,0,.3);
+			box-shadow: 0px 5px 12px -7px rgba(0,0,0,.3);
+}
+
+.copy .main-image{
+	padding-top: 50px;
+}
+.month-detail{
+}
+.month-detail strong {
+	font-size: 70px;
+	font-size: 7.0rem;
+	font-weight: bold;
+}
+.month-detail-min{
+	margin-bottom: 40px;
+}
+.month-detail-min strong {
+	font-size: 48px;
+	font-size: 4.8rem;
+}
+.month-detail span {
+	font-size: 35px;
+	font-size: 3.5rem;
+	font-weight: 400;
+	color: #848281;
+}
+.month-detail-min span {
+	font-size: 24px;
+	font-size: 2.4rem;
+	font-weight: 400;
+}
+.month-detail strong, .month-detail span,
+.month-detail-min strong, .month-detail-min span{
+	font-family: 'corporate-s';
+	line-height: 1;
+	display: block;
+}
+.plan-detail {
+	font-family: 'corporate-s';
+	font-weight: 400;
+	margin-bottom: 40px;
+}
+#legals {
+	font-size: 12px;
+	margin: 0px 0 30px;
+}
+.shortcuts .btn-primary {
+	border-radius: 0;
+	width: 100%;
+	font-size: 17px;
+	font-size: 1.7rem;
+	line-height: 44px;
+	font-family: 'corporate-s';
+	margin-top: 10px;
+}
+
+form {
+	text-align: center;
+	margin-top: 55px;;
+}
+form .form-group{
+	margin-bottom: 25px;
+}
+form .form-group:last-child {
+	margin-bottom: 0;
+}
+form .form-control {
+	font-size: 22px;
+	font-size: 2.2rem;
+	font-weight: 400;
+	color: rgb(4, 6, 0);
+	border-radius: 0;
+	border: 1px solid rgb(4, 6, 0) !important;
+	max-width: 425px;
+	margin: 0 auto;
+	font-family: 'corporate-s';
+	padding-left: 40px;
+	padding-right: 40px;
+	line-height: 32px;
+	height: auto;
+	-webkit-box-shadow: none;
+			box-shadow: none;
+}
+form .btn-primary {
+	font-size: 17px;
+	font-size: 1.7rem;
+	width: 320px;
+	line-height: 30px;
+	margin: 0 auto;
+}
+
+.bootstrap-select .filter-option {
+	font-size: 18px;
+	font-size: 1.8rem;
+}
+.bootstrap-select .dropdown-toggle::after {
+	border-top: .6em solid;
+	border-right: .6em solid transparent;
+	border-left: .6em solid transparent;
+}
+.bootstrap-select .caret {
+	border-top: .7em dashed #040600;
+	border-top: .5em solid\9;
+	border-right: .5em solid transparent;
+	border-left: .5em solid transparent;
+
+	-webkit-transition: all .3s ease-in-out 0s;
+	transition: all .3s ease-in-out 0s;
+}
+.dropup.open .caret {
+	-webkit-transform: rotate(180deg);
+			transform: rotate(180deg);
+}
+.dropup .caret, .navbar-fixed-bottom .dropdown .caret {
+	content: "";
+	border-bottom: none;
+	border-bottom: none;
+}
+.bootstrap-select > .dropdown-toggle {
+	line-height: 28px;
+	background: transparent;
+	padding-left: 0;
+	color: rgb(4, 6, 0);
+	border: none;
+	padding-left: 0px;
+}
+.bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn){
+	background: transparent;
+	width: 100%;
+}
+form .bootstrap-select > .dropdown-toggle {
+	padding-left: 40px;
+}
+.bootstrap-select.btn-group .dropdown-toggle .filter-option {
+	font-family: 'corporate-s';
+	font-weight: 400;
+	font-size: 22px;
+	font-size: 2.2rem;
+}
+.bootstrap-select.btn-group.open .dropdown-toggle{
+	-webkit-box-shadow: none;
+			box-shadow: none;
+}
+/*
+.bootstrap-select > .dropdown-toggle.bs-placeholder, .bootstrap-select > .dropdown-toggle.bs-placeholder:active, .bootstrap-select > .dropdown-toggle.bs-placeholder:focus, .bootstrap-select > .dropdown-toggle.bs-placeholder:hover {
+	color: rgb(153, 153, 153);
+}
+*/
+.bootstrap-select > .dropdown-toggle.bs-placeholder, .bootstrap-select > .dropdown-toggle.bs-placeholder:active, .bootstrap-select > .dropdown-toggle.bs-placeholder:focus, .bootstrap-select > .dropdown-toggle.bs-placeholder:hover {
+	background: #fff;
+	border: none;
+}
+.btn-default.active, .btn-default:active, .open > .dropdown-toggle.btn-default {
+	color: inherit;
+	background-color: transparent;
+	border-color: transparent;
+}
+.btn-default.active.focus, .btn-default.active:focus, .btn-default.active:hover, .btn-default:active.focus, .btn-default:active:focus, .btn-default:active:hover, .open > .dropdown-toggle.btn-default.focus, .open > .dropdown-toggle.btn-default:focus, .open > .dropdown-toggle.btn-default:hover {
+	color: inherit;
+	background-color: #fff;
+	border-color: transparent;
+}
+.dropdown-menu {
+	font-size: 20px;
+	font-size: 2.0rem;
+	border: none;
+	border-radius: 0;
+	font-family: 'corporate-s';
+}
+
+
+#preloader {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #000;
+	z-index: 100000;
+	background-image: url(assets/images/logo-mercedes-benz.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 10%;
+
+	-webkit-transition: all .7s ease-in-out .5s;
+	transition: all .7s ease-in-out .5s;
+}
+#preloader.off {
+	opacity: 0;
+}
+
+.sep, .sep-bottom, sep-top{
+	border: none;
+	border-bottom: 1px solid #848281;
+	height: 0;
+	margin: 25px 0;
+	float: none;
+}
+.sep-bottom{
+	margin-top: 0;
+}
+.sep-top{
+	margin-bottom: 0;
+}
+.sep-invisible{
+	border-color: transparent;
+}
+.hero .image-container::before {
+	content: ' ';
+	position: absolute;
+	background: rgba(0,0,0,.4);
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+}
+
+img.scale-img, .scale-img img{
+	width: 100%;
+	height: auto;
+}
+
+.btn{
+	-webkit-transition: all .3s ease-in-out 0s;
+	transition: all .3s ease-in-out 0s;
+}
+.btn-primary {
+	border-radius: 0;
+	font-family: 'corporate-s';
+	font-weight: 300;
+	background: #29b0dc;
+	border-color: #29b0dc;
+	color: #fff;
+}
+.btn-primary.active, .btn-primary:active, .btn-primary:hover{
+	background: #29b0dc;
+	border-color: #29b0dc;
+}
+.btn-primary:hover{
+	opacity: .75;
+}
+.btn-primary.focus, .btn-primary:focus{
+	color: #fff;
+}
+.btn-black {
+	background: #000;
+	color: #fff;
+	padding: 10px;
+	border: 1px solid #fff;
+	border-radius: 0;
+	cursor: pointer;
+}
+.btn-black.active, .btn-black:active, .btn-black:hover{
+	background: #000;
+	border-color: #fff;
+	color: #fff;
+}
+.btn-black:hover{
+	/*opacity: .75;*/
+}
+.btn-black.focus, .btn-black:focus{
+	color: #fff;
+}
+
+.month-detail li {
+	list-style:none;
+}
+
+.month-detail-min li {
+	list-style:none;
+}
+
+
+@media  only screen and ( max-width: 768px ){
+
+	#preloader {
+		background-size: 15%;
+	}
+
+}
+
+@media  only screen and ( max-width: 767px ){
+
+	#preloader {
+		background-size: 20%;
+	}
+
+	#wrapper {
+		padding-top: 70px;
+	}
+
+	header {
+		padding: 0px;
+		line-height: 70px;
+		height: 70px;
+		overflow: hidden;
+		position: fixed;
+		width: 100%;
+		left: 0;
+		top: 0;
+		z-index: 100;
+		background: rgba(0, 0, 0,.8) !important;
+		-webkit-box-shadow: 0px 1px 3px 1px rgba(0,0,0,.5);
+				box-shadow: 0px 1px 3px 1px rgba(0,0,0,.5);
+	}
+	header > .container > .row > div {
+		float: left;
+		width: 50%;
+	}
+	header .row > div > div {
+		line-height: 70px;
+	}
+	header .logo-holder {
+		height: 100%;
+		width: 45px;
+		margin-right: 15px;
+	}
+	header .logo-holder img{
+		margin-top: -5px;
+	}
+	header .logo-holder + div {
+		font-size: 14px;
+		font-size: 1.4rem;
+	}
+	header button.btn {
+		font-weight: 400;
+		border: none;
+		background: none;
+		padding: 0;
+		width: 100%;
+		color: transparent;
+		cursor: default;
+	}
+	header button.btn:hover {
+		background: transparent;
+		color: transparent;
+		opacity: 1;
+	}
+	header button.btn::after {
+		content: 'Plan de Ahorro';
+		position: absolute;
+		top: -1px;
+		right: 0;
+		z-index: 2;
+		background: transparent;
+		width: 100%;
+		text-align: right;
+		font-size: 12px;
+		font-size: 1.4rem;
+		font-family: 'corporate-a', sans-serif;
+		color: #fff;
+	}
+
+	.hero .image-container, .hero img {
+		margin-top: 0px;
+	}
+	.hero-info {
+		top: 50%;
+		right: 25px;
+		left: 25px;
+	}
+	.hero-info h1 {
+		font-size: 40px;
+		font-size: 4.0rem;
+	}
+	.hero-info h2 {
+		font-size: 30px;
+		font-size: 3.0rem;
+	}
+
+	.thumbs .row > div {
+		width: 100%;
+	}
+
+
+	section.copy .container, section.plan-data .container {
+		padding: 0 20px;
+	}
+	.vehicle-image-container figure {
+		/*
+		margin-left: -30px;
+		margin-right: -30px;
+		*/
+	}
+	.main-image .plan-name{
+		margin-bottom: 20px;
+	}
+	.main-image img {
+		width: 100%;
+		height: auto;
+	}
+	section.copy h1, section.copy .max h1 {
+		font-size: 30px;
+		font-size: 3.0rem;
+	}
+	.month-detail span, .month-detail-min span {
+		font-size: 30px;
+		font-size: 3.0rem;
+	}
+	.month-detail strong, .month-detail-min strong {
+		font-size: 48px;
+		font-size: 4.8rem;
+		font-weight: bold;
+	}
+
+	.plan-detail p {
+		letter-spacing: -0.06em;
+	}
+
+	form .btn-primary {
+		max-width: 425px;
+		width: 100%;
+	}
+
+	section.no-info .max.lead h1 {
+		color: #fff;
+		font-size: 40px;
+		font-size: 4.0rem;
+	}
+
+}
+
+@media only screen and ( max-width: 650px ){
+
+	section.no-info {
+		padding: 0;
+	}
+}
+
+
+@media  only screen and ( max-width: 320px ){
+
+	header .logo-holder {
+		width: 35px;
+		margin-right: 5px;
+	}
+	header > .container > .row > div:first-child{
+		padding-right: 0;
+	}
+	header .logo-holder + div {
+	}
+
+
+}
