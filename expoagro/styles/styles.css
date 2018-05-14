@@ -1,0 +1,295 @@
+BODY {
+	FONT-SIZE: 12px; COLOR: #000000; FONT-FAMILY: arial, \sans-serif; TEXT-DECORATION: none; margin: 0;
+}
+h1.titulo {
+	font-family: times new roman;
+	font-size: 20px;
+	color: #fff;
+}
+TD {
+	COLOR: #000000; FONT-FAMILY: arial,\sans-serif; TEXT-DECORATION: none
+}
+#home_b A {
+	PADDING-LEFT: 16px; FONT-WEIGHT: bold; COLOR: #003366; TEXT-DECORATION: none
+}
+A {
+	COLOR: #006699; TEXT-DECORATION: underline
+}
+P {
+	COLOR: #000000; FONT-FAMILY: arial, \ sans-serif; TEXT-DECORATION: none
+}
+H1 {
+	FONT-WEIGHT: bold; FONT-SIZE: 11px; COLOR: #006699
+}
+H1 {
+	FONT-WEIGHT: bold; FONT-SIZE: 11px; COLOR: #006699
+}
+H2 {
+	FONT-WEIGHT: bold; FONT-SIZE: 11px; COLOR: #000000
+}
+H2 {
+	FONT-WEIGHT: bold; FONT-SIZE: 11px; COLOR: #000000
+}
+H3 {
+	FONT-WEIGHT: bold; FONT-SIZE: 11px; COLOR: #000000
+}
+H3 {
+	FONT-WEIGHT: bold; FONT-SIZE: 11px; COLOR: #000000
+}
+UL LI {
+	 MARGIN-BOTTOM: 4px
+}
+SUP {
+	FONT-SIZE: 8px
+}
+#mdblu {
+	COLOR: #336699
+}
+#QuickStart {
+	FONT-SIZE: 11px; FONT-FAMILY: arial, 'lucida console', sans-serif
+}
+/*
+#header {
+	 FONT-FAMILY: arial, 'lucida console', sans-serif
+}
+*/
+#header td.level-1{
+	padding: 10px 0;
+}
+#header2 {
+	FONT-FAMILY: arial, 'lucida console', sans-serif
+}
+#header A {
+	COLOR: #003366
+}
+#header2 A {
+	MARGIN-LEFT: 20px; COLOR: #006699
+}
+#footersub {
+	 TEXT-ALIGN: right
+}
+#footer_lastsub {
+	 TEXT-ALIGN: center
+}
+#footer {
+	FONT-SIZE: 10px; TEXT-ALIGN: center;
+	padding: 10px 25px;
+}
+#topadmin {
+	/* MARGIN-TOP: 6px; */
+	FONT-SIZE: 11px;
+	/* MARGIN-BOTTOM: 6px; */
+	COLOR: #ffffff;
+	margin: 0;
+	margin-right: 25px;
+}
+#topadmin A {
+	COLOR: #FFFFFF
+}
+.texto_blanco {
+	FONT-SIZE: 11px; COLOR: #ffffff;
+}
+.texto {
+
+}
+form#Formulario_Dinamico {
+	margin: 0 25px;
+}
+#TablaResultados th{
+	background: rgba(0,0,0,.1);
+}
+#TablaResultados tr td.texto_negro {
+	padding-top: 20px;
+}
+#Formulario_Dinamico tr:nth-child(even):not(:first-child) {
+	background: rgba(0,0,0,.02);
+}
+
+.texto_rojo {
+	FONT-SIZE: 12px; COLOR: #FFFFFF;
+	background: #82D23D;
+	padding: 10px;
+	text-decoration: none;
+	border-radius: 10px;
+	FONT-WEIGHT: bold;
+}
+
+form#form-login{
+	margin: 50px 5px 100px;
+}
+form#form-login input[type="submit"]{
+	margin: 10px 5px 50px;
+}
+
+form#filtros input:not(.fdo_action_call),
+form#filtros select,
+form#Formulario_Carga input:not([type="submit"]),
+form#Formulario_Carga select,
+form#form-login input:not([type="submit"]){
+	line-height: 30px;
+	font-size: 12px;
+	padding: 0 5px;
+	border-radius: 5px;
+	border: 1px solid #ebebeb;
+	background: #fff;
+	margin: 2px 5px;
+}
+form#filtros select,
+form#Formulario_Carga select{
+	line-height: 1.2;
+	height: 30px;
+}
+form#filtros input.fdo_action_call {
+	margin: 0px 0 10px;
+}
+#FormularioExportacion{
+	margin: 0 25px;
+}
+form#Formulario_Carga {
+	margin: 0 25px;
+}
+form#Formulario_Carga .fdo_action_call {
+	margin: 25px 0;
+}
+
+
+
+.fdo_action_call, caption button {
+	COLOR: #FFFFFF;
+	background: #4286cc;
+	padding: 0px 10px;
+	text-decoration: none;
+	border-radius: 5px;
+	line-height: 30px;
+	/* FONT-WEIGHT: bold; */
+	display: inline-block;
+	text-transform: uppercase;
+	border: 1px solid #2d5e90;
+	vertical-align: middle;
+	margin: 0 5px;
+	cursor: pointer;
+}
+
+.warning {
+
+	COLOR: #FF0033;
+	FONT-WEIGHT: bold;
+}
+
+#footerbar {
+	MARGIN-TOP: 10px; FONT-SIZE: 10px; MARGIN-BOTTOM: 10px; COLOR: #ffffff; TEXT-ALIGN: center
+}
+#footersub A {
+	MARGIN-LEFT: 40px; COLOR: #003366
+}
+#footer A {
+	MARGIN-LEFT: 40px; COLOR: #003366
+}
+#footer_last A {
+	FONT-SIZE: 10px; MARGIN-LEFT: 40px; COLOR: #003366; TEXT-ALIGN: center
+}
+#footer_lastsub A {
+	MARGIN-LEFT: 40px; COLOR: #003366
+}
+#search {
+	FONT-WEIGHT: bold; FONT-SIZE: 10px
+}
+#dropdown_main {
+	FONT-WEIGHT: bold; FONT-SIZE: 14px; LEFT: 25px; COLOR: #ffffff;
+}
+#dropdown_sub {
+	FONT-WEIGHT: bold; FONT-SIZE: 14px; LEFT: 17px; COLOR: #ffffff; POSITION: relative; TOP: 9px
+}
+#sectionhead {
+	FONT-WEIGHT: bold; FONT-SIZE: 11px; COLOR: #006699
+}
+#title {
+	PADDING-LEFT: 30px; FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #000000
+}
+#title_home {
+	PADDING-LEFT: 7px; FONT-SIZE: 11px; COLOR: #000000
+}
+
+#none {
+	TEXT-DECORATION: none
+}
+#home {
+	PADDING-TOP: 15px
+}
+#line {
+	PADDING-TOP: 8px; BORDER-BOTTOM: #00529a 2px solid
+}
+#sidehead {
+	FONT-SIZE: 16px; COLOR: #00529a
+}
+#margin10 {
+	MARGIN-BOTTOM: 10px
+}
+#subleftnav {
+	PADDING-LEFT: 17px
+}
+#subleftnav A {
+	FONT-WEIGHT: bold; COLOR: #003366; TEXT-DECORATION: underline
+}
+#landingintro {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #00529a; LETTER-SPACING: 1px
+}
+.homePageNewsLink {
+	COLOR: #333; LINE-HEIGHT: 150%; PADDING-TOP: 5px; TEXT-DECORATION: none
+}
+IMG.uploaded-photo {
+	DISPLAY: block
+}
+TABLE.navtable {
+	BORDER-COLLAPSE: collapse
+}
+TABLE.subleftnav {
+	BORDER-COLLAPSE: collapse
+}
+TABLE.navtable TD {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px
+}
+TABLE.subleftnav TD {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px
+}
+DIV.flyout {
+	BORDER-RIGHT: #ffffff 1px solid; BORDER-TOP: #ffffff 1px solid; Z-INDEX: 100; VISIBILITY: hidden; MARGIN-LEFT: 195px; POSITION: absolute
+}
+DIV.sub {
+	MARGIN-TOP: -1px
+}
+DIV.flyout A:link {
+	DISPLAY: block; FONT-SIZE: 11px; WIDTH: 195px; COLOR: #003366; BACKGROUND-COLOR: #edb75d; TEXT-DECORATION: none
+}
+DIV.flyout A:visited {
+	DISPLAY: block; FONT-SIZE: 11px; WIDTH: 195px; COLOR: #003366; BACKGROUND-COLOR: #edb75d; TEXT-DECORATION: none
+}
+DIV.flyout A:active {
+	DISPLAY: block; FONT-SIZE: 11px; WIDTH: 195px; COLOR: #003366; BACKGROUND-COLOR: #edb75d; TEXT-DECORATION: none
+}
+DIV.flyout A SPAN {
+	PADDING-RIGHT: 15px; DISPLAY: block; PADDING-LEFT: 7px; PADDING-BOTTOM: 7px; PADDING-TOP: 8px; BORDER-BOTTOM: #f4d7a6 1px solid
+}
+DIV.flyout A:hover {
+	BACKGROUND-COLOR: #e59d28
+}
+DIV.flyout A.arrow {
+	BACKGROUND-POSITION: right center; BACKGROUND-IMAGE: url(images/nav_arrow.gif); BACKGROUND-REPEAT: no-repeat
+}
+
+.blanco {
+	FONT-SIZE: 8pt; COLOR: #FFFFFF; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.titulo {
+	FONT-SIZE: 18px; COLOR: #333333; FONT-FAMILY: Arial; TEXT-DECORATION: none; font-weight: normal;
+}
+.line_bottom_gris {
+	BORDER-BOTTOM: #DEDEDE 1px solid
+}
+.line_top_gris {
+	BORDER-TOP: #DEDEDE 1px solid;
+	padding: 8px 0;
+}
+.line_top_bottom_gris {
+	BORDER-TOP: #DEDEDE 1px solid
+}
