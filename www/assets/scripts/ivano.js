@@ -13,7 +13,8 @@ $(window).bind('load', function(){
 	 if(url_backoffice != null){
 		var url_accesso = url_backoffice;
 	}else{ // Si no existe, preseteo uno
-		var url_accesso = "http://expoagro.neomedia.com.ar/expoagro";
+		//var url_accesso = "http://expoagro.neomedia.com.ar/expoagro";
+		var url_accesso = "http://planahorromb.neomedia.com.ar/cms";
 	}
 
 	// Analizo los parametros del Cotizador
