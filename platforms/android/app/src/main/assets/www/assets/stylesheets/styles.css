@@ -568,6 +568,7 @@ form .bootstrap-select > .dropdown-toggle {
 	left: 0;
 	bottom: 0;
 	right: 0;
+	display: none;
 }
 
 img.scale-img, .scale-img img{

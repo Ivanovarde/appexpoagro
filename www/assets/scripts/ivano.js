@@ -11,11 +11,12 @@ $(window).bind('load', function(){
 
 	 // Si hay datos localmente
 	 if(url_backoffice != null){
-		var url_accesso = url_backoffice;
-	}else{ // Si no existe, preseteo uno
-		//var url_accesso = "http://expoagro.neomedia.com.ar/expoagro";
-		var url_accesso = "http://planahorromb.neomedia.com.ar/cms";
+		url_accesso = url_backoffice;
 	}
+	//else{ // Si no existe, preseteo uno
+	//	//var url_accesso = "http://expoagro.neomedia.com.ar/expoagro";
+	//	url_accesso = "http://planahorromb.neomedia.com.ar/cms";
+	//}
 
 	// Analizo los parametros del Cotizador
 	if(window.location.pathname.search("/cotizacion.html") != -1){
@@ -99,7 +100,7 @@ jQuery(document).ready(function() {
 
 	// ======================================== ENVIAR_COTIZACION_FINAL ====================================================
 
-	$( "#btn_enviar_cotizacion_final" ).click(function() {
+	$( "#btn_enviar_cotizacion_final" ).click(function(event) {
 		event.preventDefault();
 
 		// Valido que el formulario no este vacio

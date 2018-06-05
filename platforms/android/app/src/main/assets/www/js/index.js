@@ -17,60 +17,61 @@
  * under the License.
  */
 var app = {
-    // Application Constructor
-    initialize: function() {
-        document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
+	 // Application Constructor
+	 initialize: function() {
+		  document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
 
-        // Detecto si estoy online o offline
-        document.addEventListener("offline", estoyConectado , false);
-        document.addEventListener("online", estoyConectado , false);           
-    },
+		  // Detecto si estoy online o offline
+		  document.addEventListener("offline", estoyConectado , false);
+		  document.addEventListener("online", estoyConectado , false);
+	 },
 
-    // deviceready Event Handler
-    //
-    // Bind any cordova events here. Common events are:
-    // 'pause', 'resume', etc.
-    onDeviceReady: function() {
-        this.receivedEvent('deviceready');
-    },
+	 // deviceready Event Handler
+	 //
+	 // Bind any cordova events here. Common events are:
+	 // 'pause', 'resume', etc.
+	 onDeviceReady: function() {
+		  this.receivedEvent('deviceready');
+	 },
 
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
-/*        
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
+	 // Update DOM on a Received Event
+	 receivedEvent: function(id) {
+/*
+		  var parentElement = document.getElementById(id);
+		  var listeningElement = parentElement.querySelector('.listening');
+		  var receivedElement = parentElement.querySelector('.received');
 
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
+		  listeningElement.setAttribute('style', 'display:none;');
+		  receivedElement.setAttribute('style', 'display:block;');
 
-        console.log('Received Event: ' + id);
+		  console.log('Received Event: ' + id);
 */
-    }
+	 }
 };
 
 app.initialize();
 
 // Declaro las variables globales
-var url_accesso = "http://expoagro.neomedia.com.ar/expoagro";
+//var url_accesso = "http://expoagro.neomedia.com.ar/expoagro";
+var url_accesso = "http://planahorromb.neomedia.com.ar/cms";
 var isConnected = false;
 
 
 function estoyConectado(){
-    var networkState = navigator.connection.type;
+	 var networkState = navigator.connection.type;
 
-    var states = {};
-    states[Connection.UNKNOWN]  = 'Unknown connection';
-    states[Connection.ETHERNET] = 'Ethernet connection';
-    states[Connection.WIFI]     = 'WiFi connection';
-    states[Connection.CELL_2G]  = 'Cell 2G connection';
-    states[Connection.CELL_3G]  = 'Cell 3G connection';
-    states[Connection.CELL_4G]  = 'Cell 4G connection';
-    states[Connection.NONE]     = 'No network connection';
+	 var states = {};
+	 states[Connection.UNKNOWN]  = 'Unknown connection';
+	 states[Connection.ETHERNET] = 'Ethernet connection';
+	 states[Connection.WIFI]     = 'WiFi connection';
+	 states[Connection.CELL_2G]  = 'Cell 2G connection';
+	 states[Connection.CELL_3G]  = 'Cell 3G connection';
+	 states[Connection.CELL_4G]  = 'Cell 4G connection';
+	 states[Connection.NONE]     = 'No network connection';
 
-    if(networkState == Connection.NONE){
-        isConnected = false;
-    }else{
-        isConnected = true;         
-    }
+	 if(networkState == Connection.NONE){
+		  isConnected = false;
+	 }else{
+		  isConnected = true;
+	 }
 }

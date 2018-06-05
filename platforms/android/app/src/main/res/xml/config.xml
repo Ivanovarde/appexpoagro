@@ -10,13 +10,13 @@
     <feature name="Notification">
         <param name="android-package" value="org.apache.cordova.dialogs.Notification" />
     </feature>
-    <name>ExpoAgro App</name>
+    <name>Plan de Ahorro Mercedes Benz</name>
     <description>
-        Aplicación Mobile de ExpoAgro.
-    </description>
+		Envía información sobre planes de ahorro de diferentes tipos de vehículos Mercedes Benz
+	</description>
     <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Apache Cordova Team
-    </author>
+		Apache Cordova Team
+	</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />

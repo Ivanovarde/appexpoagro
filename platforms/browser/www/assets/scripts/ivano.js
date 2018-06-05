@@ -1,3 +1,4 @@
+
 $(window).bind('load', function(){
 
 	$('#preloader').addClass('off');
@@ -5,15 +6,17 @@ $(window).bind('load', function(){
 		$('#preloader').remove();
 	}, 1500);
 
-    //Verifico si existe la URL de acceso al BackOffice
-    var url_backoffice = window.localStorage.getItem("url_backoffice");
+	 //Verifico si existe la URL de acceso al BackOffice
+	 var url_backoffice = window.localStorage.getItem("url_backoffice");
 
-    // Si hay datos localmente
-    if(url_backoffice != null){
-		var url_accesso = url_backoffice;
-	}else{ // Si no existe, preseteo uno
-		var url_accesso = "http://expoagro.neomedia.com.ar/expoagro";
+	 // Si hay datos localmente
+	 if(url_backoffice != null){
+		url_accesso = url_backoffice;
 	}
+	//else{ // Si no existe, preseteo uno
+	//	//var url_accesso = "http://expoagro.neomedia.com.ar/expoagro";
+	//	url_accesso = "http://planahorromb.neomedia.com.ar/cms";
+	//}
 
 	// Analizo los parametros del Cotizador
 	if(window.location.pathname.search("/cotizacion.html") != -1){
@@ -26,7 +29,7 @@ $(window).bind('load', function(){
 	}
 
 	// Analizo los parametros del Formulario de Cotizador
-	if(window.location.pathname.search("/formulario.html") != -1){	
+	if(window.location.pathname.search("/formulario.html") != -1){
 		mostrarDatosCotizacion('form');
 
 		// Si es el caso de Plan 84, agrego un clase para ocultar encabezado
@@ -36,7 +39,7 @@ $(window).bind('load', function(){
 		}else{ // Saco la clase no-info
 			$("#encabezado_formulario").removeClass( "no-info" );
 		}
-		
+
 	}
 
 });
@@ -48,7 +51,6 @@ $(window).on('scroll', function(e){
 jQuery(document).ready(function() {
 
 	actualizarContadorContactosPendientes();
-
 
 
 	// ============================================ SET URL BACKOFFICE ======================================================
@@ -67,100 +69,107 @@ jQuery(document).ready(function() {
 
 	});
 
-	// ============================================ SINCRONIZAR CONTACTOS ======================================================
+	// ======================================= SINCRONIZAR CONTACTOS ======================================================
 
 	$( "#btn_contactos_pendientes" ).click(function() {
 
 		var contadorAux = 0;
 
-	    //Si tengo datos guardados localmente, los consulto directamente desde ahi
-	    var datos_guardados = JSON.parse(window.localStorage.getItem("datos_guardados"));
+		 //Si tengo datos guardados localmente, los consulto directamente desde ahi
+		 var datos_guardados = JSON.parse(window.localStorage.getItem("datos_guardados"));
 
-	    // Si no estoy conectado a Internet, cancelo
-	    if(isConnected){
+		 // Si no estoy conectado a Internet, cancelo
+		 if(isConnected){
 
-		    // Si hay datos localmente
-		    if(datos_guardados != null && datos_guardados.length != 0){
+			 // Si hay datos localmente
+			 if(datos_guardados != null && datos_guardados.length != 0){
 				contadorAux = datos_guardados.length;
 
 				if (confirm('¿Desea sincronizar los contactos locales?')) {
 					sincronizarContactosPendientes();
 				}
-		    }else{
-		    	alert('No hay contactos para sincronizar.')
-		    }
-	    }else{
-	    	alert('No se puede iniciar la sincronización porque no hay conexión a Internet.')
-	    }
+			 }else{
+				 alert('No hay contactos para sincronizar.')
+			 }
+		 }else{
+			 alert('No se puede iniciar la sincronización porque no hay conexión a Internet.')
+		 }
 
 	});
 
 
-	// ============================================ ENVIAR_COTIZACION_FINAL ======================================================
+	// ======================================== ENVIAR_COTIZACION_FINAL ====================================================
 
-	$( "#btn_enviar_cotizacion_final" ).click(function() {
+	$( "#btn_enviar_cotizacion_final" ).click(function(event) {
 		event.preventDefault();
 
+		// Valido que el formulario no este vacio
+		if($("#nombre").val() != "" && $("#apellido").val() != "" && $("#email").val() != "" && $("#telefono").val() != "" && $("#provincia").val() != "" && $("#ciudad").val() != ""){
 
-		// Cargo Loading...
-		$( "#btn_enviar_cotizacion_final" ).html("Enviando...");
+			// Cargo Loading...
+			$( "#btn_enviar_cotizacion_final" ).html("Enviando...");
 
-		var arrayGeneral =  [];
-		arrayGeneral = eval('array'+getParameters("obj"));
+			var arrayGeneral =  [];
+			arrayGeneral = eval('array'+getParameters("obj"));
 
-		var Registro =  [];
-		Registro = jQuery.grep(arrayGeneral[getParameters("linea")], function( n, i ) {
-			return n["modelo"] == unescape(getParameters("modelo")) && n["plan"] == unescape(getParameters("plan"));
-		});
+			var Registro =  [];
+			Registro = jQuery.grep(arrayGeneral[getParameters("linea")], function( n, i ) {
+				return n["modelo"] == unescape(getParameters("modelo")) && n["plan"] == unescape(getParameters("plan"));
+			});
 
-		var RegistroGuardar = new Array();
+			var RegistroGuardar = new Array();
 
-		// Obtengo los datos de la cotización	
-		RegistroGuardar["0"] = getParameters("cuotas");
-		RegistroGuardar["1"] = Registro[0]["cuotaMensual"].replace(/,/g, "|");
-		RegistroGuardar["2"] = Registro[0]["precioPublico"].replace(/,/g, "|");
-		RegistroGuardar["3"] = Registro[0]["plan"];
-		RegistroGuardar["4"] = Registro[0]["cuotaPura"].replace(/,/g, "|");
-		RegistroGuardar["5"] = Registro[0]["cargaAdminSuscripcion"].replace(/,/g, "|");
-		RegistroGuardar["6"] = Registro[0]["iva21"].replace(/,/g, "|");
-		RegistroGuardar["7"] = Registro[0]["pagoAdjudicacion30"].replace(/,/g, "|");
-		RegistroGuardar["8"] = Registro[0]["modelo"];
-		RegistroGuardar["9"] = Registro[0]["plan"];
-		RegistroGuardar["16"] = getParameters("linea");
-		RegistroGuardar["17"] = getParameters("obj");
+			// Obtengo los datos de la cotización
+			RegistroGuardar["0"] = getParameters("cuotas");
+			RegistroGuardar["1"] = Registro[0]["cuotaMensual"].replace(/,/g, "|");
+			RegistroGuardar["2"] = Registro[0]["precioPublico"].replace(/,/g, "|");
+			RegistroGuardar["3"] = Registro[0]["plan"];
+			RegistroGuardar["4"] = Registro[0]["cuotaPura"].replace(/,/g, "|");
+			RegistroGuardar["5"] = Registro[0]["cargaAdminSuscripcion"].replace(/,/g, "|");
+			RegistroGuardar["6"] = Registro[0]["iva21"].replace(/,/g, "|");
+			RegistroGuardar["7"] = Registro[0]["pagoAdjudicacion30"].replace(/,/g, "|");
+			RegistroGuardar["8"] = Registro[0]["modelo"];
+			RegistroGuardar["9"] = Registro[0]["plan"];
+			RegistroGuardar["16"] = getParameters("linea");
+			RegistroGuardar["17"] = getParameters("obj");
 
-		// Obtengo los datos del Formulario
-		RegistroGuardar["10"] = $("#nombre").val();
-		RegistroGuardar["11"] = $("#apellido").val();
-		RegistroGuardar["12"] = $("#email").val();
-		RegistroGuardar["13"] = $("#telefono").val();
-		RegistroGuardar["14"] = $("#provincia").val();
-		RegistroGuardar["15"] = $("#ciudad").val();
-
-
-	    // Si estoy conectado a Internet, guardo los datos en BD
-	    if(isConnected){
-
-            // Si falla el envio, lo guardo localmente
-			enviarRegistro(RegistroGuardar)
-				.fail(function(result,RegistroGuardar) {
-					guardarDatosLocalmente(RegistroGuardar);
-
-					// Saco Loading...
-					$( "#btn_enviar_cotizacion_final" ).html("Enviar cotización");
+			// Obtengo los datos del Formulario
+			RegistroGuardar["10"] = $("#nombre").val();
+			RegistroGuardar["11"] = $("#apellido").val();
+			RegistroGuardar["12"] = $("#email").val();
+			RegistroGuardar["13"] = $("#telefono").val();
+			RegistroGuardar["14"] = $("#provincia").val();
+			RegistroGuardar["15"] = $("#ciudad").val();
 
 
-				}).done(function(result,RegistroGuardar) {
+			 // Si estoy conectado a Internet, guardo los datos en BD
+			 if(isConnected){
 
-					// Saco Loading...
-					$( "#btn_enviar_cotizacion_final" ).html("Enviar cotización");
-				});
+					// Si falla el envio, lo guardo localmente
+				enviarRegistro(RegistroGuardar)
+					.fail(function(result,RegistroGuardar) {
+						guardarDatosLocalmente(RegistroGuardar);
+
+						// Saco Loading...
+						$( "#btn_enviar_cotizacion_final" ).html("Enviar cotización");
 
 
-	    }else{ // Si no estoy conectado a Internet, guardo los datos localmente para sync posteriormente
+					}).done(function(result,RegistroGuardar) {
 
-			guardarDatosLocalmente(RegistroGuardar);
-	    }
+						// Saco Loading...
+						$( "#btn_enviar_cotizacion_final" ).html("Enviar cotización");
+					});
+
+
+			 }else{ // Si no estoy conectado a Internet, guardo los datos localmente para sync posteriormente
+
+				guardarDatosLocalmente(RegistroGuardar);
+			 }
+
+		}else{
+			alert('Se debe completar el formulario antes de enviarlo...');
+		}
+
 
 	});
 
@@ -200,71 +209,71 @@ jQuery(document).ready(function() {
 
 	$('#bus_linea').on('changed.bs.select', function (e) {
 		actualizarModelos($(this).val(), 'bus');
-	});	
+	});
 
 	$('#bus_modelos').on('changed.bs.select', function (e) {
 		actualizarPlanes( $('#bus_linea').val(),$(this).val(), 'bus');
-	});	
+	});
 
 	$('#bus_plan').on('changed.bs.select', function (e) {
 		actualizarCuotas( $('#bus_linea').val(), $('#bus_modelos').val(), $(this).val(), 'bus');
-	});		
+	});
 
 	// ============================================ CAMIONES ======================================================
 
 	$('#camiones_linea').on('changed.bs.select', function (e) {
 		actualizarModelos($(this).val(), 'camiones');
-	});	
+	});
 
 	$('#camiones_modelos').on('changed.bs.select', function (e) {
 		actualizarPlanes( $('#camiones_linea').val(),$(this).val(), 'camiones');
-	});	
+	});
 
 	$('#camiones_plan').on('changed.bs.select', function (e) {
 		actualizarCuotas( $('#camiones_linea').val(), $('#camiones_modelos').val(), $(this).val(), 'camiones');
-	});	
+	});
 
 	// ============================================ VANS ======================================================
 
 	$('#vans_linea').on('changed.bs.select', function (e) {
 		actualizarModelos($(this).val(), 'vans');
-	});	
+	});
 
 	$('#vans_modelos').on('changed.bs.select', function (e) {
 		actualizarPlanes( $('#vans_linea').val(),$(this).val(), 'vans');
-	});	
+	});
 
 	$('#vans_plan').on('changed.bs.select', function (e) {
 		actualizarCuotas( $('#vans_linea').val(), $('#vans_modelos').val(), $(this).val(), 'vans');
-	});	
+	});
 
 	// ============================================ PICKUP ======================================================
 
 	$('#pickup_linea').on('changed.bs.select', function (e) {
 		actualizarModelos($(this).val(), 'pickup');
-	});	
+	});
 
 	$('#pickup_modelos').on('changed.bs.select', function (e) {
 		actualizarPlanes( $('#pickup_linea').val(),$(this).val(), 'pickup');
-	});	
+	});
 
 	$('#pickup_plan').on('changed.bs.select', function (e) {
 		actualizarCuotas( $('#pickup_linea').val(), $('#pickup_modelos').val(), $(this).val(), 'pickup');
-	});	
+	});
 
 	// ============================================ SMART ======================================================
 
-	$('#smart_linea').on('changed.bs.select', function (e) {
-		actualizarModelos($(this).val(), 'smart');
-	});	
+	//$('#smart_linea').on('changed.bs.select', function (e) {
+	//	actualizarModelos($(this).val(), 'smart');
+	//});
 
-	$('#smart_modelos').on('changed.bs.select', function (e) {
-		actualizarPlanes( $('#smart_linea').val(),$(this).val(), 'smart');
-	});	
+	//$('#smart_modelos').on('changed.bs.select', function (e) {
+	//	actualizarPlanes( $('#smart_linea').val(),$(this).val(), 'smart');
+	//});
 
-	$('#smart_plan').on('changed.bs.select', function (e) {
-		actualizarCuotas( $('#smart_linea').val(), $('#smart_modelos').val(), $(this).val(), 'smart');
-	});	
+	//$('#smart_plan').on('changed.bs.select', function (e) {
+	//	actualizarCuotas( $('#smart_linea').val(), $('#smart_modelos').val(), $(this).val(), 'smart');
+	//});
 });
 
 
@@ -281,22 +290,22 @@ arraypickup[1][0] = cargarMatriz("84","Pickup","Plan","0.00","0.00","0.00","0.00
 
 // SMART
 
-var arraysmart =  [];
-arraysmart[1] = [];
-arraysmart[1][0] = [];
-arraysmart[1][1] = [];
-arraysmart[1][2] = [];
-arraysmart[1][3] = [];
-arraysmart[1][4] = [];
-arraysmart[1][5] = [];
-
-// Cargo el arreglo
-arraysmart[1][0] = cargarMatriz("72","smart","smart forfour passion automatico","450,075.00","315,052.50","6,301.05","1,323.22","7,624.27","4,375.73","525.09","110.27","5,011.09","135,022.50","Plan 70/30");
-arraysmart[1][1] = cargarMatriz("72","smart","smart fortwo play","494,200.00","345,940.00","6,918.80","1,452.95","8,371.75","4,804.72","576.57","121.08","5,502.37","148,260.00","Plan 70/30");
-arraysmart[1][2] = cargarMatriz("72","smart","smart forfour play","503,025.00","352,117.50","7,042.35","1,478.89","8,521.24","4,890.52","586.86","123.24","5,600.62","150,907.50","Plan 70/30");
-arraysmart[1][3] = cargarMatriz("72","smart","smart forfour passion automatico","448290","448290","8965.8","1882.818","10848.618","6226.25","747.15","156.9015","7130.3015","","Plan 100%");
-arraysmart[1][4] = cargarMatriz("72","smart","smart fortwo play","492240","492240","9844.8","2067.408","11912.208","6836.666667","820.4","172.284","7829.350667","", "Plan 100%");
-arraysmart[1][5] = cargarMatriz("72","smart","smart forfour play","501030","501030","10020.6","2104.326","12124.926","6958.75","835.05","175.3605","7969.1605","", "Plan 100%");
+//var arraysmart =  [];
+//arraysmart[1] = [];
+//arraysmart[1][0] = [];
+//arraysmart[1][1] = [];
+//arraysmart[1][2] = [];
+//arraysmart[1][3] = [];
+//arraysmart[1][4] = [];
+//arraysmart[1][5] = [];
+//
+//// Cargo el arreglo
+//arraysmart[1][0] = cargarMatriz("72","smart","smart forfour passion automatico","450,075.00","315,052.50","6,301.05","1,323.22","7,624.27","4,375.73","525.09","110.27","5,011.09","135,022.50","Plan 70/30");
+//arraysmart[1][1] = cargarMatriz("72","smart","smart fortwo play","494,200.00","345,940.00","6,918.80","1,452.95","8,371.75","4,804.72","576.57","121.08","5,502.37","148,260.00","Plan 70/30");
+//arraysmart[1][2] = cargarMatriz("72","smart","smart forfour play","503,025.00","352,117.50","7,042.35","1,478.89","8,521.24","4,890.52","586.86","123.24","5,600.62","150,907.50","Plan 70/30");
+//arraysmart[1][3] = cargarMatriz("72","smart","smart forfour passion automatico","448290","448290","8965.8","1882.818","10848.618","6226.25","747.15","156.9015","7130.3015","","Plan 100%");
+//arraysmart[1][4] = cargarMatriz("72","smart","smart fortwo play","492240","492240","9844.8","2067.408","11912.208","6836.666667","820.4","172.284","7829.350667","", "Plan 100%");
+//arraysmart[1][5] = cargarMatriz("72","smart","smart forfour play","501030","501030","10020.6","2104.326","12124.926","6958.75","835.05","175.3605","7969.1605","", "Plan 100%");
 
 
 // BUSES
@@ -306,6 +315,7 @@ arraybus[1] = [];
 arraybus[2] = [];
 arraybus[3] = [];
 arraybus[4] = [];
+
 arraybus[1][0] = [];
 arraybus[1][1] = [];
 arraybus[1][2] = [];
@@ -316,14 +326,17 @@ arraybus[4][0] = [];
 arraybus[4][1] = [];
 
 // Cargo el arreglo
-arraybus[1][0] = cargarMatriz("72","Interurbanos","OF 1519-52 Euro V","1,879,148.71","1,879,148.71","37,582.97","7,892.42","45,475.39","26,099.29","3,131.91","657.70","29,888.90","0.00","Plan 100%");
-arraybus[1][1] = cargarMatriz("72","Interurbanos","OF 1721-59 Euro V","2,011,365.82","2,011,365.82","40,227.32","8,447.74","48,675.06","27,935.64","3,352.28","703.98","31,991.90","0.00","Plan 100%");
-arraybus[1][2] = cargarMatriz("72","Interurbanos","O500 M 1826 Euro V","2,438,208.46","2,438,208.46","48,764.17","10,240.48","59,004.65","33,864.01","4,063.68","853.37","38,781.06","0.00","Plan 100%");
-arraybus[1][3] = cargarMatriz("72","Interurbanos","O500 U 1826 Euro V","2,498,591.08","2,498,591.08","49,971.82","10,494.08","60,465.90","34,702.65","4,164.32","874.51","39,741.48","0.00","Plan 100%");
-arraybus[2][0] = cargarMatriz("72","Midibus","LO 916-45 Euro V","1,170,173.49","1,170,173.49","23,403.47","4,914.73","28,318.20","16,252.41","1,950.29","409.56","18,612.26","0.00","Plan 100%");
-arraybus[3][0] = cargarMatriz("72","Plataformas con motor electrónico","O500 RSD 2436 Euro V","3,189,867.95","3,189,867.95","63,797.36","13,397.45","77,194.81","44,303.72","5,316.45","1,116.45","50,736.62","0.00","Plan 100%");
-arraybus[4][0] = cargarMatriz("72","Urbanos","OH 1621/55 Euro V","2,205,006.63","2,205,006.63","44,100.13","9,261.03","53,361.16","30,625.09","3,675.01","771.75","35,071.85","0.00","Plan 100%");
-arraybus[4][1] = cargarMatriz("72","Urbanos","OH 1721/62 Euro V","2,244,567.66","2,244,567.66","44,891.35","9,427.18","54,318.53","31,174.55","3,740.95","785.60","35,701.10","0.00","Plan 100%");
+arraybus[1][0] = cargarMatriz("72", "Interurbanos", "OF 1519-52 Euro V", "2.219.283,04", "2.219.283,04", "44.385,66", "9.320,99", "53.706,65", "30.823,38", "3.698,81", "776,75", "35.298,93", "-", "Plan 100%");
+arraybus[1][1] = cargarMatriz("72", "Interurbanos", "OF 1721-59 Euro V", "2.375.432,04", "2.375.432,04", "47.508,64", "9.976,81", "57.485,46", "32.992,11", "3.959,05", "831,40", "37.782,57", "-", "Plan 100%");
+arraybus[1][2] = cargarMatriz("72", "Interurbanos", "O500 M 1826 Euro V", "2.879.535,11", "2.879.535,11", "57.590,70", "12.094,05", "69.684,75", "39.993,54", "4.799,23", "1.007,84", "45.800,61", "-", "Plan 100%");
+arraybus[1][3] = cargarMatriz("72", "Interurbanos", "O500 U 1826 Euro V", "2.950.847,25", "2.950.847,25", "59.016,95", "12.393,56", "71.410,50", "40.983,99", "4.918,08", "1.032,80", "46.934,86", "-", "Plan 100%");
+
+arraybus[2][0] = cargarMatriz("72", "Midibus", "LO 916-45 Euro V", "1.381.980,13", "1.381.980,13", "27.639,60", "5.804,32", "33.443,92", "19.194,17", "2.303,30", "483,69", "21.981,16", "-", "Plan 100%");
+
+arraybus[3][0] = cargarMatriz("72", "Plataformas con motor electrónico", "O500 RSD 2436 Euro V", "3.767.248,32", "3.767.248,32", "75.344,97", "15.822,44", "91.167,41", "52.322,89", "6.278,75", "1.318,54", "59.920,18", "-", "Plan 100%");
+
+arraybus[4][0] = cargarMatriz("72", "Urbanos", "OH 1621/55 Euro V", "2.604.122,70", "2.604.122,70", "52.082,45", "10.937,32", "63.019,77", "36.168,37", "4.340,20", "911,44", "41.420,02", "-", "Plan 100%");
+arraybus[4][1] = cargarMatriz("72", "Urbanos", "OH 1721/62 Euro V", "2.650.844,45", "2.650.844,45", "53.016,89", "11.133,55", "64.150,44", "36.817,28", "4.418,07", "927,80", "42.163,15", "-", "Plan 100%");
 
 
 // CAMIONES
@@ -344,6 +357,13 @@ arraycamiones[3][2] = [];
 arraycamiones[3][3] = [];
 arraycamiones[3][4] = [];
 arraycamiones[3][5] = [];
+arraycamiones[3][6] = [];
+arraycamiones[3][7] = [];
+arraycamiones[3][8] = [];
+arraycamiones[3][9] = [];
+arraycamiones[3][10] = [];
+arraycamiones[3][11] = [];
+arraycamiones[3][12] = [];
 arraycamiones[4][0] = [];
 arraycamiones[4][1] = [];
 arraycamiones[4][2] = [];
@@ -368,6 +388,13 @@ arraycamiones[4][20] = [];
 arraycamiones[4][21] = [];
 arraycamiones[4][22] = [];
 arraycamiones[4][23] = [];
+arraycamiones[4][24] = [];
+arraycamiones[4][25] = [];
+arraycamiones[4][26] = [];
+arraycamiones[4][27] = [];
+arraycamiones[4][28] = [];
+arraycamiones[4][29] = [];
+arraycamiones[4][30] = [];
 arraycamiones[5][0] = [];
 arraycamiones[5][1] = [];
 arraycamiones[5][2] = [];
@@ -388,58 +415,80 @@ arraycamiones[5][16] = [];
 arraycamiones[5][17] = [];
 
 // Cargo el arreglo
-arraycamiones[1][0] = cargarMatriz("84","Livianos ","Accelo 815/37","1,019,524.71","713,667.30","0.00","0.00","0.00","8,496.04","849.60","178.42","9,524.06","305,857.41","Plan 70/30");
-arraycamiones[1][1] = cargarMatriz("84","Livianos  ","Accelo 1016/37","1,109,966.42","776,976.50","0.00","0.00","0.00","9,249.72","924.97","194.24","10,368.93","332,989.93","Plan 70/30");
-arraycamiones[2][0] = cargarMatriz("72","Medianos","Atego 1419/48","1,455,955.96","1,455,955.96","29,119.12","6,115.02","35,234.14","20,221.61","2,426.59","509.58","23,157.78","0.00","Plan 100%");
-arraycamiones[2][1] = cargarMatriz("72","Medianos","Atego 1419/48","1,455,955.96","1,019,169.17","20,383.38","4,280.51","24,663.89","14,155.13","1,698.62","356.71","16,210.46","436,786.79","Plan 70/30");
-arraycamiones[3][0] = cargarMatriz("72","Pesados Off Road ","Axor 3131 B/36","2,823,470.14","2,823,470.14","56,469.40","11,858.57","68,327.97","39,214.86","4,705.78","988.21","44,908.85","0.00","Plan 100%");
-arraycamiones[3][1] = cargarMatriz("72","Pesados Off Road ","Axor 3131 B/36","2,823,470.14","1,976,429.10","39,528.58","8,301.00","47,829.58","27,450.40","3,294.05","691.75","31,436.20","847,041.04","Plan 70/30");
-arraycamiones[3][2] = cargarMatriz("72","Pesados Off Road ","Axor 3131 K/36","2,781,693.63","2,781,693.63","55,633.87","11,683.11","67,316.98","38,634.63","4,636.16","973.59","44,244.38","0.00","Plan 100%");
-arraycamiones[3][3] = cargarMatriz("72","Pesados Off Road ","Axor 3131 K/36","2,781,693.63","1,947,185.54","38,943.71","8,178.18","47,121.89","27,044.24","3,245.31","681.52","30,971.07","834,508.09","Plan 70/30");
-arraycamiones[3][4] = cargarMatriz("72","Pesados Off Road ","Axor 3131/48 6x4 Cab Ext","2,788,804.53","2,788,804.53","55,776.09","11,712.98","67,489.07","38,733.40","4,648.01","976.08","44,357.49","0.00","Plan 100%");
-arraycamiones[3][5] = cargarMatriz("72","Pesados Off Road ","Axor 3131/48 6x4 Cab Ext","2,788,804.53","1,952,163.17","39,043.26","8,199.08","47,242.34","27,113.38","3,253.61","683.26","31,050.25","836,641.36","Plan 70/30");
-arraycamiones[4][0] = cargarMatriz("72","Pesados On Road","Actros 1841 LS/36 4x2 Cabina L Dormitorio","3,023,908.52","3,023,908.52","60,478.17","12,700.42","73,178.59","41,998.73","5,039.85","1,058.37","48,096.95","0.00","Plan 100%");
-arraycamiones[4][1] = cargarMatriz("72","Pesados On Road","Actros 1841 LS/36 4x2 Cabina L Dormitorio","3,023,908.52","2,116,735.97","42,334.72","8,890.29","51,225.01","29,399.11","3,527.89","740.86","33,667.86","907,172.56","Plan 70/30");
-arraycamiones[4][2] = cargarMatriz("72","Pesados On Road","Actros 2041 S/36 4x2 Cabina L Dormitorio","2,961,910.40","2,961,910.40","59,238.21","12,440.02","71,678.23","41,137.64","4,936.52","1,036.67","47,110.83","0.00","Plan 100%");
-arraycamiones[4][3] = cargarMatriz("72","Pesados On Road","Actros 2041 S/36 4x2 Cabina L Dormitorio","2,961,910.40","2,073,337.28","41,466.75","8,708.02","50,174.77","28,796.35","3,455.56","725.67","32,977.58","888,573.12","Plan 70/30");
-arraycamiones[4][4] = cargarMatriz("72","Pesados On Road","Actros 2041/45 4x2 Cabina L Dormitorio","2,931,022.45","2,931,022.45","58,620.45","12,310.29","70,930.74","40,708.65","4,885.04","1,025.86","46,619.55","0.00","Plan 100%");
-arraycamiones[4][5] = cargarMatriz("72","Pesados On Road","Actros 2041/45 4x2 Cabina L Dormitorio","2,931,022.45","2,051,715.71","41,034.31","8,617.21","49,651.52","28,496.05","3,419.53","718.10","32,633.68","879,306.73","Plan 70/30");
-arraycamiones[4][6] = cargarMatriz("72","Pesados On Road","Actros 2046 S/36 4x2 Cabina L Dormitorio c/Retarder","3,112,128.08","3,112,128.08","62,242.56","13,070.94","75,313.50","43,224.00","5,186.88","1,089.24","49,500.12","0.00","Plan 100%");
-arraycamiones[4][7] = cargarMatriz("72","Pesados On Road","Actros 2046 S/36 4x2 Cabina L Dormitorio c/Retarder","3,112,128.08","2,178,489.65","43,569.79","9,149.66","52,719.45","30,256.80","3,630.82","762.47","34,650.09","933,638.42","Plan 70/30");
-arraycamiones[4][8] = cargarMatriz("72","Pesados On Road","Actros 2636 LS/33 6x2 Cabina L Dormitorio Techo Bajo (Combustible)","3,013,464.40","3,013,464.40","60,269.29","12,656.55","72,925.84","41,853.67","5,022.44","1,054.71","47,930.82","0.00","Plan 100%");
-arraycamiones[4][9] = cargarMatriz("72","Pesados On Road","Actros 2636 LS/33 6x2 Cabina L Dormitorio Techo Bajo (Combustible)","3,013,464.40","2,109,425.08","42,188.50","8,859.59","51,048.09","29,297.57","3,515.71","738.30","33,551.58","904,039.32","Plan 70/30");
-arraycamiones[4][10] = cargarMatriz("72","Pesados On Road","Actros 2646 S/33 6x4 Cabina L Dormitorio","3,530,337.65","3,530,337.65","70,606.75","14,827.42","85,434.17","49,032.47","5,883.90","1,235.62","56,151.99","0.00","Plan 100%");
-arraycamiones[4][11] = cargarMatriz("72","Pesados On Road","Actros 2646 S/33 6x4 Cabina L Dormitorio","3,530,337.65","2,471,236.35","49,424.73","10,379.19","59,803.92","34,322.73","4,118.73","864.93","39,306.39","1,059,101.29","Plan 70/30");
-arraycamiones[4][12] = cargarMatriz("72","Pesados On Road","Actros 2655 LS/33 6x4 Megaspace - c/Deflectores","3,819,440.01","3,819,440.01","76,388.80","16,041.65","92,430.45","53,047.78","6,365.73","1,336.80","60,750.31","0.00","Plan 100%");
-arraycamiones[4][13] = cargarMatriz("72","Pesados On Road","Actros 2655 LS/33 6x4 Megaspace - c/Deflectores","3,819,440.01","2,673,608.01","53,472.16","11,229.15","64,701.31","37,133.44","4,456.01","935.76","42,525.21","1,145,832.00","Plan 70/30");
-arraycamiones[4][14] = cargarMatriz("72","Pesados On Road","Atron 1735/51","2,348,151.19","2,348,151.19","46,963.02","9,862.23","56,825.25","32,613.21","3,913.59","821.85","37,348.65","0.00","Plan 100%");
-arraycamiones[4][15] = cargarMatriz("72","Pesados On Road","Atron 1735/51","2,348,151.19","1,643,705.83","32,874.12","6,903.57","39,777.69","22,829.25","2,739.51","575.30","26,144.06","704,445.36","Plan 70/30");
-arraycamiones[4][16] = cargarMatriz("72","Pesados On Road","Atron 1735S/45","2,381,261.30","2,381,261.30","47,625.23","10,001.30","57,626.53","33,073.07","3,968.77","833.44","37,875.28","0.00","Plan 100%");
-arraycamiones[4][17] = cargarMatriz("72","Pesados On Road","Atron 1735S/45","2,381,261.30","1,666,882.91","33,337.66","7,000.91","40,338.57","23,151.15","2,778.14","583.41","26,512.70","714,378.39","Plan 70/30");
-arraycamiones[4][18] = cargarMatriz("72","Pesados On Road","Axor 1933 S/36 CD Techo Bajo","2,407,260.51","2,407,260.51","48,145.21","10,110.49","58,255.70","33,434.17","4,012.10","842.54","38,288.81","0.00","Plan 100%");
-arraycamiones[4][19] = cargarMatriz("72","Pesados On Road","Axor 1933 S/36 CD Techo Bajo","2,407,260.51","1,685,082.36","33,701.65","7,077.35","40,779.00","23,403.92","2,808.47","589.78","26,802.17","722,178.15","Plan 70/30");
-arraycamiones[4][20] = cargarMatriz("72","Pesados On Road","Axor 2036 S/36 CD Techo Elevado","2,741,028.19","2,741,028.19","54,820.56","11,512.32","66,332.88","38,069.84","4,568.38","959.36","43,597.58","0.00","Plan 100%");
-arraycamiones[4][21] = cargarMatriz("72","Pesados On Road","Axor 2036 S/36 CD Techo Elevado","2,741,028.19","1,918,719.73","38,374.39","8,058.62","46,433.01","26,648.89","3,197.87","671.55","30,518.31","822,308.46","Plan 70/30");
-arraycamiones[4][22] = cargarMatriz("72","Pesados On Road","Axor 2041 S/36 CD Techo Elevado","2,863,246.72","2,863,246.72","57,264.93","12,025.64","69,290.57","39,767.32","4,772.08","1,002.14","45,541.54","0.00","Plan 100%");
-arraycamiones[4][23] = cargarMatriz("72","Pesados On Road","Axor 2041 S/36 CD Techo Elevado","2,863,246.72","2,004,272.70","40,085.45","8,417.94","48,503.39","27,837.12","3,340.45","701.49","31,879.06","858,974.02","Plan 70/30");
-arraycamiones[5][0] = cargarMatriz("72","Semipesados ","Atego 1720/36 CN","1,489,510.50","1,489,510.50","29,790.21","6,255.94","36,046.15","20,687.65","2,482.52","521.33","23,691.50","0.00","Plan 100%");
-arraycamiones[5][1] = cargarMatriz("72","Semipesados ","Atego 1720/36 CN","1,489,510.50","1,042,657.35","20,853.15","4,379.16","25,232.31","14,481.35","1,737.76","364.93","16,584.04","446,853.15","Plan 70/30");
-arraycamiones[5][2] = cargarMatriz("72","Semipesados ","Atego 1720/48 CN","1,503,065.64","1,503,065.64","30,061.31","6,312.88","36,374.19","20,875.91","2,505.11","526.07","23,907.09","0.00","Plan 100%");
-arraycamiones[5][3] = cargarMatriz("72","Semipesados ","Atego 1720/48 CN","1,503,065.64","1,052,145.95","21,042.92","4,419.01","25,461.93","14,613.14","1,753.58","368.25","16,734.97","450,919.69","Plan 70/30");
-arraycamiones[5][4] = cargarMatriz("72","Semipesados ","Atego 1726 A/42 4x4 Cab Ext Versión Civil •","2,487,702.52","2,487,702.52","49,754.05","10,448.35","60,202.40","34,551.42","4,146.17","870.70","39,568.29","0.00","Plan 100%");
-arraycamiones[5][5] = cargarMatriz("72","Semipesados ","Atego 1726 A/42 4x4 Cab Ext Versión Civil •","2,487,702.52","1,741,391.77","34,827.84","7,313.85","42,141.69","24,186.00","2,902.32","609.49","27,697.81","746,310.76","Plan 70/30");
-arraycamiones[5][6] = cargarMatriz("72","Semipesados ","Atego 1726 S/36 CD con ABS","1,787,723.70","1,787,723.70","35,754.47","7,508.44","43,262.91","24,829.50","2,979.54","625.70","28,434.74","0.00","Plan 100%");
-arraycamiones[5][7] = cargarMatriz("72","Semipesados ","Atego 1726 S/36 CD con ABS","1,787,723.70","1,251,406.59","25,028.13","5,255.91","30,284.04","17,380.65","2,085.68","437.99","19,904.32","536,317.11","Plan 70/30");
-arraycamiones[5][8] = cargarMatriz("72","Semipesados ","Atego 1726 S/36 CN con ABS","1,715,059.23","1,715,059.23","34,301.18","7,203.25","41,504.43","23,820.27","2,858.43","600.27","27,278.97","0.00","Plan 100%");
-arraycamiones[5][9] = cargarMatriz("72","Semipesados ","Atego 1726 S/36 CN con ABS","1,715,059.23","1,200,541.46","24,010.83","5,042.27","29,053.10","16,674.19","2,000.90","420.19","19,095.28","514,517.77","Plan 70/30");
-arraycamiones[5][10] = cargarMatriz("72","Semipesados ","Atego 1726/42 CD","1,759,502.33","1,759,502.33","35,190.05","7,389.91","42,579.96","24,437.53","2,932.50","615.83","27,985.86","0.00","Plan 100%");
-arraycamiones[5][11] = cargarMatriz("72","Semipesados ","Atego 1726/42 CD","1,759,502.33","1,231,651.63","24,633.03","5,172.94","29,805.97","17,106.27","2,052.75","431.08","19,590.10","527,850.70","Plan 70/30");
-arraycamiones[5][12] = cargarMatriz("72","Semipesados ","Atego 1726/42 CN","1,686,171.21","1,686,171.21","33,723.42","7,081.92","40,805.34","23,419.04","2,810.28","590.16","26,819.48","0.00","Plan 100%");
-arraycamiones[5][13] = cargarMatriz("72","Semipesados ","Atego 1726/42 CN","1,686,171.21","1,180,319.85","23,606.40","4,957.34","28,563.74","16,393.33","1,967.20","413.11","18,773.64","505,851.36","Plan 70/30");
-arraycamiones[5][14] = cargarMatriz("72","Semipesados ","Atego 1726/48 CN","1,704,170.67","1,704,170.67","34,083.41","7,157.52","41,240.93","23,669.04","2,840.28","596.46","27,105.78","0.00","Plan 100%");
-arraycamiones[5][15] = cargarMatriz("72","Semipesados ","Atego 1726/48 CN","1,704,170.67","1,192,919.47","23,858.39","5,010.26","28,868.65","16,568.33","1,988.20","417.52","18,974.05","511,251.20","Plan 70/30");
-arraycamiones[5][16] = cargarMatriz("72","Semipesados ","Atego 2426/48","1,895,942.65","1,895,942.65","37,918.85","7,962.96","45,881.81","26,332.54","3,159.90","663.58","30,156.02","0.00","Plan 100%");
-arraycamiones[5][17] = cargarMatriz("72","Semipesados ","Atego 2426/48","1,895,942.65","1,327,159.85","26,543.20","5,574.07","32,117.27","18,432.78","2,211.93","464.51","21,109.22","568,782.79","Plan 70/30");
+
+arraycamiones[1][0] = cargarMatriz("84", "Livianos ", "Accelo 815/37", "1.166.040,20", "816.228,14", "0,00", "0,00", "0,00", "9.717,00", "971,70", "204,06", "10.892,76", "349.812,06", "Plan 70/30");
+arraycamiones[1][1] = cargarMatriz("84", "Livianos  ", "Accelo 1016/37", "1.269.479,25", "888.635,48", "0,00", "0,00", "0,00", "10.578,99", "1.057,90", "222,16", "11.859,05", "380.843,78", "Plan 70/30");
+
+arraycamiones[2][0] = cargarMatriz("72", "Medianos", "Atego 1419/48", "1.582.846,20", "1.107.992,34", "22.159,85", "4.653,57", "26.813,42", "15.388,78", "1.846,65", "387,80", "17.623,23", "474.853,86", "Plan 70/30");
+arraycamiones[2][1] = cargarMatriz("72", "Medianos", "Atego 1419/48", "1.582.846,20", "1.582.846,20", "31.656,92", "6.647,95", "38.304,87", "21.983,98", "2.638,08", "554,00", "25.176,06", "---", "Plan 100%");
+
+arraycamiones[3][0] = cargarMatriz("72", "Pesados Off Road ", "Axor 3131 B/36", "3.180.687,25", "2.226.481,08", "44.529,62", "9.351,22", "53.880,84", "30.923,35", "3.710,80", "779,27", "35.413,42", "954.206,18", "Plan 70/30");
+arraycamiones[3][1] = cargarMatriz("72", "Pesados Off Road ", "Axor 3131 K/36", "3.133.669,50", "2.193.568,65", "43.871,37", "9.212,99", "53.084,36", "30.466,23", "3.655,95", "767,75", "34.889,93", "940.100,85", "Plan 70/30");
+arraycamiones[3][2] = cargarMatriz("72", "Pesados Off Road ", "Axor 3131/48 6x4 Cab Ext", "3.141.802,30", "2.199.261,61", "43.985,23", "9.236,90", "53.222,13", "30.545,30", "3.665,44", "769,74", "34.980,48", "942.540,69", "Plan 70/30");
+arraycamiones[3][3] = cargarMatriz("72", "Pesados Off Road ", "Arocs 3342 K/36 Cabina M - Toma de fuerza en caja", "3.847.831,00", "2.693.481,70", "53.869,63", "11.312,62", "65.182,25", "37.409,47", "4.489,14", "942,72", "42.841,33", "1.154.349,30", "Plan 70/30");
+arraycamiones[3][4] = cargarMatriz("72", "Pesados Off Road ", "Arocs 4136 B/42 8x4 Cabina M -Toma de fuerza en motor en caja", "4.105.284,95", "2.873.699,47", "57.473,99", "12.069,54", "69.543,53", "39.912,49", "4.789,50", "1.005,80", "45.707,79", "1.231.585,49", "Plan 70/30");
+arraycamiones[3][5] = cargarMatriz("72", "Pesados Off Road ", "Arocs 4845 K/48 8x4 Cabina M - Toma de fuerza en caja", "4.439.238,05", "3.107.466,64", "62.149,33", "13.051,36", "75.200,69", "43.159,26", "5.179,11", "1.087,61", "49.425,98", "1.331.771,42", "Plan 70/30");
+arraycamiones[3][6] = cargarMatriz("72", "Pesados Off Road", "Nuevo Actros 3342 S/36 6x4 Cabina M - Toma de fuerza en caja", "3.854.947,20", "3.854.947,20", "77.098,94", "16.190,78", "93.289,72", "53.540,93", "6.424,91", "1.349,23", "61.315,07", "---", "Plan 100%");
+arraycamiones[3][7] = cargarMatriz("72", "Pesados Off Road", "Arocs 3342 K/36 Cabina M - Toma de fuerza en caja", "3.847.831,00", "3.847.831,00", "76.956,62", "16.160,89", "93.117,51", "53.442,10", "6.413,05", "1.346,74", "61.201,89", "---", "Plan 100%");
+arraycamiones[3][8] = cargarMatriz("72", "Pesados Off Road", "Arocs 4136 B/42 8x4 Cabina M -Toma de fuerza en motor en caja", "4.105.284,95", "4.105.284,95", "82.105,70", "17.242,20", "99.347,90", "57.017,85", "6.842,14", "1.436,85", "65.296,84", "---", "Plan 100%");
+arraycamiones[3][9] = cargarMatriz("72", "Pesados Off Road", "Arocs 4845 K/48 8x4 Cabina M - Toma de fuerza en caja", "4.439.238,05", "4.439.238,05", "88.784,76", "18.644,80", "107.429,56", "61.656,08", "7.398,73", "1.553,73", "70.608,54", "---", "Plan 100%");
+arraycamiones[3][10] = cargarMatriz("72", "Pesados Off Road", "Axor 3131 B/36", "3.180.687,25", "3.180.687,25", "63.613,75", "13.358,89", "76.972,64", "44.176,21", "5.301,15", "1.113,24", "50.590,60", "---", "Plan 100%");
+arraycamiones[3][11] = cargarMatriz("72", "Pesados Off Road", "Axor 3131 K/36", "3.133.669,50", "3.133.669,50", "62.673,39", "13.161,41", "75.834,80", "43.523,19", "5.222,78", "1.096,78", "49.842,75", "---", "Plan 100%");
+arraycamiones[3][12] = cargarMatriz("72", "Pesados Off Road", "Axor 3131/48 6x4 Cab Ext", "3.141.802,30", "3.141.802,30", "62.836,05", "13.195,57", "76.031,62", "43.636,14", "5.236,34", "1.099,63", "49.972,11", "---", "Plan 100%");
+
+arraycamiones[4][0] = cargarMatriz("72", "Pesados On Road", "Atron 1735S/45", "2.770.027,81", "1.939.019,47", "38.780,39", "8.143,88", "46.924,27", "26.930,83", "3.231,70", "678,66", "30.841,18", "831.008,34", "Plan 70/30");
+arraycamiones[4][1] = cargarMatriz("72", "Pesados On Road", "Atron 1735/51", "2.731.449,50", "1.912.014,65", "38.240,29", "8.030,46", "46.270,75", "26.555,76", "3.186,69", "669,21", "30.411,66", "819.434,85", "Plan 70/30");
+arraycamiones[4][2] = cargarMatriz("72", "Pesados On Road", "Axor 1933 S/36 CD Techo Bajo", "2.800.470,56", "1.960.329,39", "39.206,59", "8.233,38", "47.439,97", "27.226,80", "3.267,22", "686,12", "31.180,13", "840.141,17", "Plan 70/30");
+arraycamiones[4][3] = cargarMatriz("72", "Pesados On Road", "Axor 2036 S/36 CD Techo Elevado", "3.237.166,56", "2.266.016,59", "45.320,33", "9.517,27", "54.837,60", "31.472,45", "3.776,69", "793,11", "36.042,25", "971.149,97", "Plan 70/30");
+arraycamiones[4][4] = cargarMatriz("72", "Pesados On Road", "Axor 2041 S/36 CD Techo Elevado", "3.381.507,19", "2.367.055,03", "47.341,10", "9.941,63", "57.282,73", "32.875,76", "3.945,09", "828,47", "37.649,33", "1.014.452,16", "Plan 70/30");
+arraycamiones[4][5] = cargarMatriz("72", "Pesados On Road", "Actros 1841 LS/36 4x2 Cabina L Dormitorio", "3.571.249,50", "2.499.874,65", "49.997,49", "10.499,47", "60.496,97", "34.720,48", "4.166,46", "874,96", "39.761,90", "1.071.374,85", "Plan 70/30");
+arraycamiones[4][6] = cargarMatriz("72", "Pesados On Road", "Actros 2041 S/36 4x2 Cabina L Dormitorio", "3.498.029,44", "2.448.620,61", "48.972,41", "10.284,21", "59.256,62", "34.008,62", "4.081,03", "857,02", "38.946,67", "1.049.408,83", "Plan 70/30");
+arraycamiones[4][7] = cargarMatriz("72", "Pesados On Road", "Actros 2041/45 4x2 Cabina L Dormitorio", "3.493.043,13", "2.445.130,19", "48.902,60", "10.269,55", "59.172,15", "33.960,14", "4.075,22", "855,80", "38.891,15", "1.047.912,94", "Plan 70/30");
+arraycamiones[4][8] = cargarMatriz("72", "Pesados On Road", "Actros 2636 LS/33 6x2 Cabina L Dormitorio Techo Bajo (Combustible)", "3.558.914,94", "2.491.240,46", "49.824,81", "10.463,21", "60.288,02", "34.600,56", "4.152,07", "871,93", "39.624,56", "1.067.674,48", "Plan 70/30");
+arraycamiones[4][9] = cargarMatriz("72", "Pesados On Road", "Nuevo Actros 2042 LS/37 4x2", "3.642.632,50", "2.549.842,75", "50.996,86", "10.709,34", "61.706,19", "35.414,48", "4.249,74", "892,44", "40.556,67", "1.092.789,75", "Plan 70/30");
+arraycamiones[4][10] = cargarMatriz("72", "Pesados On Road", "Nuevo Actros 2042 L/46 4x2", "3.562.851,50", "2.493.996,05", "49.879,92", "10.474,78", "60.354,70", "34.638,83", "4.156,66", "872,90", "39.668,39", "1.068.855,45", "Plan 70/30");
+arraycamiones[4][11] = cargarMatriz("72", "Pesados On Road", "Nuevo Actros 2048 LS/37 4x2", "3.943.385,88", "2.760.370,11", "55.207,40", "11.593,55", "66.800,96", "38.338,47", "4.600,62", "966,13", "43.905,22", "1.183.015,76", "Plan 70/30");
+arraycamiones[4][12] = cargarMatriz("72", "Pesados On Road", "Nuevo Actros 2636 LS/33 6x2 (liviano combustible CMT 50Tn)", "3.630.035,50", "2.541.024,85", "50.820,50", "10.672,30", "61.492,80", "35.292,01", "4.235,04", "889,36", "40.416,41", "1.089.010,65", "Plan 70/30");
+arraycamiones[4][13] = cargarMatriz("72", "Pesados On Road", "Nuevo Actros 2645 LS/33 6x2 (55tN / Briten 60Tn)", "3.902.445,63", "2.731.711,94", "54.634,24", "11.473,19", "66.107,43", "37.940,44", "4.552,85", "956,10", "43.449,40", "1.170.733,69", "Plan 70/30");
+arraycamiones[4][14] = cargarMatriz("72", "Pesados On Road", "Nuevo Actros 2651 LS/40 6x4 (Bitren 75 Tn)", "4.377.719,94", "3.064.403,96", "61.288,08", "12.870,50", "74.158,58", "42.561,17", "5.107,34", "1.072,54", "48.741,05", "1.313.315,98", "Plan 70/30");
+arraycamiones[4][15] = cargarMatriz("72", "Pesados On Road", "Nuevo Actros 3342 S/36 6x4 Cabina M - Toma de fuerza en caja", "3.980.652,00", "2.786.456,40", "55.729,13", "11.703,12", "67.432,24", "38.700,78", "4.644,09", "975,26", "44.320,14", "1.194.195,60", "Plan 70/30");
+arraycamiones[4][16] = cargarMatriz("72", "Pesados On Road", "Atron 1735S/45", "2.770.027,81", "2.770.027,81", "55.400,56", "11.634,12", "67.034,67", "38.472,61", "4.616,71", "969,51", "44.058,83", "-", "Plan 100%");
+arraycamiones[4][17] = cargarMatriz("72", "Pesados On Road", "Atron 1735/51", "2.731.449,50", "2.731.449,50", "54.628,99", "11.472,09", "66.101,08", "37.936,80", "4.552,42", "956,01", "43.445,22", "-", "Plan 100%");
+arraycamiones[4][18] = cargarMatriz("72", "Pesados On Road", "Axor 1933 S/36 CD Techo Bajo", "2.800.470,56", "2.800.470,56", "56.009,41", "11.761,98", "67.771,39", "38.895,42", "4.667,45", "980,16", "44.543,04", "-", "Plan 100%");
+arraycamiones[4][19] = cargarMatriz("72", "Pesados On Road", "Axor 2036 S/36 CD Techo Elevado", "3.237.166,56", "3.237.166,56", "64.743,33", "13.596,10", "78.339,43", "44.960,65", "5.395,28", "1.133,01", "51.488,93", "-", "Plan 100%");
+arraycamiones[4][20] = cargarMatriz("72", "Pesados On Road", "Axor 2041 S/36 CD Techo Elevado", "3.381.507,19", "3.381.507,19", "67.630,14", "14.202,33", "81.832,47", "46.965,38", "5.635,85", "1.183,53", "53.784,75", "-", "Plan 100%");
+arraycamiones[4][21] = cargarMatriz("72", "Pesados On Road", "Actros 1841 LS/36 4x2 Cabina L Dormitorio", "3.571.249,50", "3.571.249,50", "71.424,99", "14.999,25", "86.424,24", "49.600,69", "5.952,08", "1.249,94", "56.802,71", "-", "Plan 100%");
+arraycamiones[4][22] = cargarMatriz("72", "Pesados On Road", "Actros 2041 S/36 4x2 Cabina L Dormitorio", "3.498.029,44", "3.498.029,44", "69.960,59", "14.691,72", "84.652,31", "48.583,74", "5.830,05", "1.224,31", "55.638,10", "-", "Plan 100%");
+arraycamiones[4][23] = cargarMatriz("72", "Pesados On Road", "Actros 2041/45 4x2 Cabina L Dormitorio", "3.493.043,13", "3.493.043,13", "69.860,86", "14.670,78", "84.531,64", "48.514,49", "5.821,74", "1.222,57", "55.558,79", "-", "Plan 100%");
+arraycamiones[4][24] = cargarMatriz("72", "Pesados On Road", "Actros 2636 LS/33 6x2 Cabina L Dormitorio Techo Bajo (Combustible)", "3.558.914,94", "3.558.914,94", "71.178,30", "14.947,44", "86.125,74", "49.429,37", "5.931,52", "1.245,62", "56.606,52", "-", "Plan 100%");
+arraycamiones[4][25] = cargarMatriz("72", "Pesados On Road", "Nuevo Actros 2042 LS/37 4x2", "3.642.632,50", "3.642.632,50", "72.852,65", "15.299,06", "88.151,71", "50.592,12", "6.071,05", "1.274,92", "57.938,09", "-", "Plan 100%");
+arraycamiones[4][26] = cargarMatriz("72", "Pesados On Road", "Nuevo Actros 2042 L/46 4x2", "3.562.851,50", "3.562.851,50", "71.257,03", "14.963,98", "86.221,01", "49.484,05", "5.938,09", "1.247,00", "56.669,13", "-", "Plan 100%");
+arraycamiones[4][27] = cargarMatriz("72", "Pesados On Road", "Nuevo Actros 2048 LS/37 4x2", "3.943.385,88", "3.943.385,88", "78.867,72", "16.562,22", "95.429,94", "54.769,25", "6.572,31", "1.380,19", "62.721,74", "-", "Plan 100%");
+arraycamiones[4][28] = cargarMatriz("72", "Pesados On Road", "Nuevo Actros 2636 LS/33 6x2 (liviano combustible CMT 50Tn)", "3.630.035,50", "3.630.035,50", "72.600,71", "15.246,15", "87.846,86", "50.417,16", "6.050,06", "1.270,51", "57.737,73", "-", "Plan 100%");
+arraycamiones[4][29] = cargarMatriz("72", "Pesados On Road", "Nuevo Actros 2645 LS/33 6x2 (55tN / Briten 60Tn)", "3.902.445,63", "3.902.445,63", "78.048,91", "16.390,27", "94.439,18", "54.200,63", "6.504,08", "1.365,86", "62.070,57", "-", "Plan 100%");
+arraycamiones[4][30] = cargarMatriz("72", "Pesados On Road", "Nuevo Actros 2651 LS/40 6x4 (Bitren 75 Tn)", "4.377.719,94", "4.377.719,94", "87.554,40", "18.386,42", "105.940,82", "60.801,67", "7.296,20", "1.532,20", "69.630,07", "-", "Plan 100%");
+
+arraycamiones[5][0] = cargarMatriz("72", "Semipesados ", "Atego 1720/36 CN", "1.652.483,30", "1.156.738,31", "23.134,77", "4.858,30", "27.993,07", "16.065,81", "1.927,90", "404,86", "18.398,57", "495.744,99", "Plan 70/30");
+arraycamiones[5][1] = cargarMatriz("72", "Semipesados ", "Atego 1720/48 CN", "1.667.478,15", "1.167.234,71", "23.344,69", "4.902,38", "28.247,07", "16.211,59", "1.945,39", "408,53", "18.565,51", "500.243,45", "Plan 70/30");
+arraycamiones[5][2] = cargarMatriz("72", "Semipesados ", "Atego 1726 S/36 CN con ABS", "1.892.909,20", "1.325.036,44", "26.500,73", "5.565,15", "32.065,88", "18.403,28", "2.208,39", "463,76", "21.075,43", "567.872,76", "Plan 70/30");
+arraycamiones[5][3] = cargarMatriz("72", "Semipesados ", "Atego 1726 S/36 CD con ABS", "1.972.966,45", "1.381.076,52", "27.621,53", "5.800,52", "33.422,05", "19.181,62", "2.301,79", "483,38", "21.966,79", "591.889,94", "Plan 70/30");
+arraycamiones[5][4] = cargarMatriz("72", "Semipesados ", "Atego 1726/42 CN", "1.860.886,30", "1.302.620,41", "26.052,41", "5.471,01", "31.523,42", "18.091,95", "2.171,03", "455,92", "20.718,90", "558.265,89", "Plan 70/30");
+arraycamiones[5][5] = cargarMatriz("72", "Semipesados ", "Atego 1726/42 CD", "1.941.960,15", "1.359.372,11", "27.187,44", "5.709,36", "32.896,80", "18.880,17", "2.265,62", "475,78", "21.621,57", "582.588,05", "Plan 70/30");
+arraycamiones[5][6] = cargarMatriz("72", "Semipesados ", "Atego 1726/48 CN", "1.880.964,15", "1.316.674,91", "26.333,50", "5.530,04", "31.863,54", "18.287,15", "2.194,46", "460,84", "20.942,45", "564.289,25", "Plan 70/30");
+arraycamiones[5][7] = cargarMatriz("72", "Semipesados ", "Atego 2426/48", "2.092.416,95", "1.464.691,87", "29.293,84", "6.151,71", "35.445,55", "20.342,94", "2.441,15", "512,64", "23.296,73", "627.725,09", "Plan 70/30");
+arraycamiones[5][8] = cargarMatriz("72", "Semipesados ", "Atego 1726 A/42 4x4 Cab Ext Versión Civil", "2.745.582,45", "1.921.907,72", "38.438,15", "8.072,01", "46.510,16", "26.693,16", "3.203,18", "672,67", "30.569,01", "823.674,74", "Plan 70/30");
+arraycamiones[5][9] = cargarMatriz("72", "Semipesados", "Atego 1720/36 CN", "1.652.483,30", "1.652.483,30", "33.049,67", "6.940,43", "39.990,10", "22.951,16", "2.754,14", "578,37", "26.283,67", "---", "Plan 100%");
+arraycamiones[5][10] = cargarMatriz("72", "Semipesados", "Atego 1720/48 CN", "1.667.478,15", "1.667.478,15", "33.349,56", "7.003,41", "40.352,97", "23.159,42", "2.779,13", "583,62", "26.522,17", "---", "Plan 100%");
+arraycamiones[5][11] = cargarMatriz("72", "Semipesados", "Atego 1726 S/36 CN con ABS", "1.892.909,20", "1.892.909,20", "37.858,18", "7.950,22", "45.808,40", "26.290,41", "3.154,85", "662,52", "30.107,78", "---", "Plan 100%");
+arraycamiones[5][12] = cargarMatriz("72", "Semipesados", "Atego 1726 S/36 CD con ABS", "1.972.966,45", "1.972.966,45", "39.459,33", "8.286,46", "47.745,79", "27.402,31", "3.288,28", "690,54", "31.381,13", "---", "Plan 100%");
+arraycamiones[5][13] = cargarMatriz("72", "Semipesados", "Atego 1726/42 CN", "1.860.886,30", "1.860.886,30", "37.217,73", "7.815,72", "45.033,45", "25.845,64", "3.101,48", "651,31", "29.598,43", "---", "Plan 100%");
+arraycamiones[5][14] = cargarMatriz("72", "Semipesados", "Atego 1726/42 CD", "1.941.960,15", "1.941.960,15", "38.839,20", "8.156,23", "46.995,43", "26.971,67", "3.236,60", "679,69", "30.887,96", "---", "Plan 100%");
+arraycamiones[5][15] = cargarMatriz("72", "Semipesados", "Atego 1726/48 CN", "1.880.964,15", "1.880.964,15", "37.619,28", "7.900,05", "45.519,33", "26.124,50", "3.134,94", "658,34", "29.917,78", "---", "Plan 100%");
+arraycamiones[5][16] = cargarMatriz("72", "Semipesados", "Atego 2426/48", "2.092.416,95", "2.092.416,95", "41.848,34", "8.788,15", "50.636,49", "29.061,35", "3.487,36", "732,35", "33.281,06", "---", "Plan 100%");
+arraycamiones[5][17] = cargarMatriz("72", "Semipesados", "Atego 1726 A/42 4x4 Cab Ext Versión Civil", "2.745.582,45", "2.745.582,45", "54.911,65", "11.531,45", "66.443,10", "38.133,09", "4.575,97", "960,95", "43.670,01", "---", "Plan 100%");
+
+
+
 
 
 
@@ -449,6 +498,7 @@ var arrayvans =  [];
 arrayvans[1] = [];
 arrayvans[2] = [];
 arrayvans[3] = [];
+arrayvans[4] = [];
 
 arrayvans[1][0] = [];
 arrayvans[1][1] = [];
@@ -488,47 +538,68 @@ arrayvans[3][24] = [];
 arrayvans[3][25] = [];
 arrayvans[3][26] = [];
 arrayvans[3][27] = [];
+arrayvans[3][28] = [];
+arrayvans[3][29] = [];
+arrayvans[3][30] = [];
+arrayvans[3][31] = [];
+arrayvans[3][32] = [];
+arrayvans[3][33] = [];
+arrayvans[4][0] = [];
+arrayvans[4][1] = [];
+arrayvans[4][2] = [];
 
 
+arrayvans[1][0] = cargarMatriz("72", "Chasis Cabina", "Sprinter 415 CDI Chasis 3665 con Aire Acondicionado", "968.050,00", "677.635,00", "13.552,70", "2.846,07", "16.398,77", "9.411,60", "1.129,39", "237,17", "10.778,16", "290.415,00", "Plan 70/30");
+arrayvans[1][1] = cargarMatriz("72", "Chasis Cabina", "Sprinter 515 CDI Chasis 4325 con Aire Acondicionado", "1.058.062,50", "740.643,75", "14.812,88", "3.110,70", "17.923,58", "10.286,72", "1.234,41", "259,23", "11.780,35", "317.418,75", "Plan 70/30");
+arrayvans[1][2] = cargarMatriz("72", "Chasis Cabina", "Sprinter 415 CDI Chasis 3665 con Aire Acondicionado", "968.050,00", "968.050,00", "19.361,00", "4.065,81", "23.426,81", "13.445,14", "1.613,42", "338,82", "15.397,37", "-", "Plan 100%");
+arrayvans[1][3] = cargarMatriz("72", "Chasis Cabina", "Sprinter 515 CDI Chasis 4325 con Aire Acondicionado", "1.058.062,50", "1.058.062,50", "21.161,25", "4.443,86", "25.605,11", "14.695,31", "1.763,44", "370,32", "16.829,07", "-", "Plan 100%");
 
-arrayvans[1][0] = cargarMatriz("72","Chasis Cabina","Sprinter 415 CDI Chasis 3665 con Aire Acondicionado","819,683.60","573,778.52","11,475.57","2,409.87","13,885.44","7,969.15","956.30","200.82","9,126.27","245,905.08","Plan 70/30");
-arrayvans[1][1] = cargarMatriz("72","Chasis Cabina","Sprinter 415 CDI Chasis 3665 con Aire Acondicionado","819,683.60","819,683.60","16,393.67","3,442.67","19,836.34","11,384.49","1,366.14","286.89","13,037.52","0.00","Plan 100%");
-arrayvans[1][2] = cargarMatriz("72","Chasis Cabina","Sprinter 515 CDI Chasis 4325 con Aire Acondicionado","895,900.50","627,130.35","12,542.61","2,633.95","15,176.56","8,710.14","1,045.22","219.50","9,974.86","268,770.15","Plan 70/30");
-arrayvans[1][3] = cargarMatriz("72","Chasis Cabina","Sprinter 515 CDI Chasis 4325 con Aire Acondicionado","895,900.50","895,900.50","17,918.01","3,762.78","21,680.79","12,443.06","1,493.17","313.57","14,249.80","0.00","Plan 100%");
-arrayvans[2][0] = cargarMatriz("72","Combi","Sprinter 415 CDI Combi 3665 15+1 TE","1,231,737.50","862,216.25","17,244.33","3,621.31","20,865.64","11,975.23","1,437.03","301.78","13,714.04","369,521.25","Plan 70/30");
-arrayvans[2][1] = cargarMatriz("72","Combi","Sprinter 415 CDI Combi 3665 15+1 TE","1,231,737.50","1,231,737.50","24,634.75","5,173.30","29,808.05","17,107.47","2,052.90","431.11","19,591.48","0.00","Plan 100%");
-arrayvans[2][2] = cargarMatriz("72","Combi","Sprinter 415 CDI Combi 3665 9+1 TN","1,250,238.70","875,167.09","17,503.34","3,675.70","21,179.04","12,155.10","1,458.61","306.31","13,920.02","375,071.61","Plan 70/30");
-arrayvans[2][3] = cargarMatriz("72","Combi","Sprinter 415 CDI Combi 3665 9+1 TN","1,250,238.70","1,250,238.70","25,004.77","5,251.00","30,255.77","17,364.43","2,083.73","437.58","19,885.74","0.00","Plan 100%");
-arrayvans[2][4] = cargarMatriz("72","Combi","Sprinter 515 CDI Combi 4325 19+1","1,517,701.70","1,062,391.19","21,247.82","4,462.04","25,709.86","14,755.43","1,770.65","371.84","16,897.92","455,310.51","Plan 70/30");
-arrayvans[2][5] = cargarMatriz("72","Combi","Sprinter 515 CDI Combi 4325 19+1","1,517,701.70","1,517,701.70","30,354.03","6,374.35","36,728.38","21,079.19","2,529.50","531.20","24,139.89","0.00","Plan 100%");
-arrayvans[3][0] = cargarMatriz("72","Furgón","Sprinter 411CDI Street Furgón 3250 TN Versión 1 con Aire Acondicionado","794,345.00","556,041.50","11,120.83","2,335.37","13,456.20","7,722.80","926.74","194.62","8,844.16","238,303.50","Plan 70/30");
-arrayvans[3][1] = cargarMatriz("72","Furgón","Sprinter 411CDI Street Furgón 3250 TN Versión 1 con Aire Acondicionado","794,345.00","794,345.00","15,886.90","3,336.25","19,223.15","11,032.57","1,323.91","278.02","12,634.50","0.00","Plan 100%");
-arrayvans[3][2] = cargarMatriz("72","Furgón","Sprinter 411CDI Street Furgón 3250 TN Versión 2 con Aire Acondicionado","803,595.60","562,516.92","11,250.34","2,362.57","13,612.91","7,812.74","937.53","196.88","8,947.15","241,078.68","Plan 70/30");
-arrayvans[3][3] = cargarMatriz("72","Furgón","Sprinter 411CDI Street Furgón 3250 TN Versión 2 con Aire Acondicionado","803,595.60","803,595.60","16,071.91","3,375.10","19,447.01","11,161.05","1,339.33","281.26","12,781.64","0.00","Plan 100%");
-arrayvans[3][4] = cargarMatriz("72","Furgón","Sprinter 415 CDI Furgón 3250 TN Mixto 4+1 con Aire Acondicionado","947,784.30","663,449.01","13,268.98","2,786.49","16,055.47","9,214.57","1,105.75","232.21","10,552.53","284,335.29","Plan 70/30");
-arrayvans[3][5] = cargarMatriz("72","Furgón","Sprinter 415 CDI Furgón 3250 TN Mixto 4+1 con Aire Acondicionado","947,784.30","947,784.30","18,955.69","3,980.69","22,936.38","13,163.67","1,579.64","331.72","15,075.03","0.00","Plan 100%");
-arrayvans[3][6] = cargarMatriz("72","Furgón","Sprinter 415 CDI Furgón 3250 TN Versión 1 con Aire Acondicionado","927,674.30","649,372.01","12,987.44","2,727.36","15,714.80","9,019.06","1,082.29","227.28","10,328.63","278,302.29","Plan 70/30");
-arrayvans[3][7] = cargarMatriz("72","Furgón","Sprinter 415 CDI Furgón 3250 TN Versión 1 con Aire Acondicionado","927,674.30","927,674.30","18,553.49","3,896.23","22,449.72","12,884.37","1,546.12","324.69","14,755.18","0.00","Plan 100%");
-arrayvans[3][8] = cargarMatriz("72","Furgón","Sprinter 415 CDI Furgón 3250 TN Versión 2 con Aire Acondicionado","938,935.90","657,255.13","13,145.10","2,760.47","15,905.57","9,128.54","1,095.42","230.04","10,454.00","281,680.77","Plan 70/30");
-arrayvans[3][9] = cargarMatriz("72","Furgón","Sprinter 415 CDI Furgón 3250 TN Versión 2 con Aire Acondicionado","938,935.90","938,935.90","18,778.72","3,943.53","22,722.25","13,040.78","1,564.89","328.63","14,934.30","0.00","Plan 100%");
-arrayvans[3][10] = cargarMatriz("72","Furgón","Sprinter 415 CDI Furgón 3665 TE Mixto 4+1 con Aire Acondicionado","1,044,111.20","730,877.84","14,617.56","3,069.69","17,687.25","10,151.08","1,218.13","255.81","11,625.02","313,233.36","Plan 70/30");
-arrayvans[3][11] = cargarMatriz("72","Furgón","Sprinter 415 CDI Furgón 3665 TE Mixto 4+1 con Aire Acondicionado","1,044,111.20","1,044,111.20","20,882.22","4,385.27","25,267.49","14,501.54","1,740.18","365.44","16,607.16","0.00","Plan 100%");
-arrayvans[3][12] = cargarMatriz("72","Furgón","Sprinter 415 CDI Furgón 3665 TE Versión 1 con Aire Acondicionado","1,015,957.20","711,170.04","14,223.40","2,986.91","17,210.31","9,877.36","1,185.28","248.91","11,311.55","304,787.16","Plan 70/30");
-arrayvans[3][13] = cargarMatriz("72","Furgón","Sprinter 415 CDI Furgón 3665 TE Versión 1 con Aire Acondicionado","1,015,957.20","1,015,957.20","20,319.14","4,267.02","24,586.16","14,110.52","1,693.26","355.58","16,159.36","0.00","Plan 100%");
-arrayvans[3][14] = cargarMatriz("72","Furgón","Sprinter 415 CDI Furgón 3665 TE Versión 2 con Aire Acondicionado","1,024,604.50","717,223.15","14,344.46","3,012.34","17,356.80","9,961.43","1,195.37","251.03","11,407.83","307,381.35","Plan 70/30");
-arrayvans[3][15] = cargarMatriz("72","Furgón","Sprinter 415 CDI Furgón 3665 TE Versión 2 con Aire Acondicionado","1,024,604.50","1,024,604.50","20,492.09","4,303.34","24,795.43","14,230.62","1,707.67","358.61","16,296.90","0.00","Plan 100%");
-arrayvans[3][16] = cargarMatriz("72","Furgón","Sprinter 415 CDI Furgón 3665 TN Mixto 4+1 con Aire Acondicionado","1,022,392.40","715,674.68","14,313.49","3,005.83","17,319.32","9,939.93","1,192.79","250.49","11,383.21","306,717.72","Plan 70/30");
-arrayvans[3][17] = cargarMatriz("72","Furgón","Sprinter 415 CDI Furgón 3665 TN Mixto 4+1 con Aire Acondicionado","1,022,392.40","1,022,392.40","20,447.85","4,294.05","24,741.90","14,199.89","1,703.99","357.84","16,261.72","0.00","Plan 100%");
-arrayvans[3][18] = cargarMatriz("72","Furgón","Sprinter 415 CDI Furgón 3665 TN Versión 1 con Aire Acondicionado","994,439.50","696,107.65","13,922.15","2,923.65","16,845.80","9,668.16","1,160.18","243.64","11,071.98","298,331.85","Plan 70/30");
-arrayvans[3][19] = cargarMatriz("72","Furgón","Sprinter 415 CDI Furgón 3665 TN Versión 1 con Aire Acondicionado","994,439.50","994,439.50","19,888.79","4,176.65","24,065.44","13,811.66","1,657.40","348.05","15,817.11","0.00","Plan 100%");
-arrayvans[3][20] = cargarMatriz("72","Furgón","Sprinter 415 CDI Furgón 3665 TN Versión 2 con Aire Acondicionado","1,005,097.80","703,568.46","14,071.37","2,954.99","17,026.36","9,771.78","1,172.61","246.25","11,190.64","301,529.34","Plan 70/30");
-arrayvans[3][21] = cargarMatriz("72","Furgón","Sprinter 415 CDI Furgón 3665 TN Versión 2 con Aire Acondicionado","1,005,097.80","1,005,097.80","20,101.96","4,221.41","24,323.37","13,959.69","1,675.16","351.78","15,986.63","0.00","Plan 100%");
-arrayvans[3][22] = cargarMatriz("72","Furgón","Sprinter 415 CDI Furgón 4325 TE Versión 2 con Aire Acondicionado","1,144,862.30","801,403.61","16,028.07","3,365.89","19,393.96","11,130.61","1,335.67","280.49","12,746.77","343,458.69","Plan 70/30");
-arrayvans[3][23] = cargarMatriz("72","Furgón","Sprinter 415 CDI Furgón 4325 TE Versión 2 con Aire Acondicionado","1,144,862.30","1,144,862.30","22,897.25","4,808.42","27,705.67","15,900.87","1,908.10","400.70","18,209.67","0.00","Plan 100%");
-arrayvans[3][24] = cargarMatriz("72","Furgón","Sprinter 515 CDI Furgón 4325 TE Versión 2 con Aire Acondicionado","1,185,283.40","829,698.38","16,593.97","3,484.73","20,078.70","11,523.59","1,382.83","290.39","13,196.81","355,585.02","Plan 70/30");
-arrayvans[3][25] = cargarMatriz("72","Furgón","Sprinter 515 CDI Furgón 4325 TE Versión 2 con Aire Acondicionado","1,185,283.40","1,185,283.40","23,705.67","4,978.19","28,683.86","16,462.27","1,975.47","414.85","18,852.59","0.00","Plan 100%");
-arrayvans[3][26] = cargarMatriz("72","Furgón","Sprinter 515 CDI Furgón 4325 XL TE Versión 2 con Aire Acondicionado","1,214,241.80","849,969.26","16,999.39","3,569.87","20,569.26","11,805.13","1,416.62","297.49","13,519.24","364,272.54","Plan 70/30");
-arrayvans[3][27] = cargarMatriz("72","Furgón","Sprinter 515 CDI Furgón 4325 XL TE Versión 2 con Aire Acondicionado","1,214,241.80","1,214,241.80","24,284.84","5,099.82","29,384.66","16,864.47","2,023.74","424.99","19,313.20","0.00","Plan 100%");
+arrayvans[2][0] = cargarMatriz("72", "Combi", "Sprinter 415 CDI Combi 3665 9+1 TN", "1.476.537,50", "1.033.576,25", "20.671,53", "4.341,02", "25.012,55", "14.355,23", "1.722,63", "361,75", "16.439,60", "442.961,25", "Plan 70/30");
+arrayvans[2][1] = cargarMatriz("72", "Combi", "Sprinter 415 CDI Combi 3665 15+1 TE", "1.454.687,50", "1.018.281,25", "20.365,63", "4.276,78", "24.642,41", "14.142,80", "1.697,14", "356,40", "16.196,33", "436.406,25", "Plan 70/30");
+arrayvans[2][2] = cargarMatriz("72", "Combi", "Sprinter 515 CDI Combi 4325 19+1", "1.792.412,50", "1.254.688,75", "25.093,78", "5.269,69", "30.363,47", "17.426,23", "2.091,15", "439,14", "19.956,52", "537.723,75", "Plan 70/30");
+arrayvans[2][3] = cargarMatriz("72", "Combi", "Sprinter 415 CDI Combi 3665 9+1 TN", "1.476.537,50", "1.476.537,50", "29.530,75", "6.201,46", "35.732,21", "20.507,47", "2.460,90", "516,79", "23.485,15", "-", "Plan 100%");
+arrayvans[2][4] = cargarMatriz("72", "Combi", "Sprinter 415 CDI Combi 3665 15+1 TE", "1.454.687,50", "1.454.687,50", "29.093,75", "6.109,69", "35.203,44", "20.203,99", "2.424,48", "509,14", "23.137,61", "-", "Plan 100%");
+arrayvans[2][5] = cargarMatriz("72", "Combi", "Sprinter 515 CDI Combi 4325 19+1", "1.792.412,50", "1.792.412,50", "35.848,25", "7.528,13", "43.376,38", "24.894,62", "2.987,35", "627,34", "28.509,32", "-", "Plan 100%");
+
+arrayvans[3][0] = cargarMatriz("72", "Furgón", "Sprinter 411CDI Street Furgón 3250 TN Versión 1 con Aire Acondicionado", "938.125,00", "656.687,50", "13.133,75", "2.758,09", "15.891,84", "9.120,66", "1.094,48", "229,84", "10.444,98", "281.437,50", "Plan 70/30");
+arrayvans[3][1] = cargarMatriz("72", "Furgón", "Sprinter 411CDI Street Furgón 3250 TN Versión 2 con Aire Acondicionado", "949.050,00", "664.335,00", "13.286,70", "2.790,21", "16.076,91", "9.226,88", "1.107,23", "232,52", "10.566,62", "284.715,00", "Plan 70/30");
+arrayvans[3][2] = cargarMatriz("72", "Furgón", "Sprinter 415 CDI Furgón 3250 TN Versión 1 con Aire Acondicionado", "1.095.587,50", "766.911,25", "15.338,23", "3.221,03", "18.559,25", "10.651,55", "1.278,19", "268,42", "12.198,15", "328.676,25", "Plan 70/30");
+arrayvans[3][3] = cargarMatriz("72", "Furgón", "Sprinter 415 CDI Furgón 3250 TN Mixto 4+1 con Aire Acondicionado", "1.119.337,50", "783.536,25", "15.670,73", "3.290,85", "18.961,58", "10.882,45", "1.305,89", "274,24", "12.462,58", "335.801,25", "Plan 70/30");
+arrayvans[3][4] = cargarMatriz("72", "Furgón", "Sprinter 415 CDI Furgón 3250 TN Versión 2 con Aire Acondicionado", "1.108.887,50", "776.221,25", "15.524,43", "3.260,13", "18.784,55", "10.780,85", "1.293,70", "271,68", "12.346,23", "332.666,25", "Plan 70/30");
+arrayvans[3][5] = cargarMatriz("72", "Furgón", "Sprinter 415 CDI Furgón 3665 TN Versión 1 con Aire Acondicionado", "1.174.437,50", "822.106,25", "16.442,13", "3.452,85", "19.894,97", "11.418,14", "1.370,18", "287,74", "13.076,06", "352.331,25", "Plan 70/30");
+arrayvans[3][6] = cargarMatriz("72", "Furgón", "Sprinter 415 CDI Furgón 3665 TN Mixto 4+1 con Aire Acondicionado", "1.207.450,00", "845.215,00", "16.904,30", "3.549,90", "20.454,20", "11.739,10", "1.408,69", "295,83", "13.443,61", "362.235,00", "Plan 70/30");
+arrayvans[3][7] = cargarMatriz("72", "Furgón", "Sprinter 415 CDI Furgón 3665 TN Versión 2 con Aire Acondicionado", "1.187.025,00", "830.917,50", "16.618,35", "3.489,85", "20.108,20", "11.540,52", "1.384,86", "290,82", "13.216,20", "356.107,50", "Plan 70/30");
+arrayvans[3][8] = cargarMatriz("72", "Furgón", "Sprinter 415 CDI Furgón 3665 TE Versión 1 con Aire Acondicionado", "1.199.850,00", "839.895,00", "16.797,90", "3.527,56", "20.325,46", "11.665,21", "1.399,83", "293,96", "13.359,00", "359.955,00", "Plan 70/30");
+arrayvans[3][9] = cargarMatriz("72", "Furgón", "Sprinter 415 CDI Furgón 3665 TE Mixto 4+1 con Aire Acondicionado", "1.233.100,00", "863.170,00", "17.263,40", "3.625,31", "20.888,71", "11.988,47", "1.438,62", "302,11", "13.729,20", "369.930,00", "Plan 70/30");
+arrayvans[3][10] = cargarMatriz("72", "Furgón", "Sprinter 415 CDI Furgón 3665 TE Versión 2 con Aire Acondicionado", "1.210.062,50", "847.043,75", "16.940,88", "3.557,58", "20.498,46", "11.764,50", "1.411,74", "296,47", "13.472,70", "363.018,75", "Plan 70/30");
+arrayvans[3][11] = cargarMatriz("72", "Furgón", "Sprinter 415 CDI Furgón 4325 TE Versión 2 con Aire Acondicionado", "1.352.087,50", "946.461,25", "18.929,23", "3.975,14", "22.904,36", "13.145,30", "1.577,44", "331,26", "15.053,99", "405.626,25", "Plan 70/30");
+arrayvans[3][12] = cargarMatriz("72", "Furgón", "Sprinter 515 CDI Furgón 4325 TE Versión 2 con Aire Acondicionado", "1.399.825,00", "979.877,50", "19.597,55", "4.115,49", "23.713,04", "13.609,41", "1.633,13", "342,96", "15.585,50", "419.947,50", "Plan 70/30");
+arrayvans[3][13] = cargarMatriz("72", "Furgón", "Sprinter 515 CDI Furgón 4325 XL TE Versión 2 con Aire Acondicionado", "1.434.025,00", "1.003.817,50", "20.076,35", "4.216,03", "24.292,38", "13.941,91", "1.673,03", "351,34", "15.966,28", "430.207,50", "Plan 70/30");
+arrayvans[3][14] = cargarMatriz("72", "Furgón", "Sprinter 411CDI Street Furgón 3250 TN Versión 1 con Aire Acondicionado", "938.125,00", "938.125,00", "18.762,50", "3.940,13", "22.702,63", "13.029,51", "1.563,54", "328,34", "14.921,40", "-", "Plan 100%");
+arrayvans[3][15] = cargarMatriz("72", "Furgón", "Sprinter 411CDI Street Furgón 3250 TN Versión 2 con Aire Acondicionado", "949.050,00", "949.050,00", "18.981,00", "3.986,01", "22.967,01", "13.181,25", "1.581,75", "332,17", "15.095,17", "-", "Plan 100%");
+arrayvans[3][16] = cargarMatriz("72", "Furgón", "Sprinter 415 CDI Furgón 3250 TN Versión 1 con Aire Acondicionado", "1.095.587,50", "1.095.587,50", "21.911,75", "4.601,47", "26.513,22", "15.216,49", "1.825,98", "383,46", "17.425,93", "-", "Plan 100%");
+arrayvans[3][17] = cargarMatriz("72", "Furgón", "Sprinter 415 CDI Furgón 3250 TN Mixto 4+1 con Aire Acondicionado", "1.119.337,50", "1.119.337,50", "22.386,75", "4.701,22", "27.087,97", "15.546,35", "1.865,56", "391,77", "17.803,68", "-", "Plan 100%");
+arrayvans[3][18] = cargarMatriz("72", "Furgón", "Sprinter 415 CDI Furgón 3250 TN Versión 2 con Aire Acondicionado", "1.108.887,50", "1.108.887,50", "22.177,75", "4.657,33", "26.835,08", "15.401,22", "1.848,15", "388,11", "17.637,47", "-", "Plan 100%");
+arrayvans[3][19] = cargarMatriz("72", "Furgón", "Sprinter 415 CDI Furgón 3665 TN Versión 1 con Aire Acondicionado", "1.174.437,50", "1.174.437,50", "23.488,75", "4.932,64", "28.421,39", "16.311,63", "1.957,40", "411,05", "18.680,08", "-", "Plan 100%");
+arrayvans[3][20] = cargarMatriz("72", "Furgón", "Sprinter 415 CDI Furgón 3665 TN Mixto 4+1 con Aire Acondicionado", "1.207.450,00", "1.207.450,00", "24.149,00", "5.071,29", "29.220,29", "16.770,14", "2.012,42", "422,61", "19.205,16", "-", "Plan 100%");
+arrayvans[3][21] = cargarMatriz("72", "Furgón", "Sprinter 415 CDI Furgón 3665 TN Versión 2 con Aire Acondicionado", "1.187.025,00", "1.187.025,00", "23.740,50", "4.985,51", "28.726,01", "16.486,46", "1.978,38", "415,46", "18.880,29", "-", "Plan 100%");
+arrayvans[3][22] = cargarMatriz("72", "Furgón", "Sprinter 415 CDI Furgón 3665 TE Versión 1 con Aire Acondicionado", "1.199.850,00", "1.199.850,00", "23.997,00", "5.039,37", "29.036,37", "16.664,58", "1.999,75", "419,95", "19.084,28", "-", "Plan 100%");
+arrayvans[3][23] = cargarMatriz("72", "Furgón", "Sprinter 415 CDI Furgón 3665 TE Mixto 4+1 con Aire Acondicionado", "1.233.100,00", "1.233.100,00", "24.662,00", "5.179,02", "29.841,02", "17.126,39", "2.055,17", "431,59", "19.613,14", "-", "Plan 100%");
+arrayvans[3][24] = cargarMatriz("72", "Furgón", "Sprinter 415 CDI Furgón 3665 TE Versión 2 con Aire Acondicionado", "1.210.062,50", "1.210.062,50", "24.201,25", "5.082,26", "29.283,51", "16.806,42", "2.016,77", "423,52", "19.246,72", "-", "Plan 100%");
+arrayvans[3][25] = cargarMatriz("72", "Furgón", "Sprinter 415 CDI Furgón 4325 TE Versión 2 con Aire Acondicionado", "1.352.087,50", "1.352.087,50", "27.041,75", "5.678,77", "32.720,52", "18.778,99", "2.253,48", "473,23", "21.505,70", "-", "Plan 100%");
+arrayvans[3][26] = cargarMatriz("72", "Furgón", "Sprinter 515 CDI Furgón 4325 TE Versión 2 con Aire Acondicionado", "1.399.825,00", "1.399.825,00", "27.996,50", "5.879,27", "33.875,77", "19.442,01", "2.333,04", "489,94", "22.264,99", "-", "Plan 100%");
+arrayvans[3][27] = cargarMatriz("72", "Furgón", "Sprinter 515 CDI Furgón 4325 XL TE Versión 2 con Aire Acondicionado", "1.434.025,00", "1.434.025,00", "28.680,50", "6.022,91", "34.703,41", "19.917,01", "2.390,04", "501,91", "22.808,96", "-", "Plan 100%");
+arrayvans[3][28] = cargarMatriz("84", "Furgón", "CDI Furgón Versión 1 con aire acondicionado", "795.624,95", "556.937,46", "0,00", "0,00", "0,00", "6.630,21", "663,02", "139,23", "7.432,46", "238.687,48", "Plan 70/30");
+arrayvans[3][29] = cargarMatriz("84", "Furgón", "CDI Furgón Versión 2 con aire acondicionado", "806.312,45", "564.418,72", "0,00", "0,00", "0,00", "6.719,27", "671,93", "141,10", "7.532,30", "241.893,74", "Plan 70/30");
+arrayvans[3][30] = cargarMatriz("84", "Furgón", "CDI Furgón Mixto con aire acondicionado - PEA2", "838.137,50", "586.696,25", "11.733,93", "2.464,12", "14.198,05", "6.984,48", "838,14", "176,01", "7.998,63", "251.441,25", "Plan 70/30");
+arrayvans[3][31] = cargarMatriz("84", "Furgón", "CDI Furgón Mixto con aire acondicionado", "838.137,50", "586.696,25", "0,00", "0,00", "0,00", "6.984,48", "698,45", "146,67", "7.829,60", "251.441,25", "Plan 70/30");
+arrayvans[3][32] = cargarMatriz("84", "Furgón", "CDI Furgón Mixto X con aire acondicionado", "878.750,00", "615.125,00", "0,00", "0,00", "0,00", "7.322,92", "732,29", "153,78", "8.208,99", "263.625,00", "Plan 70/30");
+arrayvans[3][33] = cargarMatriz("84", "Furgón", "CDI Furgón Plus con aire acondicionado", "923.875,00", "646.712,50", "0,00", "0,00", "0,00", "7.698,96", "769,90", "161,68", "8.630,53", "277.162,50", "Plan 70/30");
+
+arrayvans[4][0] = cargarMatriz("84", "Pasajeros", "Vito Combi", "947.625,00", "663.337,50", "0,00", "0,00", "0,00", "7.896,88", "789,69", "165,83", "8.852,40", "284.287,50", "Plan 70/30");
+arrayvans[4][1] = cargarMatriz("84", "Pasajeros", "Vito Tourer", "1.090.125,00", "763.087,50", "0,00", "0,00", "0,00", "9.084,38", "908,44", "190,77", "10.183,58", "327.037,50", "Plan 70/30");
+arrayvans[4][2] = cargarMatriz("84", "Pasajeros", "Tourer AT X", "1.256.375,05", "879.462,53", "0,00", "0,00", "0,00", "10.469,79", "1.046,98", "219,87", "11.736,64", "376.912,51", "Plan 70/30");
+
 
 
 // FUNCTIONS
@@ -550,6 +621,9 @@ function cargarMatriz(cuota, linea, modelo, precioPublico, precioPublico100, der
 	array_aux["iva21"] = iva21;
 	array_aux["cuotaMensual"] = cuotaMensual;
 	array_aux["pagoAdjudicacion30"] = pagoAdjudicacion30;
+
+	//Plan 70/30
+	//Plan 100%
 
 	return array_aux;
 }
@@ -600,7 +674,7 @@ function cotizar(objeto){
 
 	var linea = $('#'+objeto+'_linea').val();
 	var modelo = $('#'+objeto+'_modelos').val();
-	var plan = $('#'+objeto+'_plan').val();	
+	var plan = $('#'+objeto+'_plan').val();
 	var cuotas = $('#'+objeto+'_cuotas').val();
 
 	// Armo la URL del Cotizador
@@ -654,7 +728,7 @@ function actualizarPlanes(linea, modelo, objeto){
 
 	// Obtengo los Planes del Modelo seleccionado
 	var Planes =  obtenerPlanes(eval('array'+objeto), linea, modelo);
-   
+
 	// Actualizo los planes segun el modelo elejido
 	for (var i=0; i<Planes.length; i++) {
 
@@ -671,7 +745,7 @@ function actualizarCuotas( linea, modelo, plan, objeto){
 
 	// Obtengo las cuotas del Plan seleccionado
 	var Cuotas =  obtenerCuotas(eval('array'+objeto), linea, modelo, plan);
-   
+
 	// Actualizo las cuotas segun el plan elejido
 	for (var i=0; i<Cuotas.length; i++) {
 
@@ -684,81 +758,87 @@ function actualizarContadorContactosPendientes(){
 
 	var contadorAux = 0;
 
-    //Si tengo los datos guardados localmente, los consulto directamente desde ahi
-    var datos_guardados = JSON.parse(window.localStorage.getItem("datos_guardados"));
+	 //Si tengo los datos guardados localmente, los consulto directamente desde ahi
+	 var datos_guardados = JSON.parse(window.localStorage.getItem("datos_guardados"));
 
-    // Si hay datos localmente
-    if(datos_guardados != null){
+	 // Si hay datos localmente
+	 if(datos_guardados != null){
 		contadorAux = datos_guardados.length;
-    }
+	 }
 
 	// ACtualizo el Bubble Count de Contactos Pendientes
-	$('#total_contactos_pendientes').html(contadorAux);       
+	$('#total_contactos_pendientes').html(contadorAux);
 }
-
 
 function enviarRegistro(RegistroGuardar) {
 
-    //check if station is alive
-    return $.ajax({ 
-        type: 'GET',
-        url: url_accesso + '/sync_data.php?datos_guardados='+JSON.stringify(RegistroGuardar),
-        dataType :"jsonp",
-        jsonpCallback: "expojson_sync",
-        charset: 'UTF-8',
-        success : function(data){
+	 //check if station is alive
+	 return $.ajax({
+		  type: 'GET',
+		  url: url_accesso + '/sync_data.php?datos_guardados='+JSON.stringify(RegistroGuardar),
+		  dataType :"jsonp",
+		  jsonpCallback: "expojson_sync",
+		  charset: 'UTF-8',
+		  success : function(data){
 
-            // Si no hubo error
-            if(String(data.error).toLowerCase() == "false"){
+				// Si no hubo error
+				if(String(data.error).toLowerCase() == "false"){
 
-                // Vacio los registros offline
-                //window.localStorage.removeItem("datos_guardados");
+					 // Vacio los registros offline
+					 //window.localStorage.removeItem("datos_guardados");
 
-                // Los datos se sincronizaron con éxito.
+					 // Los datos se sincronizaron con éxito.
 				alert(data.mensaje);
 
-			    // Inicializo el Formulario
-			    //$('#form1').trigger("reset");
-            }else{
-                alert(data.mensaje);                
-            }
+				 // Inicializo el Formulario
+				 $('#form1').trigger("reset");
+				$("#provincia").val('default');
+				$("#provincia").selectpicker("refresh");
 
-        },
-        beforeSend: function() {
-            // This callback function will trigger before data is sent
-        },
-        complete: function() {
-            // This callback function will trigger on data sent/received complete
-        },                    
-        error : function(httpReq,status,exception){
-            console.log(status+" "+exception);
-        }
-    }).then(function (resp) {
-        return $.Deferred(function(def){
-            def.resolveWith({},[resp == 1,RegistroGuardar]);
-        }).promise();
-    });
+				}else{
+					 alert(data.mensaje);
+				}
+
+		  },
+		  beforeSend: function() {
+				// This callback function will trigger before data is sent
+		  },
+		  complete: function() {
+				// This callback function will trigger on data sent/received complete
+		  },
+		  error : function(httpReq,status,exception){
+				console.log(status+" "+exception);
+		  }
+	 }).then(function (resp) {
+		  return $.Deferred(function(def){
+				def.resolveWith({},[resp == 1,RegistroGuardar]);
+		  }).promise();
+	 });
 }
-
 
 function guardarDatosLocalmente(RegistroGuardar){
 
-    var contactos = new Array();
+	 var contactos = new Array();
 
 	//Si tengo los datos guardados localmente, los consulto directamente desde ahi
 	var datos_guardados = JSON.parse(window.localStorage.getItem("datos_guardados"));
 
 	// Si hay datos localmente
 	if(datos_guardados != null){
-	    // Obtengo los datos de los registros previos para no perderlos
-	    contactos = datos_guardados;
+		 // Obtengo los datos de los registros previos para no perderlos
+		 contactos = datos_guardados;
 	}
 
 	// Agrego el contacto actual al arreglo
 	contactos.push(RegistroGuardar );
 
 	// Guardo los datos
-	window.localStorage.setItem("datos_guardados", JSON.stringify(contactos));           
+	window.localStorage.setItem("datos_guardados", JSON.stringify(contactos));
+
+	 // Inicializo el Formulario
+	 $('#form1').trigger("reset");
+	$("#provincia").val('default');
+	$("#provincia").selectpicker("refresh");
 
 	// Alert
 	alert('Los datos se guardaron localmente para posterior sincronización.');
@@ -775,30 +855,31 @@ function sincronizarContactosPendientes(){
 	// Para generar la cola de pensaje pendientes
 	var RegistroAux = new Array();
 
-    //Si tengo los datos guardados localmente, los consulto directamente desde ahi
-    var datos_guardados = JSON.parse(window.localStorage.getItem("datos_guardados"));
+	 //Si tengo los datos guardados localmente, los consulto directamente desde ahi
+	 var datos_guardados = JSON.parse(window.localStorage.getItem("datos_guardados"));
 
-    // Si hay datos localmente
-    if(datos_guardados != null){
+	 // Si hay datos localmente
+	 if(datos_guardados != null){
 
 
-        $.each( datos_guardados, function( key, value ) {
+		  $.each( datos_guardados, function( key, value ) {
 
-            total_contactos_pendientes++;
+				total_contactos_pendientes++;
 
-            // Si falla el envio, lo dejo en la lista de pendientes
+				// Si falla el envio, lo dejo en la lista de pendientes
 			enviarRegistro(value).fail(function(result,value) {
-			    RegistroAux.push(value );
+				 RegistroAux.push(value );
+console.log('Fallo enviarRegistro(): Result: '+result+' - Value: '+ value);
 			});
 
-        });
+		  });
 
 		// Actualizo los datos que no fueron procesados
-		window.localStorage.setItem("datos_guardados", JSON.stringify(RegistroAux));     
+		window.localStorage.setItem("datos_guardados", JSON.stringify(RegistroAux));
 
 		// Actualizo Contador
 		actualizarContadorContactosPendientes();
-    }    
+	 }
 }
 
 function mostrarDatosCotizacion(elemento){
@@ -822,14 +903,14 @@ function mostrarDatosCotizacion(elemento){
 	$("#"+elemento+"_gastos_adm_suscrip_iva").html(Registro[0]["iva21"]);
 	$("#"+elemento+"_alicuota").html(Registro[0]["pagoAdjudicacion30"]);
 	$("#"+elemento+"_modelo_cotizador").html(Registro[0]["modelo"]);
-	$("#"+elemento+"_nombre_plan_cotizador").html(Registro[0]["plan"]);		
+	$("#"+elemento+"_nombre_plan_cotizador").html(Registro[0]["plan"]);
 
 	// Actualizacion de la imagen principal
-	$("#"+elemento+"_img_ppal").attr("src","images/vehicles/"+getParameters("obj")+"-linea"+getParameters("linea")+".jpg");	
+	$("#"+elemento+"_img_ppal").attr("src","images/vehicles/"+getParameters("obj")+"-linea"+getParameters("linea")+".jpg");
 }
 
-String.prototype.float = function() { 
-  return parseFloat(this.replace(',', '')); 
+String.prototype.float = function() {
+  return parseFloat(this.replace(',', ''));
 }
 
 /* Scroll To */
@@ -851,7 +932,6 @@ function doScroll(event){
 
 	$('html, body').animate({scrollTop: targetTop}, 800);
 }
-
 
 $.fn.wait = function (time, type) {
 	time = time || 1000;

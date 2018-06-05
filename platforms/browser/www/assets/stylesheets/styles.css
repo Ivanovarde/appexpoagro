@@ -1,50 +1,50 @@
 @font-face {
 	font-family: 'corporate-s';
-	src: url('assets/fonts/corporate/corporates-light-webfont.eot');
-	src: url('assets/fonts/corporate/corporates-light-webfont.eot?#iefix') format('embedded-opentype'),
-		 url('assets/fonts/corporate/corporates-light-webfont.woff') format('woff'),
-		 url('assets/fonts/corporate/corporates-light-webfont.ttf') format('truetype'),
-		 url('assets/fonts/corporate/corporates-light-webfont.svg#corporateslight') format('svg');
+	src: url('../fonts/corporate/corporates-light-webfont.eot');
+	src: url('../fonts/corporate/corporates-light-webfont.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/corporate/corporates-light-webfont.woff') format('woff'),
+		 url('../fonts/corporate/corporates-light-webfont.ttf') format('truetype'),
+		 url('../fonts/corporate/corporates-light-webfont.svg#corporateslight') format('svg');
 	font-weight: 200;
 	font-style: normal;
 }
 @font-face {
 	font-family: 'corporate-s';
-	src: url('assets/fonts/corporate/corporates-demi-webfont.eot');
-	src: url('assets/fonts/corporate/corporates-demi-webfont.eot?#iefix') format('embedded-opentype'),
-		 url('assets/fonts/corporate/corporates-demi-webfont.woff') format('woff'),
-		 url('assets/fonts/corporate/corporates-demi-webfont.ttf') format('truetype'),
-		 url('assets/fonts/corporate/corporates-demi-webfont.svg#corporatesdemi') format('svg');
+	src: url('../fonts/corporate/corporates-demi-webfont.eot');
+	src: url('../fonts/corporate/corporates-demi-webfont.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/corporate/corporates-demi-webfont.woff') format('woff'),
+		 url('../fonts/corporate/corporates-demi-webfont.ttf') format('truetype'),
+		 url('../fonts/corporate/corporates-demi-webfont.svg#corporatesdemi') format('svg');
 	font-weight: 300;
 	font-style: normal;
 }
 @font-face {
 	font-family: 'corporate-s';
-	src: url('assets/fonts/corporate/corporates-regular-webfont.eot');
-	src: url('assets/fonts/corporate/corporates-regular-webfont.eot?#iefix') format('embedded-opentype'),
-		 url('assets/fonts/corporate/corporates-regular-webfont.woff') format('woff'),
-		 url('assets/fonts/corporate/corporates-regular-webfont.ttf') format('truetype'),
-		 url('assets/fonts/corporate/corporates-regular-webfont.svg#corporatesregular') format('svg');
+	src: url('../fonts/corporate/corporates-regular-webfont.eot');
+	src: url('../fonts/corporate/corporates-regular-webfont.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/corporate/corporates-regular-webfont.woff') format('woff'),
+		 url('../fonts/corporate/corporates-regular-webfont.ttf') format('truetype'),
+		 url('../fonts/corporate/corporates-regular-webfont.svg#corporatesregular') format('svg');
 	font-weight: 400;
 	font-style: normal;
 }
 @font-face {
 	font-family: 'corporate-s';
-	src: url('assets/fonts/corporate/corporates-regularitalic-webfont.eot');
-	src: url('assets/fonts/corporate/corporates-regularitalic-webfont.eot?#iefix') format('embedded-opentype'),
-		 url('assets/fonts/corporate/corporates-regularitalic-webfont.woff') format('woff'),
-		 url('assets/fonts/corporate/corporates-regularitalic-webfont.ttf') format('truetype'),
-		 url('assets/fonts/corporate/corporates-regularitalic-webfont.svg#corporatesregularitalic') format('svg');
+	src: url('../fonts/corporate/corporates-regularitalic-webfont.eot');
+	src: url('../fonts/corporate/corporates-regularitalic-webfont.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/corporate/corporates-regularitalic-webfont.woff') format('woff'),
+		 url('../fonts/corporate/corporates-regularitalic-webfont.ttf') format('truetype'),
+		 url('../fonts/corporate/corporates-regularitalic-webfont.svg#corporatesregularitalic') format('svg');
 	font-weight: 400;
 	font-style: italic;
 }
 @font-face {
 	font-family: 'corporate-a';
-	src: url('assets/fonts/corporate/corporatea-regular-webfont.eot');
-	src: url('assets/fonts/corporate/corporatea-regular-webfont.eot?#iefix') format('embedded-opentype'),
-		 url('assets/fonts/corporate/corporatea-regular-webfont.woff') format('woff'),
-		 url('assets/fonts/corporate/corporatea-regular-webfont.ttf') format('truetype'),
-		 url('assets/fonts/corporate/corporatea-regular-webfont.svg#corporate_aregular') format('svg');
+	src: url('../fonts/corporate/corporatea-regular-webfont.eot');
+	src: url('../fonts/corporate/corporatea-regular-webfont.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/corporate/corporatea-regular-webfont.woff') format('woff'),
+		 url('../fonts/corporate/corporatea-regular-webfont.ttf') format('truetype'),
+		 url('../fonts/corporate/corporatea-regular-webfont.svg#corporate_aregular') format('svg');
 	font-weight: 400;
 	font-style: normal;
 }
@@ -319,7 +319,7 @@ section.no-info {
 	-webkit-box-shadow: 0px 5px 12px -7px rgba(0,0,0,.3);
 	box-shadow: 0px 5px 8px 0px rgba(0,0,0,.3);
 
-	background: url(/images/header-image.jpg);
+	background: url(../../images/header-image.jpg);
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center top;
@@ -532,7 +532,7 @@ form .bootstrap-select > .dropdown-toggle {
 	height: 100%;
 	background-color: #000;
 	z-index: 100000;
-	background-image: url(assets/images/logo-mercedes-benz.png);
+	background-image: url(../images/logo-mercedes-benz.png);
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: 10%;
@@ -568,6 +568,7 @@ form .bootstrap-select > .dropdown-toggle {
 	left: 0;
 	bottom: 0;
 	right: 0;
+	display: none;
 }
 
 img.scale-img, .scale-img img{

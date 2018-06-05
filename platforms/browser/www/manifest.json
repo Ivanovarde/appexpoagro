@@ -1,10 +1,10 @@
 {
   "background_color": "#FFF",
   "display": "standalone",
-  "name": "ExpoAgro App",
-  "short_name": "ExpoAgro App",
+  "name": "Plan de Ahorro Mercedes Benz",
+  "short_name": "Plan de Ahorro Mercedes Benz",
   "version": "io.cordova.hellocordova",
-  "description": "Aplicación Mobile de ExpoAgro.",
+  "description": "Envía información sobre planes de ahorro de diferentes tipos de vehículos Mercedes Benz",
   "author": "Apache Cordova Team",
   "icons": [],
   "start_url": "index.html"
