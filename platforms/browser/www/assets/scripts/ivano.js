@@ -414,18 +414,18 @@ arraycamiones[5][17] = [];
 
 // Cargo el arreglo
 
-arraycamiones[1][0] = cargarMatriz("84", "Livianos ", "Accelo 815/37", "0,00", "0,00", "0,00", "0,00", "0,00", "0,00", "0,00", "0,00", "0,00", "0,00", "Plan 70/30");
-arraycamiones[1][1] = cargarMatriz("84", "Livianos ", "Accelo 1016/37", "1.265.407,10", "885.784,97", "0,00", "0,00", "0,00", "10.545,06", "1.054,51", "221,45", "11.821,01", "379.622,13", "Plan 70/30");
+arraycamiones[1][0] = cargarMatriz("84", "Livianos ", "Accelo 815/37", "1.265.407,10", "885.784,97", "0,00", "0,00", "0,00", "10.545,06", "1.054,51", "221,45", "11.821,01", "379.622,13", "Plan 70/30");
+arraycamiones[1][1] = cargarMatriz("84", "Livianos  ", "Accelo 1016/37", "1.377.660,96", "964.362,67", "0,00", "0,00", "0,00", "11.480,51", "1.148,05", "241,09", "12.869,65", "413.298,29", "Plan 70/30");
 
 arraycamiones[2][0] = cargarMatriz("72", "Medianos", "Atego 1419/48", "1.717.732,22", "1.202.412,56", "24.048,25", "5.050,13", "29.098,38", "16.700,17", "2.004,02", "420,84", "19.125,04", "515.319,67", "Plan 70/30");
 arraycamiones[2][1] = cargarMatriz("72", "Medianos", "Atego 1419/48", "1.582.846,20", "1.582.846,20", "31.656,92", "6.647,95", "38.304,87", "21.983,98", "2.638,08", "554,00", "25.176,06", "---", "Plan 100%");
 
-arraycamiones[3][0] = cargarMatriz("72", "Pesados Off Road ", "Axor 3131 B/36", "3.451.737,12", "2.416.215,98", "48.324,32", "10.148,11", "58.472,43", "33.558,56", "4.027,03", "845,68", "38.431,26", "1.035.521,14", "Plan 70/30");
-arraycamiones[3][1] = cargarMatriz("72", "Pesados Off Road ", "Axor 3131 K/36", "3.400.712,64", "2.380.498,85", "47.609,98", "9.998,10", "57.608,07", "33.062,48", "3.967,50", "833,17", "37.863,16", "1.020.213,79", "Plan 70/30");
-arraycamiones[3][2] = cargarMatriz("72", "Pesados Off Road ", "Axor 3131/48 6x4 Cab Ext", "3.409.538,50", "2.386.676,95", "47.733,54", "10.024,04", "57.757,58", "33.148,29", "3.977,79", "835,34", "37.961,42", "1.022.861,55", "Plan 70/30");
-arraycamiones[3][3] = cargarMatriz("72", "Pesados Off Road ", "Arocs 3342 K/36 Cabina M - Toma de fuerza en caja", "4.175.733,12", "2.923.013,18", "58.460,26", "12.276,66", "70.736,92", "40.597,41", "4.871,69", "1.023,05", "46.492,15", "1.252.719,94", "Plan 70/30");
-arraycamiones[3][4] = cargarMatriz("72", "Pesados Off Road ", "Arocs 4136 B/42 8x4 Cabina M -Toma de fuerza en motor en caja", "4.455.126,62", "3.118.588,64", "62.371,77", "13.098,07", "75.469,85", "43.313,73", "5.197,65", "1.091,51", "49.602,88", "1.336.537,99", "Plan 70/30");
-arraycamiones[3][5] = cargarMatriz("72", "Pesados Off Road ", "Arocs 4845 K/48 8x4 Cabina M - Toma de fuerza en caja", "4.817.538,34", "3.372.276,84", "67.445,54", "14.163,56", "81.609,10", "46.837,18", "5.620,46", "1.180,30", "53.637,94", "1.445.261,50", "Plan 70/30");
+arraycamiones[3][0] = cargarMatriz("72", "Pesados Off Road ", "Arocs 3342 K/36 Cabina M - Toma de fuerza en caja", "4.175.733,12", "2.923.013,18", "58.460,26", "12.276,66", "70.736,92", "40.597,41", "4.871,69", "1.023,05", "46.492,15", "1.252.719,94", "Plan 70/30");
+arraycamiones[3][1] = cargarMatriz("72", "Pesados Off Road ", "Arocs 4136 B/42 8x4 Cabina M -Toma de fuerza en motor en caja", "4.455.126,62", "3.118.588,64", "62.371,77", "13.098,07", "75.469,85", "43.313,73", "5.197,65", "1.091,51", "49.602,88", "1.336.537,99", "Plan 70/30");
+arraycamiones[3][2] = cargarMatriz("72", "Pesados Off Road ", "Arocs 4845 K/48 8x4 Cabina M - Toma de fuerza en caja", "4.817.538,34", "3.372.276,84", "67.445,54", "14.163,56", "81.609,10", "46.837,18", "5.620,46", "1.180,30", "53.637,94", "1.445.261,50", "Plan 70/30");
+arraycamiones[3][3] = cargarMatriz("72", "Pesados Off Road ", "Axor 3131 B/36", "3.451.737,12", "2.416.215,98", "48.324,32", "10.148,11", "58.472,43", "33.558,56", "4.027,03", "845,68", "38.431,26", "1.035.521,14", "Plan 70/30");
+arraycamiones[3][4] = cargarMatriz("72", "Pesados Off Road ", "Axor 3131 K/36", "3.400.712,64", "2.380.498,85", "47.609,98", "9.998,10", "57.608,07", "33.062,48", "3.967,50", "833,17", "37.863,16", "1.020.213,79", "Plan 70/30");
+arraycamiones[3][5] = cargarMatriz("72", "Pesados Off Road ", "Axor 3131/48 6x4 Cab Ext", "3.409.538,50", "2.386.676,95", "47.733,54", "10.024,04", "57.757,58", "33.148,29", "3.977,79", "835,34", "37.961,42", "1.022.861,55", "Plan 70/30");
 arraycamiones[3][6] = cargarMatriz("72", "Pesados Off Road", "Nuevo Actros 3342 S/36 6x4 Cabina M - Toma de fuerza en caja", "3.854.947,20", "3.854.947,20", "77.098,94", "16.190,78", "93.289,72", "53.540,93", "6.424,91", "1.349,23", "61.315,07", "---", "Plan 100%");
 arraycamiones[3][7] = cargarMatriz("72", "Pesados Off Road", "Arocs 3342 K/36 Cabina M - Toma de fuerza en caja", "3.847.831,00", "3.847.831,00", "76.956,62", "16.160,89", "93.117,51", "53.442,10", "6.413,05", "1.346,74", "61.201,89", "---", "Plan 100%");
 arraycamiones[3][8] = cargarMatriz("72", "Pesados Off Road", "Arocs 4136 B/42 8x4 Cabina M -Toma de fuerza en motor en caja", "4.105.284,95", "4.105.284,95", "82.105,70", "17.242,20", "99.347,90", "57.017,85", "6.842,14", "1.436,85", "65.296,84", "---", "Plan 100%");
@@ -450,6 +450,7 @@ arraycamiones[4][12] = cargarMatriz("72", "Pesados On Road", "Nuevo Actros 2636 
 arraycamiones[4][13] = cargarMatriz("72", "Pesados On Road", "Nuevo Actros 2645 LS/33 6x2 (55tN / Briten 60Tn)", "4.101.264,96", "2.870.885,47", "57.417,71", "12.057,72", "69.475,43", "39.873,41", "4.784,81", "1.004,81", "45.663,03", "1.230.379,49", "Plan 70/30");
 arraycamiones[4][14] = cargarMatriz("72", "Pesados On Road", "Nuevo Actros 2651 LS/40 6x4 (Bitren 75 Tn)", "4.600.753,25", "3.220.527,27", "64.410,55", "13.526,21", "77.936,76", "44.729,55", "5.367,55", "1.127,18", "51.224,28", "1.380.225,97", "Plan 70/30");
 arraycamiones[4][15] = cargarMatriz("72", "Pesados On Road", "Nuevo Actros 3342 S/36 6x4 Cabina M - Toma de fuerza en caja", "4.183.455,74", "2.928.419,02", "58.568,38", "12.299,36", "70.867,74", "40.672,49", "4.880,70", "1.024,95", "46.578,13", "1.255.036,72", "Plan 70/30");
+
 arraycamiones[4][16] = cargarMatriz("72", "Pesados On Road", "Atron 1735S/45", "2.770.027,81", "2.770.027,81", "55.400,56", "11.634,12", "67.034,67", "38.472,61", "4.616,71", "969,51", "44.058,83", "-", "Plan 100%");
 arraycamiones[4][17] = cargarMatriz("72", "Pesados On Road", "Atron 1735/51", "2.731.449,50", "2.731.449,50", "54.628,99", "11.472,09", "66.101,08", "37.936,80", "4.552,42", "956,01", "43.445,22", "-", "Plan 100%");
 arraycamiones[4][18] = cargarMatriz("72", "Pesados On Road", "Axor 1933 S/36 CD Techo Bajo", "2.800.470,56", "2.800.470,56", "56.009,41", "11.761,98", "67.771,39", "38.895,42", "4.667,45", "980,16", "44.543,04", "-", "Plan 100%");
@@ -474,7 +475,7 @@ arraycamiones[5][4] = cargarMatriz("72", "Semipesados ", "Atego 1726/42 CN", "2.
 arraycamiones[5][5] = cargarMatriz("72", "Semipesados ", "Atego 1726/42 CD", "2.107.448,93", "1.475.214,25", "29.504,28", "6.195,90", "35.700,18", "20.489,09", "2.458,69", "516,32", "23.464,10", "632.234,68", "Plan 70/30");
 arraycamiones[5][6] = cargarMatriz("72", "Semipesados ", "Atego 1726/48 CN", "2.041.255,01", "1.428.878,51", "28.577,57", "6.001,29", "34.578,86", "19.845,53", "2.381,46", "500,11", "22.727,11", "612.376,50", "Plan 70/30");
 arraycamiones[5][7] = cargarMatriz("72", "Semipesados ", "Atego 2426/48", "2.270.727,26", "1.589.509,08", "31.790,18", "6.675,94", "38.466,12", "22.076,52", "2.649,18", "556,33", "25.282,03", "681.218,18", "Plan 70/30");
-arraycamiones[5][8] = cargarMatriz("72", "Semipesados ", "Atego 1726 A/42 4x4 Cab Ext Versión Civil •", "2.979.553,82", "2.085.687,68", "41.713,75", "8.759,89", "50.473,64", "28.967,88", "3.476,15", "729,99", "33.174,02", "893.866,15", "Plan 70/30");
+arraycamiones[5][8] = cargarMatriz("72", "Semipesados ", "Atego 1726 A/42 4x4 Cab Ext Versión Civil", "2.979.553,82", "2.085.687,68", "41.713,75", "8.759,89", "50.473,64", "28.967,88", "3.476,15", "729,99", "33.174,02", "893.866,15", "Plan 70/30");
 arraycamiones[5][9] = cargarMatriz("72", "Semipesados", "Atego 1720/36 CN", "1.652.483,30", "1.652.483,30", "33.049,67", "6.940,43", "39.990,10", "22.951,16", "2.754,14", "578,37", "26.283,67", "---", "Plan 100%");
 arraycamiones[5][10] = cargarMatriz("72", "Semipesados", "Atego 1720/48 CN", "1.667.478,15", "1.667.478,15", "33.349,56", "7.003,41", "40.352,97", "23.159,42", "2.779,13", "583,62", "26.522,17", "---", "Plan 100%");
 arraycamiones[5][11] = cargarMatriz("72", "Semipesados", "Atego 1726 S/36 CN con ABS", "1.892.909,20", "1.892.909,20", "37.858,18", "7.950,22", "45.808,40", "26.290,41", "3.154,85", "662,52", "30.107,78", "---", "Plan 100%");
@@ -877,6 +878,8 @@ function sincronizarContactosPendientes() {
 
 function mostrarDatosCotizacion(elemento) {
 
+	var cargaAdminSuscripcion = '';
+	var iva21 = '';
 	var arrayGeneral = [];
 	arrayGeneral = eval('array' + getParameters("obj"));
 
@@ -885,6 +888,8 @@ function mostrarDatosCotizacion(elemento) {
 		return n["modelo"] == unescape(getParameters("modelo")) && n["plan"] == unescape(getParameters("plan"));
 	});
 
+	cargaAdminSuscripcion = Registro[0]["cargaAdminSuscripcion"].numberCleanComma();
+	iva21 = Registro[0]["iva21"].numberCleanComma();
 
 	// Cargo el resultado del Cotizador
 	$("#" + elemento + "_cant_cuotas").html(getParameters("cuotas"));
@@ -892,7 +897,9 @@ function mostrarDatosCotizacion(elemento) {
 	$("#" + elemento + "_precio_vehiculo_iva").html(Registro[0]["precioPublico"]);
 	$("#" + elemento + "_tipo_plan").html(Registro[0]["plan"]);
 	$("#" + elemento + "_cuota_pura").html(Registro[0]["cuotaPura"]);
-	$("#" + elemento + "_gastos_adm_suscrip").html(((Registro[0]["cargaAdminSuscripcion"].float()) + Number(Registro[0]["iva21"])).toFixed(2));
+	$("#" + elemento + "_gastos_adm_suscrip").html( (cargaAdminSuscripcion.float() + iva21.float()).toFixed(2) );
+
+	//$("#" + elemento + "_gastos_adm_suscrip").html( (parseFloat(Registro[0]["cargaAdminSuscripcion"]) + parseFloat(Registro[0]["iva21"])).toFixed(2) );
 	$("#" + elemento + "_gastos_adm_suscrip_iva").html(Registro[0]["iva21"]);
 	$("#" + elemento + "_alicuota").html(Registro[0]["pagoAdjudicacion30"]);
 	$("#" + elemento + "_modelo_cotizador").html(Registro[0]["modelo"]);
@@ -938,3 +945,25 @@ $.fn.wait = function (time, type) {
 		}, time);
 	});
 };
+
+String.prototype.numberCleanComma = function(){
+	var number = this;
+	var parts = number.split(',');
+
+	for(var i = 0; i < parts.length; i++){
+		parts[i] = parts[i].replace(/\./g,'');
+	}
+
+	return parts.join('.');
+};
+
+Number.prototype.formatMoney = function(c, d, t){
+	 var n = this,
+	 c = isNaN(c = Math.abs(c)) ? 2 : c,
+	 d = d == undefined ? "," : d,
+	 t = t == undefined ? "." : t,
+	 s = n < 0 ? "-" : "",
+	 i = String(parseInt(n = Math.abs(Number(n) || 0).toFixed(c))),
+	 j = (j = i.length) > 3 ? j % 3 : 0;
+	return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+ };

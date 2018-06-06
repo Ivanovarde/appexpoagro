@@ -316,7 +316,7 @@ if(isset($_GET['datos_guardados']) AND !empty($_GET['datos_guardados'])){
 					</div>
 					<div style="text-align: left; padding: 0 40px 20px; font-family: helvetica, arial, sans-serif;font-size:11px;">
 						<hr style="border: none; border-bottom: 1px solid #424244; margin: 25px -10px;">
-						NOTA: Los valores aquí expresados son solamente de referencia y se calculan en base a la lista de precios vigente al 01/03/2018. Las cuotas se ajusta según el valor móvil del vehículo suscripto. Precios válidos para personas residentes en la República Argentina excepto Tierra del Fuego que tiene un tratamiento impositivo distinto. Para mayor asesoramiento comuníquese al 0800-888-2262 o a <a href="mailto:plandeahorro@mercedes-benz.com.ar" target="_blank" style="color: inherit;">plandeahorro@mercedes-benz.com.ar</a>
+						NOTA: Los valores aquí expresados son solamente de referencia y se calculan en base a la lista de precios vigente al 05/06/2018. Las cuotas se ajusta según el valor móvil del vehículo suscripto. Precios válidos para personas residentes en la República Argentina excepto Tierra del Fuego que tiene un tratamiento impositivo distinto. Para mayor asesoramiento comuníquese al 0800-888-2262 o a <a href="mailto:plandeahorro@mercedes-benz.com.ar" target="_blank" style="color: inherit;">plandeahorro@mercedes-benz.com.ar</a>
 					</div>
 				</td>
 			</tr>
