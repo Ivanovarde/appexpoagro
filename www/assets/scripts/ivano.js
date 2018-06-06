@@ -1,16 +1,15 @@
-
-$(window).bind('load', function(){
+$(window).bind('load', function () {
 
 	$('#preloader').addClass('off');
-	window.setTimeout(function(){
+	window.setTimeout(function () {
 		$('#preloader').remove();
 	}, 1500);
 
-	 //Verifico si existe la URL de acceso al BackOffice
-	 var url_backoffice = window.localStorage.getItem("url_backoffice");
+	//Verifico si existe la URL de acceso al BackOffice
+	var url_backoffice = window.localStorage.getItem("url_backoffice");
 
-	 // Si hay datos localmente
-	 if(url_backoffice != null){
+	// Si hay datos localmente
+	if (url_backoffice != null) {
 		url_accesso = url_backoffice;
 	}
 	//else{ // Si no existe, preseteo uno
@@ -19,43 +18,43 @@ $(window).bind('load', function(){
 	//}
 
 	// Analizo los parametros del Cotizador
-	if(window.location.pathname.search("/cotizacion.html") != -1){
+	if (window.location.pathname.search("/cotizacion.html") != -1) {
 
 		mostrarDatosCotizacion('cotizador');
 
 		// Actulizacion de las imagenes del Pie
-		$("#cotizador_img1_cotizador").attr("src","images/vehicles/450x270-"+getParameters("obj")+"1.jpg");
-		$("#cotizador_img2_cotizador").attr("src","images/vehicles/450x270-"+getParameters("obj")+"2.jpg");
+		$("#cotizador_img1_cotizador").attr("src", "images/vehicles/450x270-" + getParameters("obj") + "1.jpg");
+		$("#cotizador_img2_cotizador").attr("src", "images/vehicles/450x270-" + getParameters("obj") + "2.jpg");
 	}
 
 	// Analizo los parametros del Formulario de Cotizador
-	if(window.location.pathname.search("/formulario.html") != -1){
+	if (window.location.pathname.search("/formulario.html") != -1) {
 		mostrarDatosCotizacion('form');
 
 		// Si es el caso de Plan 84, agrego un clase para ocultar encabezado
-		if(getParameters("obj") == "pickup"){
-			$("#encabezado_formulario").addClass( "no-info" );
+		if (getParameters("obj") == "pickup") {
+			$("#encabezado_formulario").addClass("no-info");
 
-		}else{ // Saco la clase no-info
-			$("#encabezado_formulario").removeClass( "no-info" );
+		} else { // Saco la clase no-info
+			$("#encabezado_formulario").removeClass("no-info");
 		}
 
 	}
 
 });
 
-$(window).on('scroll', function(e){
+$(window).on('scroll', function (e) {
 
 });
 
-jQuery(document).ready(function() {
+jQuery(document).ready(function () {
 
 	actualizarContadorContactosPendientes();
 
 
 	// ============================================ SET URL BACKOFFICE ======================================================
 
-	$( "#btn_backoffice" ).click(function() {
+	$("#btn_backoffice").click(function () {
 
 
 		var url_ingresada = prompt("Ingrese la URL del BackOffice", url_accesso);
@@ -71,49 +70,49 @@ jQuery(document).ready(function() {
 
 	// ======================================= SINCRONIZAR CONTACTOS ======================================================
 
-	$( "#btn_contactos_pendientes" ).click(function() {
+	$("#btn_contactos_pendientes").click(function () {
 
 		var contadorAux = 0;
 
-		 //Si tengo datos guardados localmente, los consulto directamente desde ahi
-		 var datos_guardados = JSON.parse(window.localStorage.getItem("datos_guardados"));
+		//Si tengo datos guardados localmente, los consulto directamente desde ahi
+		var datos_guardados = JSON.parse(window.localStorage.getItem("datos_guardados"));
 
-		 // Si no estoy conectado a Internet, cancelo
-		 if(isConnected){
+		// Si no estoy conectado a Internet, cancelo
+		if (isConnected) {
 
-			 // Si hay datos localmente
-			 if(datos_guardados != null && datos_guardados.length != 0){
+			// Si hay datos localmente
+			if (datos_guardados != null && datos_guardados.length != 0) {
 				contadorAux = datos_guardados.length;
 
 				if (confirm('¿Desea sincronizar los contactos locales?')) {
 					sincronizarContactosPendientes();
 				}
-			 }else{
-				 alert('No hay contactos para sincronizar.')
-			 }
-		 }else{
-			 alert('No se puede iniciar la sincronización porque no hay conexión a Internet.')
-		 }
+			} else {
+				alert('No hay contactos para sincronizar.')
+			}
+		} else {
+			alert('No se puede iniciar la sincronización porque no hay conexión a Internet.')
+		}
 
 	});
 
 
 	// ======================================== ENVIAR_COTIZACION_FINAL ====================================================
 
-	$( "#btn_enviar_cotizacion_final" ).click(function(event) {
+	$("#btn_enviar_cotizacion_final").click(function (event) {
 		event.preventDefault();
 
 		// Valido que el formulario no este vacio
-		if($("#nombre").val() != "" && $("#apellido").val() != "" && $("#email").val() != "" && $("#telefono").val() != "" && $("#provincia").val() != "" && $("#ciudad").val() != ""){
+		if ($("#nombre").val() != "" && $("#apellido").val() != "" && $("#email").val() != "" && $("#telefono").val() != "" && $("#provincia").val() != "" && $("#ciudad").val() != "") {
 
 			// Cargo Loading...
-			$( "#btn_enviar_cotizacion_final" ).html("Enviando...");
+			$("#btn_enviar_cotizacion_final").html("Enviando...");
 
-			var arrayGeneral =  [];
-			arrayGeneral = eval('array'+getParameters("obj"));
+			var arrayGeneral = [];
+			arrayGeneral = eval('array' + getParameters("obj"));
 
-			var Registro =  [];
-			Registro = jQuery.grep(arrayGeneral[getParameters("linea")], function( n, i ) {
+			var Registro = [];
+			Registro = jQuery.grep(arrayGeneral[getParameters("linea")], function (n, i) {
 				return n["modelo"] == unescape(getParameters("modelo")) && n["plan"] == unescape(getParameters("plan"));
 			});
 
@@ -142,31 +141,31 @@ jQuery(document).ready(function() {
 			RegistroGuardar["15"] = $("#ciudad").val();
 
 
-			 // Si estoy conectado a Internet, guardo los datos en BD
-			 if(isConnected){
+			// Si estoy conectado a Internet, guardo los datos en BD
+			if (isConnected) {
 
-					// Si falla el envio, lo guardo localmente
+				// Si falla el envio, lo guardo localmente
 				enviarRegistro(RegistroGuardar)
-					.fail(function(result,RegistroGuardar) {
+					.fail(function (result, RegistroGuardar) {
 						guardarDatosLocalmente(RegistroGuardar);
 
 						// Saco Loading...
-						$( "#btn_enviar_cotizacion_final" ).html("Enviar cotización");
+						$("#btn_enviar_cotizacion_final").html("Enviar cotización");
 
 
-					}).done(function(result,RegistroGuardar) {
+					}).done(function (result, RegistroGuardar) {
 
 						// Saco Loading...
-						$( "#btn_enviar_cotizacion_final" ).html("Enviar cotización");
+						$("#btn_enviar_cotizacion_final").html("Enviar cotización");
 					});
 
 
-			 }else{ // Si no estoy conectado a Internet, guardo los datos localmente para sync posteriormente
+			} else { // Si no estoy conectado a Internet, guardo los datos localmente para sync posteriormente
 
 				guardarDatosLocalmente(RegistroGuardar);
-			 }
+			}
 
-		}else{
+		} else {
 			alert('Se debe completar el formulario antes de enviarlo...');
 		}
 
@@ -175,13 +174,13 @@ jQuery(document).ready(function() {
 
 	// ============================================ ENVIAR_COTIZACION ======================================================
 
-	$( "#btn_enviar_cotizacion" ).click(function() {
+	$("#btn_enviar_cotizacion").click(function () {
 
-		var arrayGeneral =  [];
-		arrayGeneral = eval('array'+getParameters("obj"));
+		var arrayGeneral = [];
+		arrayGeneral = eval('array' + getParameters("obj"));
 
-		var Registro =  [];
-		Registro = jQuery.grep(arrayGeneral[getParameters("linea")], function( n, i ) {
+		var Registro = [];
+		Registro = jQuery.grep(arrayGeneral[getParameters("linea")], function (n, i) {
 			return n["modelo"] == unescape(getParameters("modelo")) && n["plan"] == unescape(getParameters("plan"));
 		});
 
@@ -195,11 +194,11 @@ jQuery(document).ready(function() {
 		// Armo la URL del Formulario Cotizador
 		var urlParameter = '';
 
-		if(linea != '' && modelo != '' && plan != '' && cuotas != ''){
-			urlParameter = 'obj='+escape(getParameters("obj"))+'&linea='+escape(linea)+'&modelo='+escape(modelo)+'&plan='+escape(plan)+'&cuotas='+escape(cuotas);
+		if (linea != '' && modelo != '' && plan != '' && cuotas != '') {
+			urlParameter = 'obj=' + escape(getParameters("obj")) + '&linea=' + escape(linea) + '&modelo=' + escape(modelo) + '&plan=' + escape(plan) + '&cuotas=' + escape(cuotas);
 
-			window.location.href = "formulario.html?"+urlParameter;
-		}else{
+			window.location.href = "formulario.html?" + urlParameter;
+		} else {
 			alert('Faltan elegir opciones para la cotización');
 		}
 
@@ -212,11 +211,11 @@ jQuery(document).ready(function() {
 	});
 
 	$('#bus_modelos').on('changed.bs.select', function (e) {
-		actualizarPlanes( $('#bus_linea').val(),$(this).val(), 'bus');
+		actualizarPlanes($('#bus_linea').val(), $(this).val(), 'bus');
 	});
 
 	$('#bus_plan').on('changed.bs.select', function (e) {
-		actualizarCuotas( $('#bus_linea').val(), $('#bus_modelos').val(), $(this).val(), 'bus');
+		actualizarCuotas($('#bus_linea').val(), $('#bus_modelos').val(), $(this).val(), 'bus');
 	});
 
 	// ============================================ CAMIONES ======================================================
@@ -226,11 +225,11 @@ jQuery(document).ready(function() {
 	});
 
 	$('#camiones_modelos').on('changed.bs.select', function (e) {
-		actualizarPlanes( $('#camiones_linea').val(),$(this).val(), 'camiones');
+		actualizarPlanes($('#camiones_linea').val(), $(this).val(), 'camiones');
 	});
 
 	$('#camiones_plan').on('changed.bs.select', function (e) {
-		actualizarCuotas( $('#camiones_linea').val(), $('#camiones_modelos').val(), $(this).val(), 'camiones');
+		actualizarCuotas($('#camiones_linea').val(), $('#camiones_modelos').val(), $(this).val(), 'camiones');
 	});
 
 	// ============================================ VANS ======================================================
@@ -240,11 +239,11 @@ jQuery(document).ready(function() {
 	});
 
 	$('#vans_modelos').on('changed.bs.select', function (e) {
-		actualizarPlanes( $('#vans_linea').val(),$(this).val(), 'vans');
+		actualizarPlanes($('#vans_linea').val(), $(this).val(), 'vans');
 	});
 
 	$('#vans_plan').on('changed.bs.select', function (e) {
-		actualizarCuotas( $('#vans_linea').val(), $('#vans_modelos').val(), $(this).val(), 'vans');
+		actualizarCuotas($('#vans_linea').val(), $('#vans_modelos').val(), $(this).val(), 'vans');
 	});
 
 	// ============================================ PICKUP ======================================================
@@ -254,11 +253,11 @@ jQuery(document).ready(function() {
 	});
 
 	$('#pickup_modelos').on('changed.bs.select', function (e) {
-		actualizarPlanes( $('#pickup_linea').val(),$(this).val(), 'pickup');
+		actualizarPlanes($('#pickup_linea').val(), $(this).val(), 'pickup');
 	});
 
 	$('#pickup_plan').on('changed.bs.select', function (e) {
-		actualizarCuotas( $('#pickup_linea').val(), $('#pickup_modelos').val(), $(this).val(), 'pickup');
+		actualizarCuotas($('#pickup_linea').val(), $('#pickup_modelos').val(), $(this).val(), 'pickup');
 	});
 
 	// ============================================ SMART ======================================================
@@ -281,11 +280,11 @@ jQuery(document).ready(function() {
 
 // PICKUP
 
-var arraypickup =  [];
+var arraypickup = [];
 arraypickup[1] = [];
 arraypickup[1][0] = [];
 
-arraypickup[1][0] = cargarMatriz("84","Pickup","Plan","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","84 meses");
+arraypickup[1][0] = cargarMatriz("84", "Pickup", "Plan", "0.00", "0.00", "0.00", "0.00", "0.00", "0.00", "0.00", "0.00", "0.00", "0.00", "84 meses");
 
 
 // SMART
@@ -309,8 +308,7 @@ arraypickup[1][0] = cargarMatriz("84","Pickup","Plan","0.00","0.00","0.00","0.00
 
 
 // BUSES
-
-var arraybus =  [];
+var arraybus = [];
 arraybus[1] = [];
 arraybus[2] = [];
 arraybus[3] = [];
@@ -340,7 +338,7 @@ arraybus[4][1] = cargarMatriz("72", "Urbanos", "OH 1721/62 Euro V", "2.650.844,4
 
 
 // CAMIONES
-var arraycamiones =  [];
+var arraycamiones = [];
 arraycamiones[1] = [];
 arraycamiones[2] = [];
 arraycamiones[3] = [];
@@ -416,13 +414,11 @@ arraycamiones[5][17] = [];
 
 // Cargo el arreglo
 
-arraycamiones[1][0] = cargarMatriz("84", "Livianos ", "Accelo 815/37", "0,00", "0,00", "0,00", "0,00", "0,00", "0,00", "0,00", "0,00", "0,00", "0,00", "Plan 84");
-arraycamiones[1][1] = cargarMatriz("84", "Livianos ", "Accelo 1016/37", "1.265.407,10", "885.784,97", "0,00", "0,00", "0,00", "10.545,06", "1.054,51", "221,45", "11.821,01", "379.622,13", "Plan 84");
-
+arraycamiones[1][0] = cargarMatriz("84", "Livianos ", "Accelo 815/37", "0,00", "0,00", "0,00", "0,00", "0,00", "0,00", "0,00", "0,00", "0,00", "0,00", "Plan 70/30");
+arraycamiones[1][1] = cargarMatriz("84", "Livianos ", "Accelo 1016/37", "1.265.407,10", "885.784,97", "0,00", "0,00", "0,00", "10.545,06", "1.054,51", "221,45", "11.821,01", "379.622,13", "Plan 70/30");
 
 arraycamiones[2][0] = cargarMatriz("72", "Medianos", "Atego 1419/48", "1.717.732,22", "1.202.412,56", "24.048,25", "5.050,13", "29.098,38", "16.700,17", "2.004,02", "420,84", "19.125,04", "515.319,67", "Plan 70/30");
 arraycamiones[2][1] = cargarMatriz("72", "Medianos", "Atego 1419/48", "1.582.846,20", "1.582.846,20", "31.656,92", "6.647,95", "38.304,87", "21.983,98", "2.638,08", "554,00", "25.176,06", "---", "Plan 100%");
-
 
 arraycamiones[3][0] = cargarMatriz("72", "Pesados Off Road ", "Axor 3131 B/36", "3.451.737,12", "2.416.215,98", "48.324,32", "10.148,11", "58.472,43", "33.558,56", "4.027,03", "845,68", "38.431,26", "1.035.521,14", "Plan 70/30");
 arraycamiones[3][1] = cargarMatriz("72", "Pesados Off Road ", "Axor 3131 K/36", "3.400.712,64", "2.380.498,85", "47.609,98", "9.998,10", "57.608,07", "33.062,48", "3.967,50", "833,17", "37.863,16", "1.020.213,79", "Plan 70/30");
@@ -438,7 +434,6 @@ arraycamiones[3][10] = cargarMatriz("72", "Pesados Off Road", "Axor 3131 B/36", 
 arraycamiones[3][11] = cargarMatriz("72", "Pesados Off Road", "Axor 3131 K/36", "3.133.669,50", "3.133.669,50", "62.673,39", "13.161,41", "75.834,80", "43.523,19", "5.222,78", "1.096,78", "49.842,75", "---", "Plan 100%");
 arraycamiones[3][12] = cargarMatriz("72", "Pesados Off Road", "Axor 3131/48 6x4 Cab Ext", "3.141.802,30", "3.141.802,30", "62.836,05", "13.195,57", "76.031,62", "43.636,14", "5.236,34", "1.099,63", "49.972,11", "---", "Plan 100%");
 
-
 arraycamiones[4][0] = cargarMatriz("72", "Pesados On Road", "Atron 1735S/45", "2.911.153,44", "2.037.807,41", "40.756,15", "8.558,79", "49.314,94", "28.302,88", "3.396,35", "713,23", "32.412,46", "873.346,03", "Plan 70/30");
 arraycamiones[4][1] = cargarMatriz("72", "Pesados On Road", "Atron 1735/51", "2.870.609,66", "2.009.426,76", "40.188,54", "8.439,59", "48.628,13", "27.908,71", "3.349,04", "703,30", "31.961,05", "861.182,90", "Plan 70/30");
 arraycamiones[4][2] = cargarMatriz("72", "Pesados On Road", "Axor 1933 S/36 CD Techo Bajo", "2.943.147,17", "2.060.203,02", "41.204,06", "8.652,85", "49.856,91", "28.613,93", "3.433,67", "721,07", "32.768,67", "882.944,15", "Plan 70/30");
@@ -453,7 +448,7 @@ arraycamiones[4][10] = cargarMatriz("72", "Pesados On Road", "Nuevo Actros 2042 
 arraycamiones[4][11] = cargarMatriz("72", "Pesados On Road", "Nuevo Actros 2048 LS/37 4x2", "4.144.291,01", "2.901.003,71", "58.020,07", "12.184,22", "70.204,29", "40.291,72", "4.835,01", "1.015,35", "46.142,08", "1.243.287,30", "Plan 70/30");
 arraycamiones[4][12] = cargarMatriz("72", "Pesados On Road", "Nuevo Actros 2636 LS/33 6x2 (liviano combustible CMT 50Tn)", "3.814.976,26", "2.670.483,38", "53.409,67", "11.216,03", "64.625,70", "37.090,05", "4.450,81", "934,67", "42.475,52", "1.144.492,88", "Plan 70/30");
 arraycamiones[4][13] = cargarMatriz("72", "Pesados On Road", "Nuevo Actros 2645 LS/33 6x2 (55tN / Briten 60Tn)", "4.101.264,96", "2.870.885,47", "57.417,71", "12.057,72", "69.475,43", "39.873,41", "4.784,81", "1.004,81", "45.663,03", "1.230.379,49", "Plan 70/30");
-arraycamiones[4][14]  = cargarMatriz("72", "Pesados On Road", "Nuevo Actros 2651 LS/40 6x4 (Bitren 75 Tn)", "4.600.753,25", "3.220.527,27", "64.410,55", "13.526,21", "77.936,76", "44.729,55", "5.367,55", "1.127,18", "51.224,28", "1.380.225,97", "Plan 70/30");
+arraycamiones[4][14] = cargarMatriz("72", "Pesados On Road", "Nuevo Actros 2651 LS/40 6x4 (Bitren 75 Tn)", "4.600.753,25", "3.220.527,27", "64.410,55", "13.526,21", "77.936,76", "44.729,55", "5.367,55", "1.127,18", "51.224,28", "1.380.225,97", "Plan 70/30");
 arraycamiones[4][15] = cargarMatriz("72", "Pesados On Road", "Nuevo Actros 3342 S/36 6x4 Cabina M - Toma de fuerza en caja", "4.183.455,74", "2.928.419,02", "58.568,38", "12.299,36", "70.867,74", "40.672,49", "4.880,70", "1.024,95", "46.578,13", "1.255.036,72", "Plan 70/30");
 arraycamiones[4][16] = cargarMatriz("72", "Pesados On Road", "Atron 1735S/45", "2.770.027,81", "2.770.027,81", "55.400,56", "11.634,12", "67.034,67", "38.472,61", "4.616,71", "969,51", "44.058,83", "-", "Plan 100%");
 arraycamiones[4][17] = cargarMatriz("72", "Pesados On Road", "Atron 1735/51", "2.731.449,50", "2.731.449,50", "54.628,99", "11.472,09", "66.101,08", "37.936,80", "4.552,42", "956,01", "43.445,22", "-", "Plan 100%");
@@ -470,7 +465,6 @@ arraycamiones[4][27] = cargarMatriz("72", "Pesados On Road", "Nuevo Actros 2048 
 arraycamiones[4][28] = cargarMatriz("72", "Pesados On Road", "Nuevo Actros 2636 LS/33 6x2 (liviano combustible CMT 50Tn)", "3.630.035,50", "3.630.035,50", "72.600,71", "15.246,15", "87.846,86", "50.417,16", "6.050,06", "1.270,51", "57.737,73", "-", "Plan 100%");
 arraycamiones[4][29] = cargarMatriz("72", "Pesados On Road", "Nuevo Actros 2645 LS/33 6x2 (55tN / Briten 60Tn)", "3.902.445,63", "3.902.445,63", "78.048,91", "16.390,27", "94.439,18", "54.200,63", "6.504,08", "1.365,86", "62.070,57", "-", "Plan 100%");
 arraycamiones[4][30] = cargarMatriz("72", "Pesados On Road", "Nuevo Actros 2651 LS/40 6x4 (Bitren 75 Tn)", "4.377.719,94", "4.377.719,94", "87.554,40", "18.386,42", "105.940,82", "60.801,67", "7.296,20", "1.532,20", "69.630,07", "-", "Plan 100%");
-
 
 arraycamiones[5][0] = cargarMatriz("72", "Semipesados ", "Atego 1720/36 CN", "1.793.303,62", "1.255.312,53", "25.106,25", "5.272,31", "30.378,56", "17.434,90", "2.092,19", "439,36", "19.966,44", "537.991,08", "Plan 70/30");
 arraycamiones[5][1] = cargarMatriz("72", "Semipesados ", "Atego 1720/48 CN", "1.809.576,29", "1.266.703,40", "25.334,07", "5.320,15", "30.654,22", "17.593,10", "2.111,17", "443,35", "20.147,62", "542.872,89", "Plan 70/30");
@@ -492,13 +486,8 @@ arraycamiones[5][16] = cargarMatriz("72", "Semipesados", "Atego 2426/48", "2.092
 arraycamiones[5][17] = cargarMatriz("72", "Semipesados", "Atego 1726 A/42 4x4 Cab Ext Versión Civil", "2.745.582,45", "2.745.582,45", "54.911,65", "11.531,45", "66.443,10", "38.133,09", "4.575,97", "960,95", "43.670,01", "---", "Plan 100%");
 
 
-
-
-
-
 // VANS
-
-var arrayvans =  [];
+var arrayvans = [];
 arrayvans[1] = [];
 arrayvans[2] = [];
 arrayvans[3] = [];
@@ -557,14 +546,12 @@ arrayvans[1][1] = cargarMatriz("72", "Chasis Cabina", "Sprinter 515 CDI Chasis 4
 arrayvans[1][2] = cargarMatriz("72", "Chasis Cabina", "Sprinter 415 CDI Chasis 3665 con Aire Acondicionado", "968.050,00", "968.050,00", "19.361,00", "4.065,81", "23.426,81", "13.445,14", "1.613,42", "338,82", "15.397,37", "-", "Plan 100%");
 arrayvans[1][3] = cargarMatriz("72", "Chasis Cabina", "Sprinter 515 CDI Chasis 4325 con Aire Acondicionado", "1.058.062,50", "1.058.062,50", "21.161,25", "4.443,86", "25.605,11", "14.695,31", "1.763,44", "370,32", "16.829,07", "-", "Plan 100%");
 
-
 arrayvans[2][0] = cargarMatriz("72", "Combi", "Sprinter 415 CDI Combi 3665 9+1 TN", "1.551.763,20", "1.086.234,24", "21.724,68", "4.562,18", "26.286,87", "15.086,59", "1.810,39", "380,18", "17.277,16", "465.528,96", "Plan 70/30");
 arrayvans[2][1] = cargarMatriz("72", "Combi", "Sprinter 415 CDI Combi 3665 15+1 TE", "1.528.800,00", "1.070.160,00", "21.403,20", "4.494,67", "25.897,87", "14.863,33", "1.783,60", "374,56", "17.021,49", "458.640,00", "Plan 70/30");
 arrayvans[2][2] = cargarMatriz("72", "Combi", "Sprinter 515 CDI Combi 4325 19+1", "1.883.731,20", "1.318.611,84", "26.372,24", "5.538,17", "31.910,41", "18.314,05", "2.197,69", "461,51", "20.973,25", "565.119,36", "Plan 70/30");
 arrayvans[2][3] = cargarMatriz("72", "Combi", "Sprinter 415 CDI Combi 3665 9+1 TN", "1.476.537,50", "1.476.537,50", "29.530,75", "6.201,46", "35.732,21", "20.507,47", "2.460,90", "516,79", "23.485,15", "-", "Plan 100%");
 arrayvans[2][4] = cargarMatriz("72", "Combi", "Sprinter 415 CDI Combi 3665 15+1 TE", "1.454.687,50", "1.454.687,50", "29.093,75", "6.109,69", "35.203,44", "20.203,99", "2.424,48", "509,14", "23.137,61", "-", "Plan 100%");
 arrayvans[2][5] = cargarMatriz("72", "Combi", "Sprinter 515 CDI Combi 4325 19+1", "1.792.412,50", "1.792.412,50", "35.848,25", "7.528,13", "43.376,38", "24.894,62", "2.987,35", "627,34", "28.509,32", "-", "Plan 100%");
-
 
 arrayvans[3][0] = cargarMatriz("72", "Furgón", "Sprinter 411CDI Street Furgón 3250 TN Versión 1 con Aire Acondicionado", "985.920,00", "690.144,00", "13.802,88", "2.898,60", "16.701,48", "9.585,33", "1.150,24", "241,55", "10.977,12", "295.776,00", "Plan 70/30");
 arrayvans[3][1] = cargarMatriz("72", "Furgón", "Sprinter 411CDI Street Furgón 3250 TN Versión 2 con Aire Acondicionado", "997.401,60", "698.181,12", "13.963,62", "2.932,36", "16.895,98", "9.696,96", "1.163,64", "244,36", "11.104,96", "299.220,48", "Plan 70/30");
@@ -594,16 +581,15 @@ arrayvans[3][24] = cargarMatriz("72", "Furgón", "Sprinter 415 CDI Furgón 3665 
 arrayvans[3][25] = cargarMatriz("72", "Furgón", "Sprinter 415 CDI Furgón 4325 TE Versión 2 con Aire Acondicionado", "1.352.087,50", "1.352.087,50", "27.041,75", "5.678,77", "32.720,52", "18.778,99", "2.253,48", "473,23", "21.505,70", "-", "Plan 100%");
 arrayvans[3][26] = cargarMatriz("72", "Furgón", "Sprinter 515 CDI Furgón 4325 TE Versión 2 con Aire Acondicionado", "1.399.825,00", "1.399.825,00", "27.996,50", "5.879,27", "33.875,77", "19.442,01", "2.333,04", "489,94", "22.264,99", "-", "Plan 100%");
 arrayvans[3][27] = cargarMatriz("72", "Furgón", "Sprinter 515 CDI Furgón 4325 XL TE Versión 2 con Aire Acondicionado", "1.434.025,00", "1.434.025,00", "28.680,50", "6.022,91", "34.703,41", "19.917,01", "2.390,04", "501,91", "22.808,96", "-", "Plan 100%");
-arrayvans[3][28] = cargarMatriz("84", "Furgon", "CDI Furgón Versión 1 con aire acondicionado", "836.159,94", "585.311,96", "0,00", "0,00", "0,00", "6.968,00", "696,80", "146,33", "7.811,13", "250.847,98", "84");
-arrayvans[3][29] = cargarMatriz("84", "Furgon", "CDI Furgón Versión 2 con aire acondicionado", "847.391,95", "593.174,36", "0,00", "0,00", "0,00", "7.061,60", "706,16", "148,29", "7.916,05", "254.217,58", "84");
-arrayvans[3][30] = cargarMatriz("84", "Furgon", "CDI Furgón Mixto con aire acondicionado", "880.838,40", "616.586,88", "0,00", "0,00", "0,00", "7.340,32", "734,03", "154,15", "8.228,50", "264.251,52", "84");
-arrayvans[3][31] = cargarMatriz("84", "Furgon", "CDI Furgón Mixto X con aire acondicionado", "950.976,00", "665.683,20", "0,00", "0,00", "0,00", "7.924,80", "792,48", "166,42", "8.883,70", "285.292,80", "84");
-arrayvans[3][32] = cargarMatriz("84", "Furgon", "CDI Furgón Plus con aire acondicionado", "1.010.880,00", "707.616,00", "0,00", "0,00", "0,00", "8.424,00", "842,40", "176,90", "9.443,30", "303.264,00", "84");
+arrayvans[3][28] = cargarMatriz("84", "Furgon", "CDI Furgón Versión 1 con aire acondicionado", "836.159,94", "585.311,96", "0,00", "0,00", "0,00", "6.968,00", "696,80", "146,33", "7.811,13", "250.847,98", "Plan 70/30");
+arrayvans[3][29] = cargarMatriz("84", "Furgon", "CDI Furgón Versión 2 con aire acondicionado", "847.391,95", "593.174,36", "0,00", "0,00", "0,00", "7.061,60", "706,16", "148,29", "7.916,05", "254.217,58", "Plan 70/30");
+arrayvans[3][30] = cargarMatriz("84", "Furgon", "CDI Furgón Mixto con aire acondicionado", "880.838,40", "616.586,88", "0,00", "0,00", "0,00", "7.340,32", "734,03", "154,15", "8.228,50", "264.251,52", "Plan 70/30");
+arrayvans[3][31] = cargarMatriz("84", "Furgon", "CDI Furgón Mixto X con aire acondicionado", "950.976,00", "665.683,20", "0,00", "0,00", "0,00", "7.924,80", "792,48", "166,42", "8.883,70", "285.292,80", "Plan 70/30");
+arrayvans[3][32] = cargarMatriz("84", "Furgon", "CDI Furgón Plus con aire acondicionado", "1.010.880,00", "707.616,00", "0,00", "0,00", "0,00", "8.424,00", "842,40", "176,90", "9.443,30", "303.264,00", "Plan 70/30");
 
-
-arrayvans[4][0] = cargarMatriz("84", "Pasajeros", "Vito Combi", "995.904,00", "697.132,80", "0,00", "0,00", "0,00", "8.299,20", "829,92", "174,28", "9.303,40", "298.771,20", "84");
-arrayvans[4][1] = cargarMatriz("84", "Pasajeros", "Tourer AT", "1.546.455,05", "1.082.518,53", "0,00", "0,00", "0,00", "12.887,13", "1.288,71", "270,63", "14.446,47", "463.936,51", "84");
-arrayvans[4][2] = cargarMatriz("84", "Pasajeros", "Tourer AT X", "1.558.238,69", "1.090.767,08", "0,00", "0,00", "0,00", "12.985,32", "1.298,53", "272,69", "14.556,55", "467.471,61", "84");
+arrayvans[4][0] = cargarMatriz("84", "Pasajeros", "Vito Combi", "995.904,00", "697.132,80", "0,00", "0,00", "0,00", "8.299,20", "829,92", "174,28", "9.303,40", "298.771,20", "Plan 70/30");
+arrayvans[4][1] = cargarMatriz("84", "Pasajeros", "Tourer AT", "1.546.455,05", "1.082.518,53", "0,00", "0,00", "0,00", "12.887,13", "1.288,71", "270,63", "14.446,47", "463.936,51", "Plan 70/30");
+arrayvans[4][2] = cargarMatriz("84", "Pasajeros", "Tourer AT X", "1.558.238,69", "1.090.767,08", "0,00", "0,00", "0,00", "12.985,32", "1.298,53", "272,69", "14.556,55", "467.471,61", "Plan 70/30");
 
 
 
@@ -615,7 +601,7 @@ function cargarMatriz(cuota, linea, modelo, precioPublico, precioPublico100, der
 	array_aux["modelo"] = modelo;
 	array_aux["linea"] = linea;
 	array_aux["plan"] = plan;
-	array_aux["cuotas"]= cuota;
+	array_aux["cuotas"] = cuota;
 	array_aux["precioPublico"] = precioPublico;
 	array_aux["precioPublico100"] = precioPublico100;
 	array_aux["derechoSuscripcion"] = derechoSuscripcion;
@@ -633,143 +619,145 @@ function cargarMatriz(cuota, linea, modelo, precioPublico, precioPublico100, der
 	return array_aux;
 }
 
-function obtenerModelos(arregloGeneral, linea){
+function obtenerModelos(arregloGeneral, linea) {
 
 	var arregloModelos = [];
 
-	for (var i=0; i<arregloGeneral[linea].length; i++) {
+	for (var i = 0; i < arregloGeneral[linea].length; i++) {
 		arregloModelos.push(arregloGeneral[linea][i]);
 	}
 
 	return arregloModelos;
 }
 
-function obtenerPlanes(arregloGeneral, linea, modelo){
+function obtenerPlanes(arregloGeneral, linea, modelo) {
 
 	var arregloPlanes = [];
 
-	arregloPlanes = jQuery.grep(arregloGeneral[linea], function( n, i ) {
+	arregloPlanes = jQuery.grep(arregloGeneral[linea], function (n, i) {
 		return n["modelo"] == modelo;
 	});
 
 	return arregloPlanes;
 }
 
-function obtenerCuotas(arregloGeneral, linea, modelo, plan){
+function obtenerCuotas(arregloGeneral, linea, modelo, plan) {
 
 	var arregloCuotas = [];
 
-	arregloCuotas = jQuery.grep(arregloGeneral[linea], function( n, i ) {
+	arregloCuotas = jQuery.grep(arregloGeneral[linea], function (n, i) {
 		return n["modelo"] == modelo && n["plan"] == plan;
 	});
 
 	return arregloCuotas;
 }
 
-function getParameters(k){
-	var p={};
-	location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi,function(s,k,v){p[k]=v})
-	return k?p[k]:p;
+function getParameters(k) {
+	var p = {};
+	location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (s, k, v) {
+		p[k] = v
+	})
+	return k ? p[k] : p;
 }
 
-function cotizar(objeto){
+function cotizar(objeto) {
 
-	var arrayAux =  [];
-	arrayAux = eval('array'+objeto);
+	var arrayAux = [];
+	arrayAux = eval('array' + objeto);
 
-	var linea = $('#'+objeto+'_linea').val();
-	var modelo = $('#'+objeto+'_modelos').val();
-	var plan = $('#'+objeto+'_plan').val();
-	var cuotas = $('#'+objeto+'_cuotas').val();
+	var linea = $('#' + objeto + '_linea').val();
+	var modelo = $('#' + objeto + '_modelos').val();
+	var plan = $('#' + objeto + '_plan').val();
+	var cuotas = $('#' + objeto + '_cuotas').val();
 
 	// Armo la URL del Cotizador
 	var urlParameter = '';
 
-	if(linea != '' && modelo != '' && plan != '' && cuotas != ''){
-		urlParameter = 'obj='+escape(objeto)+'&linea='+escape(linea)+'&modelo='+escape(modelo)+'&plan='+escape(plan)+'&cuotas='+escape(cuotas);
+	if (linea != '' && modelo != '' && plan != '' && cuotas != '') {
+		urlParameter = 'obj=' + escape(objeto) + '&linea=' + escape(linea) + '&modelo=' + escape(modelo) + '&plan=' + escape(plan) + '&cuotas=' + escape(cuotas);
 
-		window.location.href = "cotizacion.html?"+urlParameter;
-	}else{
+		window.location.href = "cotizacion.html?" + urlParameter;
+	} else {
 		alert('Faltan elegir opciones para la cotización');
 	}
 }
 
-function actualizarModelos(linea, objeto){
+function actualizarModelos(linea, objeto) {
 
 	// Vacio la lista
-	$("#"+objeto+"_modelos").empty().append('<option value="" selected="">Modelo</option>');
-	$("#"+objeto+"_modelos").selectpicker("refresh");
-	$("#"+objeto+"_plan").empty().append('<option value="" selected="">Plan</option>');
-	$("#"+objeto+"_plan").selectpicker("refresh");
-	$("#"+objeto+"_cuotas").empty().append('<option value="" selected="">Cuotas</option>');
-	$("#"+objeto+"_cuotas").selectpicker("refresh");
+	$("#" + objeto + "_modelos").empty().append('<option value="" selected="">Modelo</option>');
+	$("#" + objeto + "_modelos").selectpicker("refresh");
+	$("#" + objeto + "_plan").empty().append('<option value="" selected="">Plan</option>');
+	$("#" + objeto + "_plan").selectpicker("refresh");
+	$("#" + objeto + "_cuotas").empty().append('<option value="" selected="">Cuotas</option>');
+	$("#" + objeto + "_cuotas").selectpicker("refresh");
 
 	// Obtengo los Modelos de la linea seleccionada
-	var Modelos =  obtenerModelos(eval('array'+objeto), linea);
+	var Modelos = obtenerModelos(eval('array' + objeto), linea);
 
 	var arregloAux = [];
 
 	// Actualizo los modelos segun la linea elegida
-	for (var i=0; i<Modelos.length; i++) {
+	for (var i = 0; i < Modelos.length; i++) {
 
-		if( $.inArray( Modelos[i]["modelo"], arregloAux) == -1  ){
+		if ($.inArray(Modelos[i]["modelo"], arregloAux) == -1) {
 
 			arregloAux.push(Modelos[i]["modelo"]);
 
-			$("#"+objeto+"_modelos").append('<option value="'+Modelos[i]["modelo"]+'" >'+Modelos[i]["modelo"]+'</option>');
-			$("#"+objeto+"_modelos").selectpicker("refresh");
+			$("#" + objeto + "_modelos").append('<option value="' + Modelos[i]["modelo"] + '" >' + Modelos[i]["modelo"] + '</option>');
+			$("#" + objeto + "_modelos").selectpicker("refresh");
 		}
 	}
 
 }
 
-function actualizarPlanes(linea, modelo, objeto){
+function actualizarPlanes(linea, modelo, objeto) {
 
 	// Vacio la lista de Planes
-	$("#"+objeto+"_plan").empty().append('<option value="" selected="">Plan</option>');
-	$("#"+objeto+"_plan").selectpicker("refresh");
-	$("#"+objeto+"_cuotas").empty().append('<option value="" selected="">Cuotas</option>');
-	$("#"+objeto+"_cuotas").selectpicker("refresh");
+	$("#" + objeto + "_plan").empty().append('<option value="" selected="">Plan</option>');
+	$("#" + objeto + "_plan").selectpicker("refresh");
+	$("#" + objeto + "_cuotas").empty().append('<option value="" selected="">Cuotas</option>');
+	$("#" + objeto + "_cuotas").selectpicker("refresh");
 
 	// Obtengo los Planes del Modelo seleccionado
-	var Planes =  obtenerPlanes(eval('array'+objeto), linea, modelo);
+	var Planes = obtenerPlanes(eval('array' + objeto), linea, modelo);
 
 	// Actualizo los planes segun el modelo elejido
-	for (var i=0; i<Planes.length; i++) {
+	for (var i = 0; i < Planes.length; i++) {
 
-		$("#"+objeto+"_plan").append('<option value="'+Planes[i]["plan"]+'" >'+Planes[i]["plan"]+'</option>');
-		$("#"+objeto+"_plan").selectpicker("refresh");
+		$("#" + objeto + "_plan").append('<option value="' + Planes[i]["plan"] + '" >' + Planes[i]["plan"] + '</option>');
+		$("#" + objeto + "_plan").selectpicker("refresh");
 	}
 
 }
 
-function actualizarCuotas( linea, modelo, plan, objeto){
+function actualizarCuotas(linea, modelo, plan, objeto) {
 
 	// Vacio la lista de Planes
-	$("#"+objeto+"_cuotas").empty().append('<option value="" selected="">Cuotas</option>');
+	$("#" + objeto + "_cuotas").empty().append('<option value="" selected="">Cuotas</option>');
 
 	// Obtengo las cuotas del Plan seleccionado
-	var Cuotas =  obtenerCuotas(eval('array'+objeto), linea, modelo, plan);
+	var Cuotas = obtenerCuotas(eval('array' + objeto), linea, modelo, plan);
 
 	// Actualizo las cuotas segun el plan elejido
-	for (var i=0; i<Cuotas.length; i++) {
+	for (var i = 0; i < Cuotas.length; i++) {
 
-		$("#"+objeto+"_cuotas").append('<option value="'+Cuotas[i]["cuotas"]+'" >'+Cuotas[i]["cuotas"]+'</option>');
-		$("#"+objeto+"_cuotas").selectpicker("refresh");
+		$("#" + objeto + "_cuotas").append('<option value="' + Cuotas[i]["cuotas"] + '" >' + Cuotas[i]["cuotas"] + '</option>');
+		$("#" + objeto + "_cuotas").selectpicker("refresh");
 	}
 }
 
-function actualizarContadorContactosPendientes(){
+function actualizarContadorContactosPendientes() {
 
 	var contadorAux = 0;
 
-	 //Si tengo los datos guardados localmente, los consulto directamente desde ahi
-	 var datos_guardados = JSON.parse(window.localStorage.getItem("datos_guardados"));
+	//Si tengo los datos guardados localmente, los consulto directamente desde ahi
+	var datos_guardados = JSON.parse(window.localStorage.getItem("datos_guardados"));
 
-	 // Si hay datos localmente
-	 if(datos_guardados != null){
+	// Si hay datos localmente
+	if (datos_guardados != null) {
 		contadorAux = datos_guardados.length;
-	 }
+	}
 
 	// ACtualizo el Bubble Count de Contactos Pendientes
 	$('#total_contactos_pendientes').html(contadorAux);
@@ -777,71 +765,71 @@ function actualizarContadorContactosPendientes(){
 
 function enviarRegistro(RegistroGuardar) {
 
-	 //check if station is alive
-	 return $.ajax({
-		  type: 'GET',
-		  url: url_accesso + '/sync_data.php?datos_guardados='+JSON.stringify(RegistroGuardar),
-		  dataType :"jsonp",
-		  jsonpCallback: "expojson_sync",
-		  charset: 'UTF-8',
-		  success : function(data){
+	//check if station is alive
+	return $.ajax({
+		type: 'GET',
+		url: url_accesso + '/sync_data.php?datos_guardados=' + JSON.stringify(RegistroGuardar),
+		dataType: "jsonp",
+		jsonpCallback: "expojson_sync",
+		charset: 'UTF-8',
+		success: function (data) {
 
-				// Si no hubo error
-				if(String(data.error).toLowerCase() == "false"){
+			// Si no hubo error
+			if (String(data.error).toLowerCase() == "false") {
 
-					 // Vacio los registros offline
-					 //window.localStorage.removeItem("datos_guardados");
+				// Vacio los registros offline
+				//window.localStorage.removeItem("datos_guardados");
 
-					 // Los datos se sincronizaron con éxito.
+				// Los datos se sincronizaron con éxito.
 				alert(data.mensaje);
 
-				 // Inicializo el Formulario
-				 $('#form1').trigger("reset");
+				// Inicializo el Formulario
+				$('#form1').trigger("reset");
 				$("#provincia").val('default');
 				$("#provincia").selectpicker("refresh");
 
-				}else{
-					 alert(data.mensaje);
-				}
+			} else {
+				alert(data.mensaje);
+			}
 
-		  },
-		  beforeSend: function() {
-				// This callback function will trigger before data is sent
-		  },
-		  complete: function() {
-				// This callback function will trigger on data sent/received complete
-		  },
-		  error : function(httpReq,status,exception){
-				console.log(status+" "+exception);
-		  }
-	 }).then(function (resp) {
-		  return $.Deferred(function(def){
-				def.resolveWith({},[resp == 1,RegistroGuardar]);
-		  }).promise();
-	 });
+		},
+		beforeSend: function () {
+			// This callback function will trigger before data is sent
+		},
+		complete: function () {
+			// This callback function will trigger on data sent/received complete
+		},
+		error: function (httpReq, status, exception) {
+			console.log(status + " " + exception);
+		}
+	}).then(function (resp) {
+		return $.Deferred(function (def) {
+			def.resolveWith({}, [resp == 1, RegistroGuardar]);
+		}).promise();
+	});
 }
 
-function guardarDatosLocalmente(RegistroGuardar){
+function guardarDatosLocalmente(RegistroGuardar) {
 
-	 var contactos = new Array();
+	var contactos = new Array();
 
 	//Si tengo los datos guardados localmente, los consulto directamente desde ahi
 	var datos_guardados = JSON.parse(window.localStorage.getItem("datos_guardados"));
 
 	// Si hay datos localmente
-	if(datos_guardados != null){
-		 // Obtengo los datos de los registros previos para no perderlos
-		 contactos = datos_guardados;
+	if (datos_guardados != null) {
+		// Obtengo los datos de los registros previos para no perderlos
+		contactos = datos_guardados;
 	}
 
 	// Agrego el contacto actual al arreglo
-	contactos.push(RegistroGuardar );
+	contactos.push(RegistroGuardar);
 
 	// Guardo los datos
 	window.localStorage.setItem("datos_guardados", JSON.stringify(contactos));
 
-	 // Inicializo el Formulario
-	 $('#form1').trigger("reset");
+	// Inicializo el Formulario
+	$('#form1').trigger("reset");
 	$("#provincia").val('default');
 	$("#provincia").selectpicker("refresh");
 
@@ -852,7 +840,7 @@ function guardarDatosLocalmente(RegistroGuardar){
 	actualizarContadorContactosPendientes();
 }
 
-function sincronizarContactosPendientes(){
+function sincronizarContactosPendientes() {
 
 	var total_contactos_pendientes = 0;
 	var RegistroGuardar = new Array();
@@ -860,66 +848,66 @@ function sincronizarContactosPendientes(){
 	// Para generar la cola de pensaje pendientes
 	var RegistroAux = new Array();
 
-	 //Si tengo los datos guardados localmente, los consulto directamente desde ahi
-	 var datos_guardados = JSON.parse(window.localStorage.getItem("datos_guardados"));
+	//Si tengo los datos guardados localmente, los consulto directamente desde ahi
+	var datos_guardados = JSON.parse(window.localStorage.getItem("datos_guardados"));
 
-	 // Si hay datos localmente
-	 if(datos_guardados != null){
+	// Si hay datos localmente
+	if (datos_guardados != null) {
 
 
-		  $.each( datos_guardados, function( key, value ) {
+		$.each(datos_guardados, function (key, value) {
 
-				total_contactos_pendientes++;
+			total_contactos_pendientes++;
 
-				// Si falla el envio, lo dejo en la lista de pendientes
-			enviarRegistro(value).fail(function(result,value) {
-				 RegistroAux.push(value );
-console.log('Fallo enviarRegistro(): Result: '+result+' - Value: '+ value);
+			// Si falla el envio, lo dejo en la lista de pendientes
+			enviarRegistro(value).fail(function (result, value) {
+				RegistroAux.push(value);
+				console.log('Fallo enviarRegistro(): Result: ' + result + ' - Value: ' + value);
 			});
 
-		  });
+		});
 
 		// Actualizo los datos que no fueron procesados
 		window.localStorage.setItem("datos_guardados", JSON.stringify(RegistroAux));
 
 		// Actualizo Contador
 		actualizarContadorContactosPendientes();
-	 }
+	}
 }
 
-function mostrarDatosCotizacion(elemento){
+function mostrarDatosCotizacion(elemento) {
 
-	var arrayGeneral =  [];
-	arrayGeneral = eval('array'+getParameters("obj"));
+	var arrayGeneral = [];
+	arrayGeneral = eval('array' + getParameters("obj"));
 
-	var Registro =  [];
-	Registro = jQuery.grep(arrayGeneral[getParameters("linea")], function( n, i ) {
+	var Registro = [];
+	Registro = jQuery.grep(arrayGeneral[getParameters("linea")], function (n, i) {
 		return n["modelo"] == unescape(getParameters("modelo")) && n["plan"] == unescape(getParameters("plan"));
 	});
 
 
 	// Cargo el resultado del Cotizador
-	$("#"+elemento+"_cant_cuotas").html(getParameters("cuotas"));
-	$("#"+elemento+"_total_cuota_mensual").html('$'+Registro[0]["cuotaMensual"]);
-	$("#"+elemento+"_precio_vehiculo_iva").html(Registro[0]["precioPublico"]);
-	$("#"+elemento+"_tipo_plan").html(Registro[0]["plan"]);
-	$("#"+elemento+"_cuota_pura").html(Registro[0]["cuotaPura"]);
-	$("#"+elemento+"_gastos_adm_suscrip").html( ((Registro[0]["cargaAdminSuscripcion"].float())+Number(Registro[0]["iva21"])).toFixed(2) );
-	$("#"+elemento+"_gastos_adm_suscrip_iva").html(Registro[0]["iva21"]);
-	$("#"+elemento+"_alicuota").html(Registro[0]["pagoAdjudicacion30"]);
-	$("#"+elemento+"_modelo_cotizador").html(Registro[0]["modelo"]);
-	$("#"+elemento+"_nombre_plan_cotizador").html(Registro[0]["plan"]);
+	$("#" + elemento + "_cant_cuotas").html(getParameters("cuotas"));
+	$("#" + elemento + "_total_cuota_mensual").html('$' + Registro[0]["cuotaMensual"]);
+	$("#" + elemento + "_precio_vehiculo_iva").html(Registro[0]["precioPublico"]);
+	$("#" + elemento + "_tipo_plan").html(Registro[0]["plan"]);
+	$("#" + elemento + "_cuota_pura").html(Registro[0]["cuotaPura"]);
+	$("#" + elemento + "_gastos_adm_suscrip").html(((Registro[0]["cargaAdminSuscripcion"].float()) + Number(Registro[0]["iva21"])).toFixed(2));
+	$("#" + elemento + "_gastos_adm_suscrip_iva").html(Registro[0]["iva21"]);
+	$("#" + elemento + "_alicuota").html(Registro[0]["pagoAdjudicacion30"]);
+	$("#" + elemento + "_modelo_cotizador").html(Registro[0]["modelo"]);
+	$("#" + elemento + "_nombre_plan_cotizador").html(Registro[0]["plan"]);
 
 	// Actualizacion de la imagen principal
-	$("#"+elemento+"_img_ppal").attr("src","images/vehicles/"+getParameters("obj")+"-linea"+getParameters("linea")+".jpg");
+	$("#" + elemento + "_img_ppal").attr("src", "images/vehicles/" + getParameters("obj") + "-linea" + getParameters("linea") + ".jpg");
 }
 
-String.prototype.float = function() {
-  return parseFloat(this.replace(',', ''));
+String.prototype.float = function () {
+	return parseFloat(this.replace(',', ''));
 }
 
 /* Scroll To */
-function doScroll(event){
+function doScroll(event) {
 	var el = $(event.currentTarget);
 	var fullUrl = el.attr('href') !== undefined ? el.attr('href') : '';
 	var parts, targetEl, trgt, targetOffset, targetTop;
@@ -927,7 +915,7 @@ function doScroll(event){
 
 	targetTop = 0;
 
-	if(fullUrl){
+	if (fullUrl) {
 		parts = fullUrl.split("#");
 		trgt = parts[1];
 		targetEl = $("#" + trgt);
@@ -935,7 +923,9 @@ function doScroll(event){
 		targetTop = targetOffset.top;
 	}
 
-	$('html, body').animate({scrollTop: targetTop}, 800);
+	$('html, body').animate({
+		scrollTop: targetTop
+	}, 800);
 }
 
 $.fn.wait = function (time, type) {
@@ -948,4 +938,3 @@ $.fn.wait = function (time, type) {
 		}, time);
 	});
 };
-
